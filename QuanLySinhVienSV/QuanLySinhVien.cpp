@@ -18,7 +18,7 @@ int main()
 
 	}
 	//
-	// tree 
+	// tree s
 //	DSLopTC t;ss
 //	KhoiTaoCay(t);
 //	LoadTC(t);
