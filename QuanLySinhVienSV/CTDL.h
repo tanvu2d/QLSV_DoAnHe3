@@ -66,13 +66,6 @@ struct DSMonHoc {
 	int n;
 	monHoc* ds[MAXMH];
 };
-// nhầm file rồi
-// chieu moi up dc ma
-// cái link  là DoAnHe
-// de ban tui test bang cai khac 
-
-// ong code DoAnHe 3
-// t clone doanhe3 
 
 // danh sach lop tin chi theo cay nhi phan 
 

@@ -1218,22 +1218,7 @@ void XuLyNhapSo(int& n)
 
 // cac  ham mon hoc mang con tro 
 ///MON HOC
-void sortMH(monHoc ds[], int nds)
-{
-	for (int i = 0; i < nds - 1; i++)
-	{
-		for (int j = i + 1; j < nds; j++)
-		{
-			if (ds[i].TenMH > ds[j].TenMH)
-			{
-				//hoanviMH(ds[i], ds[j]);
-				monHoc temp = ds[i];
-				ds[i] = ds[j];
-				ds[j] = temp;
-			}
-		}
-	}
-}
+
 void hoanviMH(monHoc* a, monHoc* b) {
 	monHoc* tam = new monHoc;
 
@@ -1303,23 +1288,6 @@ void themMonHoc(DSMonHoc& dsMH) {
 	GiaoDienThongBao("Them Thanh Cong");
 }
 
-//
-//void nhap(DSMonHoc &dsMH, monHoc &mh){
-//	while(1){
-//	cin.ignore();
-//	cout << "Nhap ma mon hoc: ";
-//   	getline(cin, mh.maMonHoc);
-//    	//if (mh.maMonHoc== '') return 0;
-//	getline(cin, mh.maMonHoc);
-//	cout << "Nhap ten mon hoc: ";
-//	getline(cin, mh.TenMH);
-//	cout <<"Nhap stclt: ";
-//	cin >>mh.sotclt;
-//	cout << "Nhap stcth: ";
-//	cin >> mh.sotcth;
-//	}
-//	return 1;
-//}
 void NhapDSSV(DSMonHoc& dsMH) {
 	monHoc mh;
 	//	if (flag==0) 
@@ -1375,7 +1343,7 @@ void sapxep(monHoc* ds[], int& nds) {
 }
 void xuatMonHoc(DSMonHoc dsMH) {
 	sort(dsMH);
-	cout << "da xep!";
+	//cout << "da xep!";
 	for (int i = 0; i < dsMH.n; i++) {
 		cout << "\t\t========MON HOC " << i << "========" << endl;
 		cout << "Ma mon hoc: " << dsMH.ds[i]->maMonHoc << endl;
@@ -1392,7 +1360,6 @@ void xuat(monHoc* ds[], int& nds) {
 		cout << "ma mon hoc: " << ds[i]->maMonHoc << endl;
 		cout << "ten mon hoc: " << ds[i]->TenMH << endl;
 	}
-
 }
 //void xuatMonHoc(monHoc mh[], int n){
 ////	monHoc ds[MAXMH];
@@ -1463,35 +1430,73 @@ void LoadMH(DSMonHoc& dsMH) {
 //  clreol();
 //  gotoxy(x,y);
 //}
-void XoaMH(DSMonHoc& dsMH, string mmh) {
-	int i = SearchMH(dsMH, mmh);
-	if (i == -1) {
-		cout << "Ma mon hoc khong co trong danh sach";
+
+///XOA MON HOC
+int ktMonHoc(string a,DSMonHoc dsMH)
+{
+	for (int i = 0; i < dsMH.n; i++)
+	{
+		//kt ma vt a ton tai
+		if (dsMH.ds[i]->maMonHoc == a)
+		{
+				return i;
+		}
+	}
+	return -1;
+}
+void xoaMonHoc(DSMonHoc &dsMH)
+{
+	string a;
+	cout << "Nhap ma mon hoc can xoa "; cin >> a;
+	DinhDangChuoi(a);
+	//=======================
+	int mh = ktMonHoc(a, dsMH);
+	//======== xoa ========
+	//dời
+	if (mh < 0)
+	{
+		cout << "Mon hoc khong ton tai!" << endl;
+		system("pause");
 	}
 	else
 	{
-		delete  dsMH.ds[i];
-		for (int j = i + 1; j < dsMH.n; j++)
-			//ds.nodes[j-1]=ds.nodes[j];
-			dsMH.ds[j - 1] = dsMH.ds[j];
+		for (int i = mh; i < dsMH.n - 1; i++)
+		{
+			dsMH.ds[i]->maMonHoc = dsMH.ds[i + 1]->maMonHoc;
+			dsMH.ds[i]->TenMH = dsMH.ds[i + 1]->TenMH;
+			dsMH.ds[i]->sotclt = dsMH.ds[i + 1]->sotclt;
+			dsMH.ds[i]->sotcth = dsMH.ds[i + 1]->sotcth;
+		}
+		//giảm sl
+		monHoc* tam = dsMH.ds[dsMH.n - 1];
 		dsMH.n--;
+		cout << "Da xoa thanh cong !" << endl;
+		system("pause");
 	}
-	cout << "Da xoa thanh cong!!";
 }
 
-void chinhsuaMH(DSMonHoc& dsMH, string mmh) {
-	int i = SearchMH(dsMH, mmh);
-	if (i == -1) {
-		cout << "Ma mon hoc khong co trong danh sach";
+void chinhsuaMH(DSMonHoc& dsMH) {
+	string a;
+	cout << "Nhap ma mon hoc can hieu chinh: "; cin >> a;
+	DinhDangChuoi(a);
+	//=======================
+	int mh = ktMonHoc(a, dsMH);
+	//======== xoa ========
+	//dời
+	if (mh < 0)
+	{
+		cout << "Mon hoc khong ton tai!" << endl;
+		system("pause");
 	}
 	else {
 		cin.ignore();
 		cout << "Nhap ten mon hoc hieu chinh: ";
-		getline(cin, dsMH.ds[i]->TenMH);
+		getline(cin, dsMH.ds[mh]->TenMH);
+		DinhDangChuoi(dsMH.ds[mh]->TenMH);
 		cout << "Nhap so tin chi ly thuyet hieu chinh: ";
-		cin >> dsMH.ds[i]->sotclt;
+		cin >> dsMH.ds[mh]->sotclt;
 		cout << "Nhap so tin chi thuc hanh hieu chinh: ";
-		cin >> dsMH.ds[i]->sotcth;
+		cin >> dsMH.ds[mh]->sotcth;
 		cout << "===================" << endl;
 		cout << "Da thay doi thong tin vat tu !" << endl;
 		system("pause");

@@ -14,7 +14,7 @@ int main()
 	GiaoDienMain();
 	while (true)
 	{
-		RunMenu(t, dsMH,dsSV);
+		RunMenu(t, dsMH, dsSV);
 
 	}
 	//
