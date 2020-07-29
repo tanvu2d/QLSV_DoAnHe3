@@ -1273,24 +1273,36 @@ void sort(DSMonHoc& dsMH)
 }
 
 void themMonHoc(DSMonHoc& dsMH) {
+
+
+	int toadoY = toadoYMain;
+
+
 	monHoc* p = new monHoc;
-	//cin.ignore();
+	cin.ignore();
+	gotoXY(toadoXBox, toadoY++);
 	cout << "Nhap ma mon hoc: ";
 	getline(cin, p->maMonHoc);
+	gotoXY(toadoXBox, toadoY++);
 	cout << "Nhap ten mon hoc: ";
 	getline(cin, p->TenMH);
+	gotoXY(toadoXBox, toadoY++);
 	cout << "Nhap so tin chi ly thuyet: ";
 	cin >> p->sotclt;
+	gotoXY(toadoXBox, toadoY++);
 	cout << "Nhap so tin chi thuc hanh: ";
 	cin >> p->sotcth;
 	DinhDangChuoi(p->maMonHoc);
 	DinhDangChuoi(p->TenMH);
-	//dsMH.ds[dsMH.n] = p; // 
+	//sua
 	dsMH.ds[dsMH.n] = new monHoc;
 	dsMH.ds[dsMH.n] = p;
 	dsMH.n++;
-	//a
+
+	ShowCur(0);
+	GiaoDienThongBao("Them Thanh Cong");
 }
+
 //
 //void nhap(DSMonHoc &dsMH, monHoc &mh){
 //	while(1){
