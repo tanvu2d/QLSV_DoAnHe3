@@ -19,7 +19,7 @@ int main()
 	}
 	//
 	// tree 
-//	DSLopTC t;
+//	DSLopTC t;ss
 //	KhoiTaoCay(t);
 //	LoadTC(t);
 //	SaveLopTinChi(t) ;
