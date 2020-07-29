@@ -32,7 +32,7 @@ int main()
 
 
 	// test them sinh vien theo thu tu 
-	
+	//////
 
 	system("pause");
 	return 0;
