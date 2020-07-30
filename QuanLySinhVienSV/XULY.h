@@ -1069,6 +1069,38 @@ void LoadSV(DSSV& dsSV)
 //		}
 //	}
 //}
+////===============DOC FILE MON HOC=========================
+//https://paste.ubuntu.com/p/T3GCyCt8pH
+
+void DocFileMonHoc(DSMonHoc &dsMH)
+{
+	ifstream filein;
+	filein.open("inputMH.txt", ios_base::in); 
+	if (filein.fail() == true)
+	{
+		cout << "\nFile khong ton tai. Xin kiem tra lai";
+		system("pause");
+		//return 0;
+	}
+	string temp;
+	while (filein.eof() != true)
+	{
+		dsMH.ds[dsMH.n] = new monHoc;
+
+		getline(filein, dsMH.ds[dsMH.n]->maMonHoc, ',');
+		getline(filein, dsMH.ds[dsMH.n]->TenMH, ',');
+		//getline(filein, temp, ',');
+		filein >> dsMH.ds[dsMH.n]->sotclt;
+		getline(filein, temp, ','); // lay dau phay o giua 2 so
+		filein >> dsMH.ds[dsMH.n]->sotcth;
+		//filein.ignore();
+		dsMH.n++;
+	}
+	filein.close();
+}
+//==========GHI FILE MON HOC===============
+
+
 void XuLyNhapSo(int& n)
 {
 	string x = "";

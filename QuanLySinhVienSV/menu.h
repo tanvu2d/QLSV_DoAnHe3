@@ -278,18 +278,13 @@ void RunMenu(DSLopTC& dsLopTC, DSMonHoc& dsMonHoc, DSSV& dsSV) 		// DSLTC& dsLop
 							switch (pointer)
 							{
 							case 7:
-								//themLopTC(dsLopTC, dsMonHoc);
 								themMonHoc(dsMonHoc);
-								//NhapDSSV(dsMonHoc);
-								cout << "test";
 								break;
 
 							case 8:
-								//XoaLopTC(dsLopTC);
 								xoaMonHoc(dsMonHoc);
 								break;
 							case 9:
-								//SuaLopTC(dsLopTC, dsMonHoc);
 								xuatMonHoc(dsMonHoc);
 								system("pause");
 								break;

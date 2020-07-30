@@ -63,8 +63,8 @@ struct monHoc {
 
 
 struct DSMonHoc {
-	int n;
-	monHoc* ds[MAXMH];
+	int n=0;
+	monHoc *ds[MAXMH];
 };
 
 // danh sach lop tin chi theo cay nhi phan 

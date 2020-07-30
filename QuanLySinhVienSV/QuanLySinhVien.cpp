@@ -9,6 +9,7 @@ int main()
 	dsMH.n = 0;
 	KhoiTaoCay(t);
 	LoadTC(t);
+	DocFileMonHoc(dsMH);
 	Menu();
 	resizeConsole(1000, 600);
 	GiaoDienMain();
