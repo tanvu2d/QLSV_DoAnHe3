@@ -19,7 +19,9 @@ void themLopTC(DSLopTC& t, DSMonHoc dsMH)
 		gotoXY(toadoXBox, toadoY);
 		cout << "Nhap Ma Mon Hoc(0:De Thoat):";
 		gotoXY(toadoXBox + 30, toadoY++);
-		XuLyNhapMa(maMH);
+		//XuLyNhapMa(maMH);
+		cin >> maMH;
+		chuanhoaChu(maMH);
 		if (maMH == "0")
 		{
 			ShowCur(0);

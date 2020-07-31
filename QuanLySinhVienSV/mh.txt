@@ -1,3 +1,0 @@
-001,Co So An Toan Thong Tin,2,1
-004,An Toan He Thong,2,1
-003,Bn Toan He Thong,2,1

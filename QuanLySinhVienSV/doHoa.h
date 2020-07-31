@@ -54,6 +54,26 @@ void ShowCur(bool CursorVisibility)
 //	return -1;
 //}
 
+void chuanhoaChu(string& a) {
+	//ki tu dau
+	while (a[0] == ' ') {
+		a.erase(a.begin() + 0);
+	}
+	//cuoi
+	while (a[a.length() - 1] == ' ') {
+		a.erase(a.begin() + a.length() - 1);
+	}
+	//giua
+	for (int i = 0; i < a.length(); i++) {
+		if (a[i] == ' ' && a[i + 1] == ' ') {
+			a.erase(a.begin() + i);
+			i--;
+		}
+	}
+
+	transform(a.begin(), a.end(), a.begin(), ptr_fun<int, int>(toupper));
+}
+
 float roundF(float var, int num)
 {
 	float value = (int)(var * num + 0.5);

@@ -166,7 +166,7 @@ void ThemCuoi(NodeSV*& pHead, NodeSV* p)
 }
 
 int SearchMH(DSMonHoc dsMH, string x) {
-	DinhDangChuoi(x);
+	chuanhoaChu(x);
 	for (int i = 0; i < dsMH.n; i++)
 		if (dsMH.ds[i]->maMonHoc == x) return 1;
 	return -1;
@@ -1075,7 +1075,7 @@ void LoadSV(DSSV& dsSV)
 void DocFileMonHoc(DSMonHoc &dsMH)
 {
 	ifstream filein;
-	filein.open("mh.txt", ios_base::in); 
+	filein.open("inputMH.txt", ios_base::in); 
 	if (filein.fail() == true)
 	{
 		cout << "\nFile khong ton tai. Xin kiem tra lai";
@@ -1309,8 +1309,8 @@ void themMonHoc(DSMonHoc& dsMH) {
 	gotoXY(toadoXBox, toadoY++);
 	cout << "Nhap so tin chi thuc hanh: ";
 	cin >> p->sotcth;
-	DinhDangChuoi(p->maMonHoc);
-	DinhDangChuoi(p->TenMH);
+	chuanhoaChu(p->maMonHoc);
+	chuanhoaChu(p->TenMH);
 	//sua
 	dsMH.ds[dsMH.n] = new monHoc;
 	dsMH.ds[dsMH.n] = p;

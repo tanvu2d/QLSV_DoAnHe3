@@ -6,6 +6,10 @@
 #include<string>
 #include<string.h>
 #include<iomanip>
+#include <algorithm> 
+#include <functional>
+#include <cctype>
+
 
 #pragma warning(disable : 4996)
 using namespace std;
