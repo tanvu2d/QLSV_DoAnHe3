@@ -1075,7 +1075,7 @@ void LoadSV(DSSV& dsSV)
 void DocFileMonHoc(DSMonHoc &dsMH)
 {
 	ifstream filein;
-	filein.open("inputMH.txt", ios_base::in); 
+	filein.open("mh.txt", ios_base::in); 
 	if (filein.fail() == true)
 	{
 		cout << "\nFile khong ton tai. Xin kiem tra lai";
@@ -1093,7 +1093,7 @@ void DocFileMonHoc(DSMonHoc &dsMH)
 		filein >> dsMH.ds[dsMH.n]->sotclt;
 		getline(filein, temp, ','); // lay dau phay o giua 2 so
 		filein >> dsMH.ds[dsMH.n]->sotcth;
-		//filein.ignore();
+		filein.ignore();
 		dsMH.n++;
 	}
 	filein.close();
