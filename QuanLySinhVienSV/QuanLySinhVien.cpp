@@ -2,7 +2,6 @@
 
 int main()
 {
-	string a = "";
 	DSLopTC t;
 	DSSV dsSV;
 	LoadSV(dsSV);
@@ -10,12 +9,13 @@ int main()
 	dsMH.n = 0;
 	KhoiTaoCay(t);
 	LoadTC(t);
+	DocFileMonHoc(dsMH);
 	Menu();
 	resizeConsole(1000, 600);
 	GiaoDienMain();
 	while (true)
 	{
-		RunMenu(t, dsMH, dsSV, a);
+		RunMenu(t, dsMH, dsSV);
 
 	}
 	//
