@@ -6,9 +6,6 @@
 #include<string>
 #include<string.h>
 #include<iomanip>
-#include <algorithm> 
-#include <functional>
-#include <cctype>
 
 
 #pragma warning(disable : 4996)
@@ -67,8 +64,8 @@ struct monHoc {
 
 
 struct DSMonHoc {
-	int n=0;
-	monHoc *ds[MAXMH];
+	int n = 0;
+	monHoc* ds[MAXMH];
 };
 
 // danh sach lop tin chi theo cay nhi phan 
@@ -96,3 +93,4 @@ struct DSLopTC {
 	NodeLopTC* root = NULL;
 	int soLuong = 0;
 };
+

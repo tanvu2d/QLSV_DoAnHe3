@@ -52,6 +52,25 @@ void ThemCuoiSVDK(NodeSVDK*& pHead, NodeSVDK* p)
 }
 
 // hÃ m thÃªm node p vÃ o sau node q trong danh sÃ¡ch
+//void chuanhoaChu(string& a) {
+//	//ki tu dau
+//	while (a[0] == ' ') {
+//		a.erase(a.begin() + 0);
+//	}
+//	//cuoi
+//	while (a[a.length() - 1] == ' ') {
+//		a.erase(a.begin() + a.length() - 1);
+//	}
+//	//giua
+//	for (int i = 0; i < a.length(); i++) {
+//		if (a[i] == ' ' && a[i + 1] == ' ') {
+//			a.erase(a.begin() + i);
+//			i--;
+//		}
+//	}
+//
+//	transform(a.begin(), a.end(), a.begin(), ptr_fun<int, int>(toupper));
+//}
 
 // hÃ m xÃ³a node dau danh sÃ¡ch
 void XoaDauSVDK(NodeSVDK*& pHead)
@@ -166,9 +185,14 @@ void ThemCuoi(NodeSV*& pHead, NodeSV* p)
 }
 
 int SearchMH(DSMonHoc dsMH, string x) {
-	chuanhoaChu(x);
+
+
 	for (int i = 0; i < dsMH.n; i++)
-		if (dsMH.ds[i]->maMonHoc == x) return 1;
+	{
+
+		if (dsMH.ds[i]->maMonHoc == x)
+			return 1;
+	}
 	return -1;
 }
 
@@ -247,13 +271,13 @@ void Xuat(NodeSV* pHead)
 	{
 		cout << "\n Lop sv : " << k->data.malop;
 		cout << "\n Ma sv : " << k->data.mssv;
-		cout << "\nho va ten  Sv : " << k->data.ho <<" "<< k->data.ten;
+		cout << "\nho va ten  Sv : " << k->data.ho << " " << k->data.ten;
 		cout << "\nPhai sv :" << k->data.phai;
 		cout << "\nSo dien thoai sv : " << k->data.sdt;
 		cout << "\nNam nhap hoc :" << k->data.namnhaphoc;
 
 		cout << "--------" << endl;
-		
+
 	}
 	getch();
 }
@@ -933,7 +957,6 @@ int KiemTraCoLopTinChi(NodeLopTC* t, int data)
 void LoadTC(DSLopTC& dsTC)
 {
 	ifstream fileIn;
-	ifstream fileIn1;
 	fileIn.open("inputLopTC.txt", ios_base::in);
 	if (fileIn.fail() == true)
 	{
@@ -941,63 +964,40 @@ void LoadTC(DSLopTC& dsTC)
 		system("pause");
 		//return 0;
 	}
-	fileIn1.open("inputSV.txt", ios_base::in);
-	if (fileIn1.fail() == true)
-	{
-		cout << "\nFile khong ton tai. Xin kiem tra lai";
-		system("pause");
-		//return 0;
-	}
 	fileIn >> dsTC.soLuong;
 	fileIn.ignore();
-	//	cout << dsTC.soLuong << endl;
 
 	for (int i = 0; i < dsTC.soLuong; i++)
 	{
-
 		LopTC tc;
 		fileIn >> tc.malopTc;
 		fileIn.ignore();
-		//	cout << mh.mamh<<" ";
+
 		getline(fileIn, tc.mmh, ',');
-		//	cout << mh.tenmh << " ";
+
 		getline(fileIn, tc.nienkhoa, ',');
-		//	cout << mh.stclt;
-		//	fileIn.ignore();
+
 		fileIn >> tc.hocki;
-		//cout << mh.stcth<<" ";
 		fileIn.ignore();
 
 		fileIn >> tc.nhom;
 		fileIn.ignore();
+
 		fileIn >> tc.so_svmax;
 		fileIn.ignore();
+
 		fileIn >> tc.so_sv_min;
 		fileIn.ignore();
-		//tc.dssvdk.pHead = NULL;
-	//	cout << endl;
 
-		/*for (int i=0 ; i<3 ; i++)
-		{
-			SinhVienDK x ;
-		getline(fileIn1 , x.malop,',') ;
-		fileIn1 >> x.namnhaphoc ;
-		fileIn1.ignore();
-		getline(fileIn1 , x.mssv,',') ;
-		getline (fileIn1 , x.ho , ',') ;
-		getline (fileIn1 , x.ten,',') ;
-		getline (fileIn1 , x.phai,',') ;
-		getline(fileIn1 , x.sdt) ;
-		NodeSV* p = KhoiTaoNode(x);
-		ThemDau(tc.DSSV, p);
-		}*/
-
-		for (int i = 0; i < 3; i++)
+		fileIn >> tc.dssvdk.soLg;
+		fileIn.ignore();
+		for (int i = 0; i < tc.dssvdk.soLg; i++)
 		{
 			SinhVienDK x;
 
-			getline(fileIn1, x.masv, ',');
-			fileIn1 >> x.diem;
+			getline(fileIn, x.masv, ',');
+			fileIn >> x.diem;
+			fileIn.ignore();
 			NodeSVDK* p = KhoiTaoNodeSVDK(x);
 			ThemCuoiSVDK(tc.dssvdk.pHead, p);
 		}
@@ -1006,7 +1006,6 @@ void LoadTC(DSLopTC& dsTC)
 		ThemNodeVaoCay(dsTC.root, tc);
 	}
 	fileIn.close();
-	fileIn1.close();
 }
 
 // load danh sach sinh vien 
@@ -1072,10 +1071,10 @@ void LoadSV(DSSV& dsSV)
 ////===============DOC FILE MON HOC=========================
 //https://paste.ubuntu.com/p/T3GCyCt8pH
 
-void DocFileMonHoc(DSMonHoc &dsMH)
+void DocFileMonHoc(DSMonHoc& dsMH)
 {
 	ifstream filein;
-	filein.open("inputMH.txt", ios_base::in); 
+	filein.open("inputMH.txt", ios_base::in);
 	if (filein.fail() == true)
 	{
 		cout << "\nFile khong ton tai. Xin kiem tra lai";
@@ -1097,6 +1096,15 @@ void DocFileMonHoc(DSMonHoc &dsMH)
 		dsMH.n++;
 	}
 	filein.close();
+	//ua sao ko xem dc mon hoc luôn
+	//sua lai so moi check dc á
+	// do d?nh d?ng chu?i sai á nên check b?ng s?
+	// tí tui ch?nh l?i file d?nh d?ng xong qua ch?
+	// mà 002 là chu?i mà dâu ph?i s? 
+	// acssi sai nên ABCD sai á ch? hàm dúng r?i
+	// oki 
+	/// vay chieu t xem lai 
+	// chi?u s?a l?i d?nh d?ng chu?i là xong
 }
 //==========GHI FILE MON HOC===============
 
@@ -1145,111 +1153,91 @@ void XuLyNhapSo(int& n)
 //	}
 //	return str;
 //}
-//int ChuyenStringSangSo(string x) {
-//	int a = 0;
-//	for (int i = 0; i < x.length(); i++) {
-//		a = a + (int)(x[i] - '0') * pow(10, x.length() - i - 1);
-//	}
-//	return a;
-//}
-
-//void XuLyNhap_NK(string& InPut, int toadoX, int& toadoY, int LenghtMax, int& flag) {
-//	int toadoXtam; int NK;
-//	string NK2;
-//	char c;
-//	while (true)
-//	{
-//		char c = _getch();
-//		if ((c >= 48 && c <= 57) && InPut.length() < LenghtMax)
-//		{
-//			InPut.insert(InPut.begin() + (whereX() - toadoX), c);
-//			if (InPut.length() == 4) {
-//
-//				NK = ChuyenStringSangSo(InPut) + 5;
-//				InPut.push_back('-');
-//				NK2 = ChuyenSoSangString(NK);
-//				InPut = InPut + NK2;
-//				toadoXtam = whereX() + 6;
-//				gotoXY(toadoX, whereY());
-//				cout << InPut;
-//				gotoXY(toadoXtam, whereY());
-//
-//			}
-//			else if ((whereX() - toadoX) < InPut.length() - 1)
-//			{
-//				toadoXtam = whereX() + 1;
-//				gotoXY(toadoX, whereY());
-//				cout << "                                               ";
-//				gotoXY(toadoX, whereY());
-//				cout << InPut;
-//				gotoXY(toadoXtam, whereY());
-//			}
-//			else
-//				cout << c;
-//		}
-//		else if (c == 8 && whereX() > toadoX)
-//		{
-//			InPut.erase(InPut.begin() + (whereX() - toadoX) - 1);
-//			toadoXtam = whereX() - 1;
-//			gotoXY(toadoX, whereY());
-//			cout << "                                               ";
-//			gotoXY(toadoX, whereY());
-//			cout << InPut;
-//			gotoXY(toadoXtam, whereY());
-//		}
-//		else if (c == 32 && InPut.length() < LenghtMax && InPut.length() != 0 && InPut[whereX() - toadoX - 1] != ' ')
-//		{
-//			InPut.insert(InPut.begin() + (whereX() - toadoX), ' ');
-//			if ((whereX() - toadoX) < InPut.length() - 1)
-//			{
-//				toadoXtam = whereX() + 1;
-//				gotoXY(toadoX, whereY());
-//				cout << "                                               ";
-//				gotoXY(toadoX, whereY());
-//				cout << InPut;
-//				gotoXY(toadoXtam, whereY());
-//			}
-//			else
-//				cout << c;
-//		}
-//		else if (c == 13 && InPut.length() > 0) //enter
-//		{
-//			toadoY = toadoY + 3;
-//			break;
-//		}
-//		else if (c == 27) {
-//			flag = 0;
-//			ShowCur(0);
-//			break;
-//		}
-//		else if (c == -32)
-//		{
-//			c = getch();
-//			if (c == 75 && whereX() > toadoX)
-//			{
-//				cout << "\b";
-//			}
-//			else if (c == 77 && whereX() < toadoX + InPut.length())
-//			{
-//				gotoXY(whereX() + 1, whereY());
-//			}
-//			else if (c == 80)
-//			{
-//				toadoY = toadoY + 3;
-//				break;
-//			}
-//			else if (c == 72)
-//			{
-//				toadoY = toadoY - 3;
-//				break;
-//			}
-//		}
-//	}
-//}
+int ChuyenStringSangSo(string x) {
+	int a = 0;
+	for (int i = 0; i < x.length(); i++) {
+		a = a + (int)(x[i] - '0') * pow(10, x.length() - i - 1);
+	}
+	return a;
+}
 
 
-// cac  ham mon hoc mang con tro 
+
+bool XetNienKhoa(string NK) {
+	string str1, str2;
+	str1 = NK.substr(0, 4);
+	str2 = NK.substr(5, 9);
+	int so1, so2;
+	so1 = ChuyenStringSangSo(str1);
+	so2 = ChuyenStringSangSo(str2);
+	if (so2 - so1 == 1)
+	{
+		return true;
+	}
+	return false;
+}
+
+
+void XuLyNhapNienKhoa(string& InPut)
+{
+	int lengthMax = 9;
+
+	ShowCur(1);
+	int nam1;
+	int nam2;
+	string stringNam2 = "";
+	while (true)
+	{
+		char c = getch();
+
+		if (c >= 48 && c <= 57 && InPut.length() < lengthMax)
+		{
+
+
+			InPut.insert(InPut.begin() + InPut.length(), c);
+
+			cout << c;
+
+			if (InPut.length() == 4)
+			{
+				nam1 = ChuyenStringSangSo(InPut);
+				nam2 = nam1 + 1;
+				stringNam2 = ChuyenSoSangString(nam2);
+				InPut.push_back('-');
+
+
+				InPut = InPut + stringNam2;
+
+				//cout << InPut;
+				cout << "-" << stringNam2;
+			}
+
+		}
+		else if (c == 8 && InPut.length() > 0) //beckspace
+		{
+			InPut.erase(InPut.begin() + InPut.length() - 1);
+			cout << "\b";
+			cout << " ";
+			cout << "\b";
+		}
+		else if (c == 27) // esc
+		{
+			InPut.clear();
+			return;
+		}
+		else if (c == 13 && InPut.length() > 0)//enter
+		{
+			break;
+		}
+	}
+
+
+}
+
+
 ///MON HOC
+
+
 
 void hoanviMH(monHoc* a, monHoc* b) {
 	monHoc* tam = new monHoc;
@@ -1291,45 +1279,45 @@ void sort(DSMonHoc& dsMH)
 
 void themMonHoc(DSMonHoc& dsMH) {
 
-
+	ShowCur(1);
 	int toadoY = toadoYMain;
-
+	string monHocss = "";
+	string tenMHss = "";
 
 	monHoc* p = new monHoc;
-	cin.ignore();
-	gotoXY(toadoXBox, toadoY++);
+
+	gotoXY(toadoXBox, toadoY);
 	cout << "Nhap ma mon hoc: ";
-	getline(cin, p->maMonHoc);
+	gotoXY(toadoXBox + 18, toadoY);
+	XuLyNhapMa(monHocss);
+	p->maMonHoc = monHocss;
+
 	gotoXY(toadoXBox, toadoY++);
 	cout << "Nhap ten mon hoc: ";
-	getline(cin, p->TenMH);
+	gotoXY(toadoXBox + 20, toadoY);
+	XuLyNhapMa(tenMHss);
+	p->TenMH = tenMHss;
+
 	gotoXY(toadoXBox, toadoY++);
 	cout << "Nhap so tin chi ly thuyet: ";
+	gotoXY(toadoXBox + 29, toadoY);
 	cin >> p->sotclt;
 	gotoXY(toadoXBox, toadoY++);
 	cout << "Nhap so tin chi thuc hanh: ";
 	cin >> p->sotcth;
-	chuanhoaChu(p->maMonHoc);
-	chuanhoaChu(p->TenMH);
+
 	//sua
 	dsMH.ds[dsMH.n] = new monHoc;
 	dsMH.ds[dsMH.n] = p;
 	dsMH.n++;
 
 	ShowCur(0);
-	GiaoDienThongBao("Them Thanh Cong");
+	GiaoDienThongBao("     Them Thanh Cong");
 }
 
 void NhapDSSV(DSMonHoc& dsMH) {
 	monHoc mh;
-	//	if (flag==0) 
-	// 	while (dsMH.n> 0){
-	// 	   delete dsMH.ds[dsMH.n-1];
-	//       dsMH.n-- ;
-	//   }
 
-		//while (dsMH.n <MAXMH)
-		//{  
 
 	cout << "Nhap ma mon hoc: ";
 	cin.ignore();
@@ -1383,6 +1371,19 @@ void xuatMonHoc(DSMonHoc dsMH) {
 		cout << "So tin chi ly thuyet: " << dsMH.ds[i]->sotclt << endl;
 		cout << "So tin chi thuc hanh: " << dsMH.ds[i]->sotcth << endl;
 	}
+	/*if (dsMH.ds[i]->maMonHoc == "INTATTT001")
+	{
+		cout << "co1" ;
+	}
+	else if (dsMH.ds[i]->maMonHoc == "INTCNTT001")
+	{
+		cout << "co2" ;
+	}
+	else if (dsMH.ds[i]->maMonHoc == "INTCNTT002")
+	{
+		cout << "co3" << endl;
+	}*/
+
 	_getch();
 }
 void xuat(monHoc* ds[], int& nds) {
@@ -1464,19 +1465,19 @@ void LoadMH(DSMonHoc& dsMH) {
 //}
 
 ///XOA MON HOC
-int ktMonHoc(string a,DSMonHoc dsMH)
+int ktMonHoc(string a, DSMonHoc dsMH)
 {
 	for (int i = 0; i < dsMH.n; i++)
 	{
 		//kt ma vt a ton tai
 		if (dsMH.ds[i]->maMonHoc == a)
 		{
-				return i;
+			return i;
 		}
 	}
 	return -1;
 }
-void xoaMonHoc(DSMonHoc &dsMH)
+void xoaMonHoc(DSMonHoc& dsMH)
 {
 	string a;
 	cout << "Nhap ma mon hoc can xoa "; cin >> a;
@@ -1484,7 +1485,7 @@ void xoaMonHoc(DSMonHoc &dsMH)
 	//=======================
 	int mh = ktMonHoc(a, dsMH);
 	//======== xoa ========
-	//dời
+	//d?i
 	if (mh < 0)
 	{
 		cout << "Mon hoc khong ton tai!" << endl;
@@ -1499,7 +1500,7 @@ void xoaMonHoc(DSMonHoc &dsMH)
 			dsMH.ds[i]->sotclt = dsMH.ds[i + 1]->sotclt;
 			dsMH.ds[i]->sotcth = dsMH.ds[i + 1]->sotcth;
 		}
-		//giảm sl
+		//gi?m sl
 		monHoc* tam = dsMH.ds[dsMH.n - 1];
 		dsMH.n--;
 		cout << "Da xoa thanh cong !" << endl;
@@ -1514,7 +1515,7 @@ void chinhsuaMH(DSMonHoc& dsMH) {
 	//=======================
 	int mh = ktMonHoc(a, dsMH);
 	//======== xoa ========
-	//dời
+	//d?i
 	if (mh < 0)
 	{
 		cout << "Mon hoc khong ton tai!" << endl;
@@ -1533,6 +1534,7 @@ void chinhsuaMH(DSMonHoc& dsMH) {
 		cout << "Da thay doi thong tin vat tu !" << endl;
 		system("pause");
 	}
+
 }
 
 
@@ -1545,7 +1547,9 @@ void CheckTrungLopTinChi(NodeLopTC* t, string nienKhoa, int hocKi, int nhom, str
 			GiaoDienThongBao("Du Lieu Lop Da Ton Tai");
 			return;
 		}
+		CheckTrungLopTinChi(t->pLeft, nienKhoa, hocKi, nhom, maMH);
+		CheckTrungLopTinChi(t->pRight, nienKhoa, hocKi, nhom, maMH);
 	}
-	NLR(t->pLeft);
-	NLR(t->pRight);
-}//// 
+
+
+}

@@ -54,26 +54,6 @@ void ShowCur(bool CursorVisibility)
 //	return -1;
 //}
 
-void chuanhoaChu(string& a) {
-	//ki tu dau
-	while (a[0] == ' ') {
-		a.erase(a.begin() + 0);
-	}
-	//cuoi
-	while (a[a.length() - 1] == ' ') {
-		a.erase(a.begin() + a.length() - 1);
-	}
-	//giua
-	for (int i = 0; i < a.length(); i++) {
-		if (a[i] == ' ' && a[i + 1] == ' ') {
-			a.erase(a.begin() + i);
-			i--;
-		}
-	}
-
-	transform(a.begin(), a.end(), a.begin(), ptr_fun<int, int>(toupper));
-}
-
 float roundF(float var, int num)
 {
 	float value = (int)(var * num + 0.5);
@@ -350,7 +330,7 @@ void XuLyNhapSo(int& n, int toadoX)
 	while (true)
 	{
 		c = getch();
-		if ((c >= 48 && c <= 57))// n?u là s? thì
+		if ((c >= 48 && c <= 57))
 		{
 			x.insert(x.begin() + x.length(), c);
 			cout << c;
@@ -362,9 +342,40 @@ void XuLyNhapSo(int& n, int toadoX)
 			cout << " ";
 			cout << "\b";
 		}
-		else if (c == 13 && x.length() > 0)// n?u là phím enter
+		else if (c == 13 && x.length() > 0)
 		{
 			n = atoi(x.c_str());
+			return;
+		}
+	}
+}
+
+void XuLyNhapSDT(string& sdt)
+{
+	string x = "";
+	char c;
+	while (true)
+	{
+		c = getch();
+		if ((c >= 48 && c <= 57) && x.length() < 10)
+		{
+			x.insert(x.begin() + x.length(), c);
+			cout << c;
+		}
+		else if (c == 8 && x.length() > 0)
+		{
+			x.erase(x.begin() + x.length() - 1);
+			cout << "\b";
+			cout << " ";
+			cout << "\b";
+		}
+		else if (c == 13 && x.length() > 0)
+		{
+			if (x.length() < 10)
+			{
+
+			}
+			sdt = x;
 			return;
 		}
 	}
@@ -594,4 +605,5 @@ void GiaoDienThongBao(string x)
 	cout << CanDeuChuoi(x, 49);
 	getch();
 	textcolor(7);
+
 }

@@ -2,6 +2,8 @@
 
 int main()
 {
+
+	string a = "";
 	DSLopTC t;
 	DSSV dsSV;
 	LoadSV(dsSV);
@@ -15,7 +17,7 @@ int main()
 	GiaoDienMain();
 	while (true)
 	{
-		RunMenu(t, dsMH, dsSV);
+		RunMenu(t, dsMH, dsSV, a);
 
 	}
 	//
