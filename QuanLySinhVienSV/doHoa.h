@@ -26,20 +26,20 @@ void textcolor(int x)
 	mau = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(mau, x);
 }
-//int whereX()
-//{
-//	CONSOLE_SCREEN_BUFFER_INFO csbi;
-//	if (GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi))
-//		return csbi.dwCursorPosition.X;
-//	return -1;
-//}
-//int whereY()
-//{
-//	CONSOLE_SCREEN_BUFFER_INFO csbi;
-//	if (GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi))
-//		return csbi.dwCursorPosition.Y;
-//	return -1;
-//}
+int whereX()
+{
+	CONSOLE_SCREEN_BUFFER_INFO csbi;
+	if (GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi))
+		return csbi.dwCursorPosition.X;
+	return -1;
+}
+int whereY()
+{
+	CONSOLE_SCREEN_BUFFER_INFO csbi;
+	if (GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi))
+		return csbi.dwCursorPosition.Y;
+	return -1;
+}
 void ShowCur(bool CursorVisibility)
 {
 	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -216,113 +216,111 @@ void XuLyNhapMa(string& InPut)
 		}
 	}
 }
-//bool XuLyNhapDiem(float& n, int toadoX, int& toadoY)
-//{
-//	int toadoXtam;
-//	string x = to_string(n);
-//	if (n == -1)
-//	{
-//		x = "";
-//	}
-//	else {
-//		x = x.substr(0, 4);
-//	}
-//	
-//
-//	char c;
-//	while (true)
-//	{
-//		c = getch();
-//		if (((c >= 48 && c <= 57) || c == 46) && x.length() < 4 && whereX() < toadoX + 10)// n?u là s? thì
-//		{
-//			if (x.length() == 1)
-//			{
-//				if ((x == "1" && c == 48) || c == 46)
-//				{
-//					x.insert(x.begin() + (whereX() - toadoX), c);
-//					if ((whereX() - toadoX) < x.length() - 1)
-//					{
-//						toadoXtam = whereX() + 1;
-//						gotoXY(toadoX, whereY());
-//						cout << "  ";
-//						gotoXY(toadoX, whereY());
-//						cout << x;
-//						gotoXY(toadoXtam, whereY());
-//					}
-//					else
-//						cout << c;
-//				}
-//			}
-//			else {
-//				x.insert(x.begin() + (whereX() - toadoX), c);
-//				if ((whereX() - toadoX) < x.length() - 1)
-//				{
-//					toadoXtam = whereX() + 1;
-//					gotoXY(toadoX, whereY());
-//					cout << "     ";
-//					gotoXY(toadoX, whereY());
-//					cout << x;
-//					gotoXY(toadoXtam, whereY());
-//				}
-//				else
-//					cout << c;
-//			}
-//
-//		}
-//		else if (c == 8 && whereX() > toadoX)
-//		{
-//			x.erase(x.begin() + x.length()-1);
-//			cout << "\b";
-//			cout << " ";
-//			cout << "\b";
-//
-//		}
-//		else if (c == 13 && x.length() > 0)// n?u là phím enter
-//		{
-//			toadoY = toadoY + 2;
-//			n = atof(x.c_str());
-//			gotoXY(1, 1);
-//			cout << n;
-//			break;
-//		}
-//		else if (c == -32)
-//		{
-//			c = getch();
-//			if (c == 80)
-//			{
-//				if (x.empty())
-//				{
-//					n = 0;
-//				}
-//				else
-//				{
-//					n = atof(x.c_str());
-//				}
-//				toadoY = toadoY + 2;
-//				break;
-//			}
-//			else if (c == 72)
-//			{
-//				if (x.empty())
-//				{
-//					n = 0;
-//				}
-//				else
-//				{
-//					n = atof(x.c_str());
-//				}
-//				toadoY = toadoY - 2;
-//				break;
-//			}
-//		}
-//		else if (c == 27 && x.length() > 0)// n?u là phím enter
-//		{
-//			n = atof(x.c_str());
-//			return false;
-//		}
-//	}
-//	return true;
-//}
+bool XuLyNhapDiem(float& n, int toadoX, int& toadoY)
+{
+	int toadoXtam;
+	string x = to_string(n);
+	if (n == -1)
+	{
+		x = "";
+	}
+	else {
+		x = x.substr(0, 4);
+	}
+	char c;
+	while (true)
+	{
+		c = getch();
+		if (((c >= 48 && c <= 57) || c == 46) && x.length() < 4 && whereX() < toadoX + 10)
+		{
+			if (x.length() == 1)
+			{
+				if ((x == "1" && c == 48) || c == 46)
+				{
+					x.insert(x.begin() + (whereX() - toadoX), c);
+					if ((whereX() - toadoX) < x.length() - 1)
+					{
+						toadoXtam = whereX() + 1;
+						gotoXY(toadoX, whereY());
+						cout << "  ";
+						gotoXY(toadoX, whereY());
+						cout << x;
+						gotoXY(toadoXtam, whereY());
+					}
+					else
+						cout << c; 
+				}
+			}
+			else {
+				x.insert(x.begin() + (whereX() - toadoX), c);
+				if ((whereX() - toadoX) < x.length() - 1)
+				{
+					toadoXtam = whereX() + 1;
+					gotoXY(toadoX, whereY());
+					cout << "     ";
+					gotoXY(toadoX, whereY());
+					cout << x;
+					gotoXY(toadoXtam, whereY());
+				}
+				else
+					cout << c;
+			}
+
+		}
+		else if (c == 8 && whereX() > toadoX)
+		{
+			x.erase(x.begin() + x.length() - 1);
+			cout << "\b";
+			cout << " ";
+			cout << "\b";
+
+		}
+		else if (c == 13 && x.length() > 0)// n?u là phím enter
+		{
+			toadoY = toadoY + 2;
+			n = atof(x.c_str());
+			gotoXY(1, 1);
+			cout << n;
+			break;
+		}
+		else if (c == -32)
+		{
+			c = getch();
+			if (c == 80)
+			{
+				if (x.empty())
+				{
+					n = 0;
+				}
+				else
+				{
+					n = atof(x.c_str());
+				}
+				toadoY = toadoY + 2;
+				break;
+			}
+			else if (c == 72)
+			{
+				if (x.empty())
+				{
+					n = 0;
+				}
+				else
+				{
+					n = atof(x.c_str());
+				}
+				toadoY = toadoY - 2;
+				break;
+			}
+		}
+		else if (c == 27 && x.length() > 0)   // 
+		{
+			n = atof(x.c_str());
+			return false;
+		}
+	}
+	return true; 
+}
 void XuLyNhapSo(int& n, int toadoX)
 {
 	string x = "";

@@ -10,9 +10,9 @@ string strMNMain[] = {
 	" 6.                                          " ,
 	" 7.											",
 	" 8.Dang ki lop tin chi									",
-	" 9.												",
-	" 10.											",
-	" 11.											",
+	" 9.Nhap diem												",
+	" 10.In bang diem cua lop TC								",
+	" 11.In bang diem cua 1 lop theo tin chi 					",
 	" 12.											",
 	" 13.Mon hoc									",
 	" 0.Ket thuc chuong trinh                     "
@@ -340,7 +340,15 @@ void RunMenu(DSLopTC& dsLopTC, DSMonHoc& dsMonHoc, DSSV& dsSV, string a) 		// DS
 			case 14:
 				DangKiLopTC(dsSV, dsLopTC, dsMonHoc, toadoXBox, 7);
 				break;
-
+			case 15:
+				NhapDiem(dsSV, dsLopTC, dsMonHoc, toadoXBox, 7);
+				break;
+			case 16 :
+				InBangDiemCuaLopTC(dsSV, dsLopTC, dsMonHoc, toadoXBox, 7);
+				break;
+			case 17 : 
+				InDiemTBCuaLopTheoTC(dsSV, dsLopTC, dsMonHoc, toadoXBox, 7);
+				break;
 			case 19:
 				// Cho xu li mon hoc
 
