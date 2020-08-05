@@ -2,8 +2,7 @@
 
 int main()
 {
-
-	string a = "";
+	
 	DSLopTC t;
 	DSSV dsSV;
 	LoadSV(dsSV);
@@ -11,32 +10,24 @@ int main()
 	dsMH.n = 0;
 	KhoiTaoCay(t);
 	LoadTC(t);
+
+	int soLuong = 0;
+	int a[SoLuongID];
+
+	loadIdLopTC(a, soLuong);
+	if (t.soLuong > 8)
+	{
+		soLuong = soLuong + 8 - t.soLuong;
+	}
 	DocFileMonHoc(dsMH);
 	Menu();
 	resizeConsole(1000, 600);
 	GiaoDienMain();
 	while (true)
 	{
-		RunMenu(t, dsMH, dsSV, a);
+		RunMenu(t, dsMH, dsSV,a,soLuong);
 
 	}
-	//
-	// tree s
-//	DSLopTC t;ss
-//	KhoiTaoCay(t);
-//	LoadTC(t);
-//	SaveLopTinChi(t) ;
-	//MenuTREE(t);
-//	RunMenu ();
-//	nodeSinhVien *pHead = NULL; 
-//	Menu(pHead);
-
-//	GiaiPhong(pHead);
-
-
-	// test them sinh vien theo thu tu 
-	//////
-
 	system("pause");
 	return 0;
 }

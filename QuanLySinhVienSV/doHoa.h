@@ -347,7 +347,32 @@ void XuLyNhapSo(int& n, int toadoX)
 		}
 	}
 }
-
+void XuLyNhapSoHK(int& n, int toadoX)
+{
+	string x = "";
+	char c;
+	while (true)
+	{
+		c = getch();
+		if ((c >= 48 && c <= 51) && x.length()<1	)
+		{
+			x.insert(x.begin() + x.length(), c);
+			cout << c;
+		}
+		else if (c == 8 && x.length() > 0)
+		{
+			x.erase(x.begin() + x.length() - 1);
+			cout << "\b";
+			cout << " ";
+			cout << "\b";
+		}
+		else if (c == 13 && x.length() > 0  )
+		{
+			n = atoi(x.c_str());
+			return;
+		}
+	}
+}
 void XuLyNhapSDT(string& sdt)
 {
 	string x = "";

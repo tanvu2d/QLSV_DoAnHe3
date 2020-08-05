@@ -11,6 +11,7 @@
 #pragma warning(disable : 4996)
 using namespace std;
 #define MAXMH 300
+#define SoLuongID 9000
 
 int pointer = 7; // con tro dieu khien menu main
 int toadoXBox = 15;

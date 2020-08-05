@@ -1,94 +1,112 @@
 ﻿#include "XULY.h"
 
 //  cau a  
-void themLopTC(DSLopTC& t, DSMonHoc dsMH)
+void themLopTC(DSLopTC& t, DSMonHoc dsMH , int a[] , int &soLuong)
 {
 	string maMH;
 	string nienKhoa;
 
 	int toadoY = toadoYMain;
 	LopTC x;
-	gotoXY(toadoXBox, toadoY++);
-	cout << "Nhap ma lop tin chi ";
+	gotoXY(toadoXBox, toadoY);
+	cout << "Ma lop TC : ";
+	gotoXY(toadoXBox + 13, toadoY++);
+	
+	x.malopTc = a[soLuong-1];
+	soLuong--;
+	cout << x.malopTc;
 	ShowCur(1);
-	cin >> x.malopTc;
-	cin.ignore();
 	int i;
-	do {
-		i = 0;
-		maMH = "";
-		gotoXY(toadoXBox, toadoY);
-		cout << "Nhap Ma Mon Hoc(0:De Thoat):";
-		gotoXY(toadoXBox + 30, toadoY++);
-		XuLyNhapMa(maMH);
-		if (maMH == "0")
+	
+		do {
+			i = 0;
+			maMH = "";
+			gotoXY(toadoXBox, toadoY);
+			cout << "Nhap Ma Mon Hoc(0:De Thoat):";
+			gotoXY(toadoXBox + 30, toadoY++);
+			XuLyNhapMa(maMH);
+			if (maMH == "0")
+			{
+				ShowCur(0);
+				return;
+			}
+
+			i = SearchMH(dsMH, maMH);
+			if (i == -1)
+			{
+				gotoXY(toadoXBox, toadoY++);
+				cout << "Ma Mon Hoc Chua Ton Tai. Nhap Lai";
+
+			}
+
+
+		} while (i == -1);
+
+		x.mmh = maMH;
+		do
 		{
-			ShowCur(0);
-			return;
-		}
+			nienKhoa = "";
+			gotoXY(toadoXBox, toadoY);
+			cout << "Nhap Nien Khoa : ";
+			gotoXY(toadoXBox + 17, toadoY++);
+			XuLyNhapNienKhoa(nienKhoa);
+			if (nienKhoa == "0")
+			{
+				ShowCur(0);
+				return;
+			}
+			if (!XetNienKhoa(nienKhoa))
+			{
+				gotoXY(toadoXBox, toadoY++);
+				cout << "Nhap nien khoa sai ! Nhap lai ";
+			}
 
-		i = SearchMH(dsMH, maMH);
-		if (i == -1)
-		{
-			gotoXY(toadoXBox, toadoY++);
-			cout << "Ma Mon Hoc Chua Ton Tai. Nhap Lai";
-
-		}
+		} while (XetNienKhoa(nienKhoa) == false);
+		x.nienkhoa = nienKhoa;
 
 
-	} while (i == -1);
-
-	x.mmh = maMH;
-	/*gotoXY(toadoXBox, toadoY);
-	cout << "Nhap Nien Khoa : ";
-	gotoXY(toadoXBox + 17, toadoY++);
-	cin.ignore();
-	getline(cin, x.nienkhoa);*/
-
-	do
-	{
-		nienKhoa = "";
 		gotoXY(toadoXBox, toadoY);
-		cout << "Nhap Nien Khoa : ";
+		cout << "Nhap Hoc Ki    : ";
 		gotoXY(toadoXBox + 17, toadoY++);
-		XuLyNhapNienKhoa(nienKhoa);
-		if (nienKhoa == "0")
+		XuLyNhapSoHK(x.hocki, toadoXBox + 17);
+
+		gotoXY(toadoXBox, toadoY);
+		cout << "Nhap Nhom      : ";
+		gotoXY(toadoXBox + 17, toadoY++);
+		XuLyNhapSo(x.nhom, toadoXBox + 17);
+		
+		if (CheckTrungLopTinChi(t.root, x.nienkhoa, x.hocki, x.nhom, x.mmh))
 		{
-			ShowCur(0);
 			return;
 		}
-		if (!XetNienKhoa(nienKhoa))
+		
+		
+	
+	
+		gotoXY(toadoXBox, toadoY);
+		cout << "Nhap So SV Max : ";
+		gotoXY(toadoXBox + 17, toadoY++);
+		XuLyNhapSo(x.so_svmax, toadoXBox + 17);
+
+		gotoXY(toadoXBox, toadoY);
+		cout << "Nhap So SV Min : ";
+		gotoXY(toadoXBox + 17, toadoY++);
+		XuLyNhapSo(x.so_sv_min, toadoXBox + 17);
+		while(x.so_svmax < x.so_sv_min)
 		{
 			gotoXY(toadoXBox, toadoY++);
-			cout << "Nhap nien khoa sai ! Nhap lai ";
-		}
+			cout << "Nhap lai so sinh vien min max";
+			gotoXY(toadoXBox, toadoY);
+			cout << "Nhap So SV Max : ";
+			gotoXY(toadoXBox + 17, toadoY++);
+			XuLyNhapSo(x.so_svmax, toadoXBox + 17);
 
-	} while (XetNienKhoa(nienKhoa) == false);
-	x.nienkhoa = nienKhoa;
-
-
-	gotoXY(toadoXBox, toadoY);
-	cout << "Nhap Hoc Ki    : ";
-	gotoXY(toadoXBox + 17, toadoY++);
-	XuLyNhapSo(x.hocki, toadoXBox + 17);
-
-	gotoXY(toadoXBox, toadoY);
-	cout << "Nhap Nhom      : ";
-	gotoXY(toadoXBox + 17, toadoY++);
-	XuLyNhapSo(x.nhom, toadoXBox + 17);
-
-	CheckTrungLopTinChi(t.root, x.nienkhoa, x.hocki, x.nhom, x.mmh);
-
-	gotoXY(toadoXBox, toadoY);
-	cout << "Nhap So SV Max : ";
-	gotoXY(toadoXBox + 17, toadoY++);
-	XuLyNhapSo(x.so_svmax, toadoXBox + 17);
-
-	gotoXY(toadoXBox, toadoY);
-	cout << "Nhap So SV Min : ";
-	gotoXY(toadoXBox + 17, toadoY++);
-	XuLyNhapSo(x.so_sv_min, toadoXBox + 17);
-	//MenuDS(x.DSSVDK);
+			gotoXY(toadoXBox, toadoY);
+			cout << "Nhap So SV Min : ";
+			gotoXY(toadoXBox + 17, toadoY++);
+			XuLyNhapSo(x.so_sv_min, toadoXBox + 17);
+		};
+	
 	x.dssvdk.pHead = NULL;
 
 	ThemNodeVaoCay(t.root, x);
@@ -363,7 +381,7 @@ void InDSSV(DSSV dsSV, DSLopTC& dslop, DSMonHoc dsMH, int toadoX, int toadoY)
 	gotoXY(toadoXBox, toadoYtemp);
 	cout << "Nhap Hoc Ki(0:De Thoat): ";
 	gotoXY(toadoXBox + 27, toadoYtemp++);
-	XuLyNhapSo(HK, toadoXBox + 17);
+	XuLyNhapSoHK(HK, toadoXBox + 17);
 	if (HK == 0)
 	{
 		ShowCur(0);
@@ -417,10 +435,6 @@ void XuatSVDKTest(DSSV dsSV, int toadoX, int toadoY)
 	for (NodeSV* k = dsSV.pHead; k != NULL; k = k->pNext)
 	{
 
-
-
-		//gotoXY(toadoX + 1, toadoY + 4 + (dem * 2));
-		//cout << CanDeuChuoi(ChuyenSoSangString(t->data.malopTc), 9);
 		gotoXY(toadoX + 11, toadoY + 4 + (dem * 2));
 		cout << CanDeuChuoi(k->data.malop, 19);
 		gotoXY(toadoX + 31, toadoY + 4 + (dem * 2));
@@ -444,6 +458,10 @@ bool checkMaSV(DSSV dsSV, string maSV)
 
 	for (NodeSV* k = dsSV.pHead; k != NULL; k = k->pNext)
 	{
+		if (maSV < k->data.mssv)
+		{
+			return true;
+		}
 		if (k->data.mssv == maSV)
 		{
 			return false;
@@ -455,25 +473,16 @@ bool checkMaSV(DSSV dsSV, string maSV)
 
 void ThemSinhVienTheoThuTu(DSSV& dsSV, NodeSV* p)
 {
+	string a = p->data.malop + p->data.mssv;
 	for (NodeSV* k = dsSV.pHead; k != NULL; k = k->pNext)
 	{
-		if (p->data.malop == k->data.malop)
+		string k1 = k->data.malop + k->data.mssv;
+		if (a > k1)
 		{
-			if (p->data.mssv > k->data.mssv && (p->data.malop == k->pNext->data.malop && p->data.mssv < k->pNext->data.mssv))
-			{
-				Them_NODE_p_Vao_Sau_NODE_q(dsSV.pHead, p, k);
-				break;
-			}
-			else if (p->data.mssv > k->data.mssv&& p->data.malop < k->pNext->data.malop)
-
-			{
-				Them_NODE_p_Vao_Sau_NODE_q(dsSV.pHead, p, k);
-				break;
-			}
-			else if (p->data.malop == k->data.malop && p->data.mssv < k->data.mssv)
-			{
-				ThemDau(dsSV.pHead, p);
-			}
+			NodeSV* g = KhoiTaoNode(p->data);
+			g->pNext = k->pNext;
+			k->pNext = g;
+			break;
 		}
 	}
 }
@@ -594,9 +603,6 @@ void XoaSVLop(DSSV& dsSV)
 		delete temp;
 		return;
 	}
-
-
-
 
 	NodeSV* temp = dsSV.pHead;
 	for (NodeSV* k = dsSV.pHead->pNext; k != NULL; k = k->pNext)
@@ -845,7 +851,7 @@ void XuatDSSV(SinhVien sv[500], int n, int toadoX, int toadoY)
 
 	int dem = 0;
 	XoaManHinhChinh();
-	SortArr(sv, n);
+	//SortArr(sv, n);
 	for (int i = 0; i < n; i++)
 	{
 		gotoXY(toadoX + 1, toadoY + 4 + (dem * 2));
@@ -890,6 +896,10 @@ void XuatDSSV1Lop(DSSV dsSV, int toadoX, int toadoY)
 
 	for (NodeSV* k = dsSV.pHead; k != NULL; k = k->pNext)
 	{
+		if (maLop < k->data.malop)
+		{
+			break;
+		}
 		if (k->data.malop == maLop)
 		{
 			sv[n++] = k->data;

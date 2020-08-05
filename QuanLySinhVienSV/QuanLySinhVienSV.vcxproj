@@ -143,6 +143,7 @@
     <ClInclude Include="doHoa.h" />
     <ClInclude Include="menu.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="SaveFile.h" />
     <ClInclude Include="XULY.h" />
   </ItemGroup>
   <ItemGroup>

@@ -51,28 +51,7 @@ void ThemCuoiSVDK(NodeSVDK*& pHead, NodeSVDK* p)
 	}
 }
 
-// hÃ m thÃªm node p vÃ o sau node q trong danh sÃ¡ch
-//void chuanhoaChu(string& a) {
-//	//ki tu dau
-//	while (a[0] == ' ') {
-//		a.erase(a.begin() + 0);
-//	}
-//	//cuoi
-//	while (a[a.length() - 1] == ' ') {
-//		a.erase(a.begin() + a.length() - 1);
-//	}
-//	//giua
-//	for (int i = 0; i < a.length(); i++) {
-//		if (a[i] == ' ' && a[i + 1] == ' ') {
-//			a.erase(a.begin() + i);
-//			i--;
-//		}
-//	}
-//
-//	transform(a.begin(), a.end(), a.begin(), ptr_fun<int, int>(toupper));
-//}
 
-// hÃ m xÃ³a node dau danh sÃ¡ch
 void XoaDauSVDK(NodeSVDK*& pHead)
 {
 	if (pHead == NULL)
@@ -131,8 +110,7 @@ void GiaiPhongSVDK(NodeSVDK*& pHead)
 		k = pHead;
 	}
 }
-//hÃ m thÃªm node p vÃ o dau danh sach
-
+// node sinh vien
 NodeSV* KhoiTaoNode(SinhVien x)
 {
 	NodeSV* p = new NodeSV;
@@ -160,9 +138,6 @@ void ThemDau(NodeSV*& pHead, NodeSV* p)
 		pHead = p;
 	}
 }
-
-
-
 
 void ThemCuoi(NodeSV*& pHead, NodeSV* p)
 {
@@ -296,104 +271,6 @@ void GiaiPhong(NodeSV*& pHead)
 	}
 }
 
-// menu danh sach lien ket don 
-
-//void MenuDS(NodeSV* pHead)
-//{
-//	int luachon;
-//	while (true)
-//	{
-//		system("cls");
-//		cout << "\n\n\t\t ========= MENU =========";
-//		cout << "\n1. Them phan tu vao dau";
-//		cout << "\n2. Xuat danh sach lien ket don";
-//		cout << "\n3. Them NODE p vao sau NODE q";
-//		cout << "\n4. Them NODE p vao truoc NODE q";
-//		cout << "\n5. Xoa dau";
-//		cout << "\n6. Xoa cuoi";
-//		cout << "\n0. Thoat";
-//		cout << "\n\n\t\t =========  END =========";
-//
-//		cout << "\nNhap lua chon: ";
-//		cin >> luachon;
-//
-//		if (luachon == 1)
-//		{
-//			SinhVien x ;
-//			
-//			fflush(stdin) ;
-//			cout << "\nNhap mssv : " ;
-//			getline(cin,x.mssv) ;
-//			cout << "\nNhap ho : " ;
-//			getline(cin,x.ho) ;
-//			cout << "\nNhap ten : " ;
-//			getline(cin ,x.ten) ;
-//			cout<< "Nhap phai : " ;
-//			getline(cin,x.phai) ;
-//			cout <<"\nNhap so dien thoai :" ;
-//			getline(cin,x.sdt) ;
-//			cout <<"\n Nhap ma lop : " ;
-//			getline(cin ,x.malop);		
-//			fflush(stdin);	
-//			cout <<"\nNhap nam hoc : " ;
-//			cin >> x.namnhaphoc ;
-//			
-//			
-//			NodeSV* p = KhoiTaoNode(x);
-//			ThemDau(pHead, p);
-//		}
-//		else if (luachon == 2)
-//		{
-//			cout << "\n\n\t\t DANH SACH LIEN KET DON     menu111\n";
-//			Xuat(pHead);
-//			system("pause");
-//		}
-//		else if (luachon == 3)
-//		{
-//			break  ;
-//		}
-//	/*	else if (luachon == 3)
-//		{
-//			int x;
-//			cout << "\nNhap vao data cua node q can tim trong danh sach: ";
-//			cin >> x;
-//			nodeSinhVien* q = KhoiTaoNode(x);
-//
-//			int y;
-//			cout << "\nNhap vao data cua node p can them: ";
-//			cin >> y;
-//			NODE *p = KhoiTaoNode(y);
-//			Them_NODE_p_Vao_Sau_NODE_q(pHead, p, q);
-//		}
-//		else if (luachon == 4)
-//		{
-//			int x;
-//			cout << "\nNhap vao data cua node q can tim trong danh sach: ";
-//			cin >> x;
-//			NODE* q = KhoiTaoNode(x);
-//
-//			int y;
-//			cout << "\nNhap vao data cua node p can them: ";
-//			cin >> y;
-//			NODE* p = KhoiTaoNode(y);
-//			Them_NODE_p_Vao_Truoc_NODE_q(pHead, p, q);
-//		}
-//		else if (luachon == 5)
-//		{
-//			XoaDau(pHead);
-//		}
-//		else if (luachon == 6)
-//		{
-//			XoaCuoi(pHead);
-//		}
-//		*/
-//		else
-//		{
-//			break;
-//		}
-//	}
-//}
-
 // ham TREE 
 
 int compareSV(SinhVien x, SinhVien y)
@@ -507,33 +384,7 @@ void TimKiem(NodeLopTC* t, int  x)
 	}
 
 }
-/*NODE* TimKiem(TREE t, int  data)
-{
 
-	if (t == NULL)
-	{
-		return NULL;
-	}
-	else
-	{
-
-		if (x < t->data)
-		{
-			TimKiem(t->pLeft, x);
-		}
-		else if (x > t->data)
-		{
-			TimKiem(t->pRight, x);
-		}
-		else // <=> t->data == x
-		{
-			return t;
-		}
-	}
-
-}
-*/
-//xoa node bat ky 
 void DiTimNodeTheMang(NodeLopTC*& X, NodeLopTC*& Y)
 {
 
@@ -754,204 +605,6 @@ int KiemTraCoLopTinChi(NodeLopTC* t, int data)
 	return 0;
 }
 
-/*void DuyetSave(DSlopTC *dsTC, ofstream &fileOut, ofstream &fileOut1)
-{
-	if (root == NULL)
-	{
-		return;
-	}
-	fileOut  <<
-
-	DuyetSave(root->pLeft,fileOut);
-
-	DuyetSave(root->pRight,fileOut);
-}
-*/
-//void themLopTC (DSLopTC &t)
-//{
-//	LopTC x ;
-//		
-//			gotoXY(50,8) ;	
-//			
-//			cout << "Nhap ma lop tin chi : ";
-//			cin >> x.malopTc ;
-//			
-//			
-//			gotoXY(50,9) ;	
-//			//fflush(stdin);
-//			cin.ignore();	
-//			cout << "Nhap ma mon hoc : " ;				
-//			getline(cin,x.mmh) ;
-//			gotoXY(50,10) ;
-//			cout << "Nhap nien khoa: " ;
-//			
-//			getline(cin ,x.nienkhoa) ;
-//			gotoXY(50,11) ;		
-//			cout << "Nhap hoc ky : ";
-//			cin >> x.hocki ; 
-//			gotoXY(50,12) ;			
-//			cout<<"Nhap nhom : " ;
-//			cin >> x.nhom ;
-//			gotoXY(50,13) ;
-//			cout << "Nhap so sinh vien max : " ;
-//			cin >> x.so_svmax ;
-//			gotoXY(50,14) ;
-//			cout <<"Nhap so sinh vien min : " ;
-//			cin >>x.so_sv_min ;
-//			/// con tro ds sv						
-//			MenuDS(x.DSSVDK);  //ds sinh vien dung contro dang ky
-//
-// 			ThemNodeVaoCay(t.root, x);
-// 			t.soLuong++ ;
-//} 
-//void XoaLopTC(DSLopTC &t )
-//{
-//	int x;
-//				gotoXY(50, 8);
-//				cout << "Nhap gia tri can xoa: ";
-//				cin >> x;
-//				XoaNode(t.root, x);
-//				t.soLuong-- ;
-//}
-//
-//void SuaLopTC(DSLopTC& t)
-//{	
-//				gotoXY(50, 8);
-//				cout << "Ban muon xem thong tin lop tin chi nao : ";
-//				int x ;
-//				cin >> x ;
-//				TimKiem(t.root,x) ;
-//}
-// menu TREE 
-//void MenuTREE(DSLopTC &t)
-//{
-////	int luachon ;
-//	while (true)
-//	{
-//		system("cls");
-//		cout << "\n\n\t\t ============ MENU ============";
-//		cout << "\n1. Them lop tin chi  ";
-//		cout <<"\n2.Xuat cay nhi phan phan" ;
-//		cout <<"\n3.Hieu chinh lop tin chi ";
-//		cout << "\n4. Xoa lop tin chi  ";
-//		cout <<"\n5.Xem thong tin lop tin chi "; 
-//		
-//		cout << "\n0. Thoat";
-//		cout << "\n\n\t\t =============  END  =============";
-
-	//	cout << "\nNhap lua chon: ";
-	//	cin >> luachon;
-
-//		if (luachon == 1)
-//		{
-//			LopTC x ;			
-//			cout << "\nNhap ma lop tin chi : ";
-//			cin >> x.malopTc ;
-//			
-//			fflush(stdin);			
-//			cout << "\nNhap ma mon hoc : " ;
-//					
-//			getline(cin,x.mmh) ;
-//			
-//			cout << "\nNhap nien khoa: " ;
-//			
-//			getline(cin ,x.nienkhoa) ;
-//					
-//			cout << "\nNhap hoc ky : ";
-//			cin >> x.hocki ; 			
-//			cout<<"\nNhap nhom : " ;
-//			cin >> x.nhom ;
-//			cout << "\nNhap so sinh vien max : " ;
-//			cin >> x.so_svmax ;
-//			cout <<"\nNhap so sinh vien min : " ;
-//			cin >>x.so_sv_min ;
-//			/// con tro ds sv						
-//			MenuDS(x.DSSVDK);  //ds sinh vien dung contro dang ky
-//
-// 			ThemNodeVaoCay(t.root, x);
-// 			t.soLuong++ ;
-//		}
-//		else if (luachon == 2)
-//		{
-//			cout << "\n\t CAY NHI PHAN TIM KIEM\n";
-//			cout <<"\n So luong node trong cay " << t.soLuong<<endl<<endl ;
-//			NLR(t.root);
-//			system("pause");
-//		}
-//		else if (luachon == 3)
-//		{
-//			cout << "\n Ban muon sua lop tin chi nao " ;
-//			int x ;
-//			cin >> x ;
-//			hieuChinh (t.root , x) ;
-//		}
-//		else if (luachon == 4)
-//		{
-//			int x;
-//			cout << "\nNhap gia tri can xoa: ";
-//			cin >> x;
-//			XoaNode(t.root, x);
-//			t.soLuong-- ;
-//		}
-//		else if (luachon == 5)
-//		{
-//			cout << "\nBan muon xem thong tin lop tin chi nao : " ;
-//			int x ;
-//			cin >> x ;
-//			 TimKiem(t.root,x) ;
-//			
-//		} 
-//		else
-//		{
-//			break;
-//		}
-//		
-//	}
-//}
-
-/// load file 
-
-// ghi file 
-
-
-//void DuyetSave(NodeLopTC *root, ofstream &fileOut, ofstream &fileOut1)
-//{
-//	
-//	if (root == NULL)
-//	{
-//		return;
-//	}
-//	
-//	fileOut << root->data.malopTc ;
-//	fileOut << "," ;
-//	fileOut <<root->data.mmh <<","<< root->data.nienkhoa<<","
-//	<<root->data.hocki<<","<<root->data.nhom<<","<<root->data.so_svmax
-//	<<","<<root->data.so_sv_min <<endl ;
-//	
-//	for (NodeSV *k = root->data.dssvdk.pHead; k!= NULL ; k= k->pNext)
-//	{
-//		fileOut1  << k->data.malop<<"," <<k->data.namnhaphoc <<","
-//		<<k->data.mssv<<"," << k->data.ho <<"," << k->data.ten
-//		<<","<<k->data.phai<<","<<k->data.sdt<<endl;
-//	}
-//	
-//	DuyetSave(root->pLeft,fileOut,fileOut1);
-//	DuyetSave(root->pRight,fileOut,fileOut1);
-//}
-//void SaveLopTinChi(DSLopTC dsLTC)
-//{
-//	ofstream fileOut ;
-//	fileOut.open("outputLopTC.txt", ios::out);
-//	ofstream fileOut1;
-//	fileOut1.open("outputSV.txt", ios::out);
-//	fileOut << dsLTC.soLuong <<endl;
-//
-//	DuyetSave(dsLTC.root, fileOut,fileOut1);
-//
-//	fileOut.close();
-//	fileOut1.close() ;
-//}
-
 
 // load cay nhi phan lop tin chi
 void LoadTC(DSLopTC& dsTC)
@@ -1034,40 +687,7 @@ void LoadSV(DSSV& dsSV)
 }
 
 
-//void XuLyNhapMa(string& InPut)
-//{
-//	while (true)
-//	{
-//		char c = getch();
-//		if ((c >= 48 && c <= 57) || c == '_' || (c >= 65 && c <= 90))
-//		{
-//			InPut.insert(InPut.begin() + InPut.length(), c);
-//			cout << c;
-//		}
-//		else if (c >= 97 && c <= 122)
-//		{
-//			c = c - 32;
-//			InPut.insert(InPut.begin() + InPut.length(), c);
-//			cout << c;
-//		}
-//		else if (c == 8 && InPut.length() > 0)
-//		{
-//			InPut.erase(InPut.begin() + InPut.length() - 1);
-//			cout << "\b";
-//			cout << " ";
-//			cout << "\b";
-//		}
-//		else if (c == 27)
-//		{
-//			InPut.clear();
-//			return;
-//		}
-//		else if (c == 13 && InPut.length() > 0)// náº¿u lÃ  phÃ­m enter
-//		{
-//			break;
-//		}
-//	}
-//}
+
 ////===============DOC FILE MON HOC=========================
 //https://paste.ubuntu.com/p/T3GCyCt8pH
 
@@ -1136,23 +756,7 @@ void XuLyNhapSo(int& n)
 		}
 	}
 }
-//string ChuyenSoSangString(int n)
-//{
-//	string str;
-//	int a;
-//	if (n == 0)
-//	{
-//		str = "0";
-//	}
-//	while (n > 0)
-//	{
-//		a = n % 10;
-//		Chuyen1SoSangKiTu(a);
-//		str.insert(str.begin() + 0, Chuyen1SoSangKiTu(a));
-//		n = n / 10;
-//	}
-//	return str;
-//}
+
 int ChuyenStringSangSo(string x) {
 	int a = 0;
 	for (int i = 0; i < x.length(); i++) {
@@ -1170,7 +774,7 @@ bool XetNienKhoa(string NK) {
 	int so1, so2;
 	so1 = ChuyenStringSangSo(str1);
 	so2 = ChuyenStringSangSo(str2);
-	if (so2 - so1 == 1)
+	if (so2 - so1 == 1 && so1 <= 2020)
 	{
 		return true;
 	}
@@ -1225,7 +829,7 @@ void XuLyNhapNienKhoa(string& InPut)
 			InPut.clear();
 			return;
 		}
-		else if (c == 13 && InPut.length() > 0)//enter
+		else if (c == 13 && InPut.length() > 0 && InPut.length() ==9)//enter
 		{
 			break;
 		}
@@ -1278,7 +882,6 @@ void sort(DSMonHoc& dsMH)
 }
 
 void themMonHoc(DSMonHoc& dsMH) {
-
 	ShowCur(1);
 	int toadoY = toadoYMain;
 	string monHocss = "";
@@ -1394,18 +997,6 @@ void xuat(monHoc* ds[], int& nds) {
 		cout << "ten mon hoc: " << ds[i]->TenMH << endl;
 	}
 }
-//void xuatMonHoc(monHoc mh[], int n){
-////	monHoc ds[MAXMH];
-//	sortMH(mh, n);
-//	for (int i=0 ; i<n; i++){
-//		cout << "\t\t========MON HOC "<<i<< "========" << endl;
-//		cout << "Ma mon hoc: " <<  mh[i].maMonHoc <<endl;
-//		cout << "Ten Mon Hoc: " << mh[i].TenMH <<endl;
-//		cout << "So tin chi ly thuyet: " << mh[i].sotclt<< endl;
-//		cout << "So tin chi thuc hanh: " << mh[i].sotcth << endl;	
-//	}
-//	getch();
-//}
 
 void LoadMH(DSMonHoc& dsMH) {
 	ifstream filein;
@@ -1434,35 +1025,6 @@ void LoadMH(DSMonHoc& dsMH) {
 }
 
 
-/*void LoadMonHoc(DSMonHoc& dsMH)
-{
-	ifstream fileIn("inputMH.txt", ios::in);
-	fileIn >> dsMH.n;
-	fileIn.ignore();
-	for (int i = 0; i < dsMH.n; i++)
-	{
-		dsMH.ds[dsMH.n++] = new monHoc;
-		getline(fileIn, dsMH.ds[i]->maMonHoc, ',');
-		fileIn.ignore();
-		getline(fileIn, dsMH.ds[i]->TenMH, ',');
-		fileIn.ignore();
-		fileIn >> dsMH.ds[i]->sotclt;
-		fileIn.ignore();
-		fileIn >> dsMH.ds[i]->sotcth;
-		fileIn.ignore();
-	}
-	fileIn.close();
-}*/
-
-//void BaoLoi (char *s){
-//  int x=wherex() , y=wherey();
-//  gotoxy (10,24);
-//  cout <<s;
-//  Sleep(4000);
-//  gotoxy(10,24);
-//  clreol();
-//  gotoxy(x,y);
-//}
 
 ///XOA MON HOC
 int ktMonHoc(string a, DSMonHoc dsMH)
@@ -1538,18 +1100,43 @@ void chinhsuaMH(DSMonHoc& dsMH) {
 }
 
 
-void CheckTrungLopTinChi(NodeLopTC* t, string nienKhoa, int hocKi, int nhom, string maMH)
+bool CheckTrungLopTinChi(NodeLopTC* t, string nienKhoa, int hocKi, int nhom, string maMH )
 {
-	if (t != NULL)
+	if (t == NULL)
+	{
+
+		return false;
+	}
+	else
 	{
 		if (t->data.mmh == maMH && t->data.hocki == hocKi && t->data.nhom == nhom && t->data.nienkhoa == nienKhoa)
 		{
 			GiaoDienThongBao("Du Lieu Lop Da Ton Tai");
-			return;
+			
+			return true ;
 		}
-		CheckTrungLopTinChi(t->pLeft, nienKhoa, hocKi, nhom, maMH);
-		CheckTrungLopTinChi(t->pRight, nienKhoa, hocKi, nhom, maMH);
+		return  CheckTrungLopTinChi(t->pLeft, nienKhoa, hocKi, nhom, maMH);
+		return  CheckTrungLopTinChi(t->pRight, nienKhoa, hocKi, nhom, maMH);
 	}
+}
 
 
+void loadIdLopTC(int a[], int& n)
+{
+	ifstream fileIn;
+	fileIn.open("IDLopTC.txt", ios_base::in);
+	if (fileIn.fail() == true)
+	{
+		cout << "\nFile khong ton tai. Xin kiem tra lai";
+		system("pause");
+		//return 0;
+	}
+	fileIn >> n;
+	fileIn.ignore();
+	for (int i = 0; i < n; i++)
+	{
+		fileIn >> a[i];
+
+	}
+	fileIn.close();
 }
