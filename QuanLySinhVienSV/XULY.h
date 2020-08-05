@@ -688,9 +688,6 @@ void LoadSV(DSSV& dsSV)
 
 
 
-////===============DOC FILE MON HOC=========================
-//https://paste.ubuntu.com/p/T3GCyCt8pH
-
 void DocFileMonHoc(DSMonHoc& dsMH)
 {
 	ifstream filein;
@@ -727,7 +724,19 @@ void DocFileMonHoc(DSMonHoc& dsMH)
 	// chi?u s?a l?i d?nh d?ng chu?i là xong
 }
 //==========GHI FILE MON HOC===============
+void GhiFileMonHoc(DSMonHoc dsMH) {
+	ofstream fileOut;
+	fileOut.open("inputMH.txt");
 
+	for (int i = 0; i < dsMH.n; i++) {
+		fileOut << dsMH.ds[i]->maMonHoc; fileOut << ",";
+		fileOut << dsMH.ds[i]->TenMH; fileOut << ",";
+		fileOut << dsMH.ds[i]->sotclt; fileOut << ",";
+		fileOut << dsMH.ds[i]->sotcth << endl;
+		//fileOut << ",";
+	}
+	fileOut.close();
+}
 
 void XuLyNhapSo(int& n)
 {
@@ -880,7 +889,7 @@ void sort(DSMonHoc& dsMH)
 		}
 	}
 }
-
+/*
 void themMonHoc(DSMonHoc& dsMH) {
 	ShowCur(1);
 	int toadoY = toadoYMain;
@@ -917,7 +926,7 @@ void themMonHoc(DSMonHoc& dsMH) {
 	ShowCur(0);
 	GiaoDienThongBao("     Them Thanh Cong");
 }
-
+*/
 void NhapDSSV(DSMonHoc& dsMH) {
 	monHoc mh;
 
@@ -1039,7 +1048,7 @@ int ktMonHoc(string a, DSMonHoc dsMH)
 	}
 	return -1;
 }
-void xoaMonHoc(DSMonHoc& dsMH)
+/*void xoaMonHoc(DSMonHoc& dsMH)
 {
 	string a;
 	cout << "Nhap ma mon hoc can xoa "; cin >> a;
@@ -1069,8 +1078,8 @@ void xoaMonHoc(DSMonHoc& dsMH)
 		system("pause");
 	}
 }
-
-void chinhsuaMH(DSMonHoc& dsMH) {
+*/
+/*void chinhsuaMH(DSMonHoc& dsMH) {
 	string a;
 	cout << "Nhap ma mon hoc can hieu chinh: "; cin >> a;
 	DinhDangChuoi(a);
@@ -1098,7 +1107,7 @@ void chinhsuaMH(DSMonHoc& dsMH) {
 	}
 
 }
-
+*/
 
 bool CheckTrungLopTinChi(NodeLopTC* t, string nienKhoa, int hocKi, int nhom, string maMH )
 {

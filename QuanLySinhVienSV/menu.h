@@ -355,14 +355,14 @@ void RunMenu(DSLopTC& dsLopTC, DSMonHoc& dsMonHoc, DSSV& dsSV , int a[] , int so
 							switch (pointer)
 							{
 							case 7:
-								themMonHoc(dsMonHoc);
+								themMonHoc(dsMonHoc, toadoXBox + 8, toadoYBox);
 								break;
 
 							case 8:
 								xoaMonHoc(dsMonHoc);
 								break;
 							case 9:
-								xuatMonHoc(dsMonHoc);
+								xuatMonHoc(dsMonHoc, toadoXBox + 5, toadoYBox);
 								system("pause");
 								break;
 							case 10:
@@ -371,6 +371,7 @@ void RunMenu(DSLopTC& dsLopTC, DSMonHoc& dsMonHoc, DSSV& dsSV , int a[] , int so
 
 							case 11:
 								pointer = 7;
+								GhiFileMonHoc(dsMonHoc);
 								goto VONGLAP;
 							}
 
