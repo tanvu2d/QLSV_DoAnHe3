@@ -698,19 +698,20 @@ void DocFileMonHoc(DSMonHoc& dsMH)
 		system("pause");
 		//return 0;
 	}
+	filein >> dsMH.n;
+	filein.ignore();
 	string temp;
-	while (filein.eof() != true)
+	for (int i = 0; i < dsMH.n; i++)
 	{
-		dsMH.ds[dsMH.n] = new monHoc;
+		dsMH.ds[i] = new monHoc;
 
-		getline(filein, dsMH.ds[dsMH.n]->maMonHoc, ',');
-		getline(filein, dsMH.ds[dsMH.n]->TenMH, ',');
+		getline(filein, dsMH.ds[i]->maMonHoc, ',');
+		getline(filein, dsMH.ds[i]->TenMH, ',');
 		//getline(filein, temp, ',');
-		filein >> dsMH.ds[dsMH.n]->sotclt;
-		getline(filein, temp, ','); // lay dau phay o giua 2 so
-		filein >> dsMH.ds[dsMH.n]->sotcth;
+		filein >> dsMH.ds[i]->sotclt;
 		filein.ignore();
-		dsMH.n++;
+		filein >> dsMH.ds[i]->sotcth;
+		filein.ignore();
 	}
 	filein.close();
 	//ua sao ko xem dc mon hoc luôn
@@ -728,6 +729,7 @@ void GhiFileMonHoc(DSMonHoc dsMH) {
 	ofstream fileOut;
 	fileOut.open("inputMH.txt");
 
+	fileOut << dsMH.n << endl;
 	for (int i = 0; i < dsMH.n; i++) {
 		fileOut << dsMH.ds[i]->maMonHoc; fileOut << ",";
 		fileOut << dsMH.ds[i]->TenMH; fileOut << ",";

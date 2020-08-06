@@ -2297,7 +2297,7 @@ void xuatMonHoc(DSMonHoc dsMH, int toadoX, int toadoY) {
 	GiaoDienMonHoc(toadoXBox + 4, toadoYBox, dsMH.n);
 
 	for (int i = 0; i < dsMH.n; i++) {
-		//cout << "\t\t========MON HOC " << i << "========" << endl;
+		
 		gotoXY(toadoX + 1, toadoY + 4 + (dem * 2));
 		cout << CanDeuChuoi(ChuyenSoSangString(i + 1), 9);
 
@@ -2420,7 +2420,7 @@ void chinhsuaMH(DSMonHoc& dsMH) {
 		gotoXY(toadoXBox, toadoYBox + 1);
 		GiaoDienThongBao("Ma Mon hoc KHONG ton tai! Nhap Lai!");
 		//goto vonglap;
-		system("pause");
+		
 	}
 	else {
 		GiaoDienCHINHMonHoc(toadoXBox + 5, toadoYBox + 10, 1);
@@ -2440,7 +2440,7 @@ void chinhsuaMH(DSMonHoc& dsMH) {
 		//cout << "===================" << endl;
 		gotoXY(toadoXBox, toadoYBox + 1);
 		GiaoDienThongBao("Hieu Chinh Thanh Cong");
-		system("pause");
+		///system("pause");
 	}
 
 }

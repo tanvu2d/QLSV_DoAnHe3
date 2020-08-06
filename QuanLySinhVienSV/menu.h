@@ -38,7 +38,6 @@ string menuMH[] = {
 
 	"Them mon hoc               ",
 	"Xoa mon hoc                ",
-	"Xem danh sach mon hoc      ",
 	"Hieu chinh mon hoc         ",
 	"Thoat toi menu chinh       "
 };
@@ -361,15 +360,12 @@ void RunMenu(DSLopTC& dsLopTC, DSMonHoc& dsMonHoc, DSSV& dsSV , int a[] , int so
 							case 8:
 								xoaMonHoc(dsMonHoc);
 								break;
+							
 							case 9:
-								xuatMonHoc(dsMonHoc, toadoXBox + 5, toadoYBox);
-								system("pause");
-								break;
-							case 10:
 								chinhsuaMH(dsMonHoc);
 								break;
 
-							case 11:
+							case 10:
 								pointer = 7;
 								GhiFileMonHoc(dsMonHoc);
 								goto VONGLAP;
@@ -394,7 +390,10 @@ void RunMenu(DSLopTC& dsLopTC, DSMonHoc& dsMonHoc, DSSV& dsSV , int a[] , int so
 				}
 				break;
 		
-
+			case 12:
+				xuatMonHoc(dsMonHoc, toadoXBox + 5, toadoYBox);
+				getch();
+				break;
 			case 13:
 				DangKiLopTC(dsSV, dsLopTC, dsMonHoc, toadoXBox, 7);
 				SaveLopTC(dsLopTC);
