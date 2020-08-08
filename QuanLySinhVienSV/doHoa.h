@@ -216,6 +216,89 @@ void XuLyNhapMa(string& InPut)
 		}
 	}
 }
+void XuLyNhapten(string& InPut, int maximum=256)
+{
+	//|| c == '_'
+	while (true)
+	{
+		char c = _getch();
+		if (c == ' ') {
+			if (InPut[InPut.length()-1] == c) {
+				continue;
+			}
+		}
+		if (((c >= 48 && c <= 57)  || (c >= 65 && c <= 90) || c == ' ' )&& (sizeof(c) <=35)) // hoa
+		{
+			if (InPut.length() < maximum) {
+				InPut.insert(InPut.begin() + InPut.length(), c);
+				cout << c;
+			}
+		}
+		else if (c >= 97 && c <= 122) // thuong
+		{
+			c = c - 32;
+			if (InPut.length() < maximum) {
+				InPut.insert(InPut.begin() + InPut.length(), c);
+				cout << c;
+			}
+		}
+		else if (c == 8 && InPut.length() > 0) //beckspace
+		{
+			InPut.erase(InPut.begin() + InPut.length() - 1);
+			cout << "\b";
+			cout << " ";
+			cout << "\b";
+		}
+		else if (c == 27) // esc
+		{
+			InPut.clear();
+			return;
+		}
+		else if (c == 13 && InPut.length() > 0)//enter
+		{
+			break;
+		}
+	}
+}
+void XuLyNhapMaMon(string& InPut, int maximum = 256)
+{
+	while (true)
+	{
+		char c = _getch();
+		if ((c >= 48 && c <= 57) || c == '_' || (c >= 65 && c <= 90)) // hoa
+		{
+			if (InPut.length() < maximum) {
+				InPut.insert(InPut.begin() + InPut.length(), c);
+				cout << c;
+			}
+		}
+		else if (c >= 97 && c <= 122) // thuong
+		{
+			if (InPut.length() < maximum) {
+				c = c - 32;
+				InPut.insert(InPut.begin() + InPut.length(), c);
+				cout << c;
+			}
+		}
+		else if (c == 8 && InPut.length() > 0) //beckspace
+		{
+			InPut.erase(InPut.begin() + InPut.length() - 1);
+			cout << "\b";
+			cout << " ";
+			cout << "\b";
+		}
+		else if (c == 27) // esc
+		{
+			InPut.clear();
+			return;
+		}
+		else if (c == 13 && InPut.length() > 0)//enter
+		{
+			break;
+		}
+	}
+}
+
 bool XuLyNhapDiem(float& n, int toadoX, int& toadoY)
 {
 	int toadoXtam;
@@ -347,6 +430,32 @@ void XuLyNhapSo(int& n, int toadoX)
 		}
 	}
 }
+void XuLyNhapSoMH(float& n)
+{
+	string x = "";
+	char c;
+	while (true)
+	{
+		c = getch();
+		if ((c >= 48 && c <= 57))
+		{
+			x.insert(x.begin() + x.length(), c);
+			cout << c;
+		}
+		else if (c == 8 && x.length() > 0)
+		{
+			x.erase(x.begin() + x.length() - 1);
+			cout << "\b";
+			cout << " ";
+			cout << "\b";
+		}
+		else if (c == 13 && x.length() > 0)
+		{
+			n = atoi(x.c_str());
+			return;
+		}
+	}
+}
 void XuLyNhapSoHK(int& n, int toadoX)
 {
 	string x = "";
@@ -403,6 +512,8 @@ void XuLyNhapSDT(string& sdt)
 		}
 	}
 }
+
+
 void resizeConsole(int width, int height)
 {
 	HWND console = GetConsoleWindow();

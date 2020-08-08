@@ -2318,7 +2318,7 @@ void themMonHoc(DSMonHoc& dsMH, int toadoX, int toadoY) {
 	ShowCur(1);
 	//int toadoY = toadoYMain;
 	string monHocss;
-	string tenMHss = "";
+	string tenMHss;
 	int i;
 	//int Y = toadoY + 4;
 	int X = toadoX + 71;
@@ -2332,9 +2332,10 @@ void themMonHoc(DSMonHoc& dsMH, int toadoX, int toadoY) {
 		i = 0;
 		monHocss = "";
 		gotoXY(toadoX + 11, toadoY + 4);
+		//cout << "               |                                       |         |         |";
 		cout << "          ";
 		gotoXY(toadoX + 11, toadoY + 4);
-		XuLyNhapMa(monHocss);
+		XuLyNhapMaMon(monHocss,10);
 		i = SearchMH(dsMH, monHocss);
 		if (monHocss == "0") {
 			ShowCur(0);
@@ -2353,12 +2354,27 @@ void themMonHoc(DSMonHoc& dsMH, int toadoX, int toadoY) {
 		}
 	} while (i == 1 || monHocss.size() != 10);
 	p->maMonHoc = monHocss;
-	gotoXY(toadoX + 31, toadoY + 4);
-	getline(cin, p->TenMH);
+	//gotoXY(toadoX + 31, toadoY + 4);
+	//getline(cin, p->TenMH);
+
+	do {
+		tenMHss = "";
+		gotoXY(toadoX + 31, toadoY + 4);
+		XuLyNhapten(tenMHss, 35);
+		//getline(cin,tenMHss);
+		if (tenMHss.size() > 35 || tenMHss.size() <= 0 ) {
+			gotoXY(toadoXBox, toadoY + 1);
+			GiaoDienThongBao("Ten Mon hoc khong hop le! Nhap Lai( < 35 ki tu )");
+
+		}
+	} while (tenMHss.size() > 35 || tenMHss.size() <= 0);
+
+	p->TenMH = tenMHss;
 	gotoXY(toadoX + 71, toadoY + 4);
-	cin >> p->sotclt;
+	XuLyNhapSoMH(p->sotclt);
 	gotoXY(toadoX + 81, toadoY + 4);
-	cin >> p->sotcth;
+	//cin >> p->sotcth;
+	XuLyNhapSoMH(p->sotcth);
 	dsMH.ds[dsMH.n] = new monHoc;
 	dsMH.ds[dsMH.n] = p;
 	dsMH.n++;
