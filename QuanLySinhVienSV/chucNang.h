@@ -1,215 +1,71 @@
 ﻿#include "XULY.h"
 
 //  cau a  
-void themLopTC(DSLopTC& t, DSMonHoc dsMH , int a[] , int &soLuong)
+void GiaoDienXOAMonHoc(int toadoX, int toadoY, int n)
 {
-	string maMH;
-	string nienKhoa;
+	int chieucao = 3 + 2 * n;
+	//int chieucao = 3 + 2 * n;
 
-	int toadoY = toadoYMain;
-	LopTC x;
-	gotoXY(toadoXBox, toadoY);
-	cout << "Ma lop TC : ";
-	gotoXY(toadoXBox + 13, toadoY++);
-	
-	x.malopTc = a[soLuong-1];
-	soLuong--;
-	cout << x.malopTc;
-	ShowCur(1);
-	int i;
-	
-		do {
-			i = 0;
-			maMH = "";
-			gotoXY(toadoXBox, toadoY);
-			cout << "Nhap Ma Mon Hoc(0:De Thoat):";
-			gotoXY(toadoXBox + 30, toadoY++);
-			XuLyNhapMa(maMH);
-			if (maMH == "0")
-			{
-				ShowCur(0);
-				return;
-			}
+	int chieudai = 40;
 
-			i = SearchMH(dsMH, maMH);
-			if (i == -1)
-			{
-				gotoXY(toadoXBox, toadoY++);
-				cout << "Ma Mon Hoc Chua Ton Tai. Nhap Lai";
+	int toadoX1 = toadoX + 70;
+	int toadoY1 = toadoY + chieucao + 2;
+	// gach ngang tren cung
+	for (int i = toadoX; i <= chieudai + toadoX; i++)
+	{
+		gotoXY(i, toadoY);
+		if (i == toadoX)
+			cout << (char)218;
+		else if (i == chieudai + toadoX)
+			cout << (char)191;
+		else
+			cout << (char)196;
+	}
+	// gach ngang duoi cung
+	for (int i = toadoX; i <= chieudai + toadoX; i++)
+	{
+		gotoXY(i, chieucao + toadoY);
+		if (i == toadoX)
+			cout << (char)192;
+		else if (i == chieudai + toadoX)
+			cout << (char)217;
+		else
+			cout << char(196);
+	}
+	//
+	for (int i = toadoY + 1; i < chieucao + toadoY; i++)
+	{
+		gotoXY(toadoX, i);
+		cout << (char)179;
+	}
+	for (int i = toadoY + 1; i < chieucao + toadoY; i++)
+	{
+		gotoXY(chieudai + toadoX, i);
+		cout << (char)179;
+	}
 
-			}
-
-
-		} while (i == -1);
-
-		x.mmh = maMH;
-		do
+	// gach ngang ben trong
+	for (int j = 3; j < chieucao; j = j + 2)
+	{
+		for (int i = toadoX; i <= chieudai + toadoX; i++)
 		{
-			nienKhoa = "";
-			gotoXY(toadoXBox, toadoY);
-			cout << "Nhap Nien Khoa : ";
-			gotoXY(toadoXBox + 17, toadoY++);
-			XuLyNhapNienKhoa(nienKhoa);
-			if (nienKhoa == "0")
-			{
-				ShowCur(0);
-				return;
-			}
-			if (!XetNienKhoa(nienKhoa))
-			{
-				gotoXY(toadoXBox, toadoY++);
-				cout << "Nhap nien khoa sai ! Nhap lai ";
-			}
-
-		} while (XetNienKhoa(nienKhoa) == false);
-		x.nienkhoa = nienKhoa;
-
-
-		gotoXY(toadoXBox, toadoY);
-		cout << "Nhap Hoc Ki    : ";
-		gotoXY(toadoXBox + 17, toadoY++);
-		XuLyNhapSoHK(x.hocki, toadoXBox + 17);
-
-		gotoXY(toadoXBox, toadoY);
-		cout << "Nhap Nhom      : ";
-		gotoXY(toadoXBox + 17, toadoY++);
-		XuLyNhapSo(x.nhom, toadoXBox + 17);
-		
-		if (CheckTrungLopTinChi(t.root, x.nienkhoa, x.hocki, x.nhom, x.mmh))
-		{
-			return;
-		}
-		
-		
-	
-	
-		gotoXY(toadoXBox, toadoY);
-		cout << "Nhap So SV Max : ";
-		gotoXY(toadoXBox + 17, toadoY++);
-		XuLyNhapSo(x.so_svmax, toadoXBox + 17);
-
-		gotoXY(toadoXBox, toadoY);
-		cout << "Nhap So SV Min : ";
-		gotoXY(toadoXBox + 17, toadoY++);
-		XuLyNhapSo(x.so_sv_min, toadoXBox + 17);
-		while(x.so_svmax < x.so_sv_min)
-		{
-			gotoXY(toadoXBox, toadoY++);
-			cout << "Nhap lai so sinh vien min max";
-			gotoXY(toadoXBox, toadoY);
-			cout << "Nhap So SV Max : ";
-			gotoXY(toadoXBox + 17, toadoY++);
-			XuLyNhapSo(x.so_svmax, toadoXBox + 17);
-
-			gotoXY(toadoXBox, toadoY);
-			cout << "Nhap So SV Min : ";
-			gotoXY(toadoXBox + 17, toadoY++);
-			XuLyNhapSo(x.so_sv_min, toadoXBox + 17);
-		};
-	
-	x.dssvdk.pHead = NULL;
-
-	ThemNodeVaoCay(t.root, x);
-	t.soLuong++;
-	ShowCur(0);
-	GiaoDienThongBao("Them Thanh Cong");
-
-
-}
-
-
-void XoaLopTC(DSLopTC& t)
-{
-	/*int x;
-	gotoXY(50, 8);
-	cout << "Nhap gia tri can xoa: ";
-	cin >> x;
-	XoaNode(t.root, x);
-	t.soLuong--;*/
-
-	ShowCur(1);
-	int malop = 0;
-	gotoXY(toadoXBox, toadoYMain);
-	cout << "Nhap Ma Lop(0:De Thoat): ";
-	gotoXY(toadoXBox + 25, toadoYMain);
-	XuLyNhapSo(malop, toadoXBox + 25);
-	ShowCur(0);
-	if (malop == 0)
-	{
-		return;
-	}
-
-
-
-	NodeLopTC* p = NULL;
-	p = getLopTC(t.root, malop);
-	if (p == NULL)
-	{
-		GiaoDienThongBao("Lop tin chi khong ton tai");
-	}
-	else
-	{
-		GiaoDienThongBao("          Xoa thanh cong lop " + malop);
-		XoaNode(t.root, malop);
-		t.soLuong--;
-		return;
-
-	}
-}
-
-
-
-void SuaLopTC(DSLopTC& t, DSMonHoc dsMH)
-{
-	/*gotoXY(50, 8);
-	cout << "Ban muon xem thong tin lop tin chi nao : ";
-	int x;
-	cin >> x;
-	TimKiem(t.root, x);*/
-
-	ShowCur(1);
-	int malop = 0;
-	gotoXY(toadoXBox, toadoYMain);
-	cout << "Nhap Ma Lop(0:De Thoat): ";
-	gotoXY(toadoXBox + 25, toadoYMain);
-	XuLyNhapSo(malop, toadoXBox + 25);
-
-	if (malop == 0)
-	{
-		ShowCur(0);
-		return;
-	}
-
-
-	NodeLopTC* p = NULL;
-	p = getLopTC(t.root, malop);
-	if (p == NULL)
-	{
-		GiaoDienThongBao("Lop tin chi khong ton tai");
-	}
-	else
-	{
-		hieuChinhTC(t.root, dsMH, malop);
-
-	}
-}
-
-
-// cau b 
-
-NodeSV* getSV(DSSV t, string maSV)
-{
-	for (NodeSV* k = t.pHead; k != NULL; k = k->pNext)
-	{
-		if (k->data.mssv == maSV)
-		{
-			return k;
+			gotoXY(i, toadoY + j);
+			if (i == toadoX)
+				cout << (char)195;
+			else if (i == chieudai + toadoX)
+				cout << (char)180;
+			else if (i == toadoX + 40)
+				cout << (char)197;
+			else
+				cout << (char)196;
 		}
 	}
+	///  bang2
 
-	return NULL;
+
+	//gotoXY(toadoX + 4, toadoY + 1);
+	//cout << CanDeuChuoi("NHAP MA MON HOC CAN XOA", 10);
 }
-
 void GiaoDienInDSLop(int toadoX, int toadoY, int n)
 {
 	int chieucao = 3 + 2 * n;
@@ -297,6 +153,330 @@ void GiaoDienInDSLop(int toadoX, int toadoY, int n)
 	gotoXY(toadoX + 101, toadoY + 1);
 	cout << CanDeuChuoi("Nam nhap hoc", 14);
 }
+void GiaoDienNHAPLTC(int toadoX, int toadoY, int n)
+{
+	int chieucao = 3 + 2 * n;
+	int chieudai = 115;
+	for (int i = toadoX; i <= chieudai + toadoX; i++)
+	{
+		gotoXY(i, toadoY);
+		if (i == toadoX)
+			cout << (char)218;
+		else if (i == chieudai + toadoX)
+			cout << (char)191;
+		else
+			cout << (char)196;
+	}
+	for (int i = toadoX; i <= chieudai + toadoX; i++)
+	{
+		gotoXY(i, chieucao + toadoY);
+		if (i == toadoX)
+			cout << (char)192;
+		else if (i == chieudai + toadoX)
+			cout << (char)217;
+		else
+			cout << char(196);
+	}
+	for (int i = toadoY + 1; i < chieucao + toadoY; i++)
+	{
+		gotoXY(toadoX, i);
+		cout << (char)179;
+	}
+	for (int i = toadoY + 1; i < chieucao + toadoY; i++)
+	{
+		gotoXY(chieudai + toadoX, i);
+		cout << (char)179;
+	}
+
+
+	// gach xuong
+	for (int i = toadoX + 1; i < chieudai + toadoX; i++)
+	{
+		if (i == toadoX + 10 || i == toadoX + 30 || i == toadoX + 50 || i == toadoX + 80 || i == toadoX + 85 || i == toadoX + 100)
+		{
+			for (int j = toadoY; j < chieucao + toadoY + 1; j++)
+			{
+				gotoXY(i, j);
+				if (j == toadoY)
+					cout << char(194);
+				else if (j == chieucao + toadoY)
+					cout << char(193);
+				else
+					cout << (char)179;
+			}
+		}
+	}
+
+
+	// gach ngang
+	for (int j = 3; j < chieucao; j = j + 2)
+	{
+		for (int i = toadoX; i <= chieudai + toadoX; i++)
+		{
+			gotoXY(i, toadoY + j);
+			if (i == toadoX)
+				cout << (char)195;
+			else if (i == chieudai + toadoX)
+				cout << (char)180;
+			else if (i == toadoX + 10 || i == toadoX + 30 || i == toadoX + 50 || i == toadoX + 80 || i == toadoX + 85 || i == toadoX + 100)
+				cout << (char)197;
+			else
+				cout << (char)196;
+		}
+	}
+
+	gotoXY(toadoX + 1, toadoY + 1);
+	cout << CanDeuChuoi("Ma Lop TC", 9);
+	gotoXY(toadoX + 11, toadoY + 1);
+	cout << CanDeuChuoi("Ma Mon Hoc", 19);
+	gotoXY(toadoX + 31, toadoY + 1);
+	cout << CanDeuChuoi("Nien Khoa", 19);
+	gotoXY(toadoX + 51, toadoY + 1);
+	cout << CanDeuChuoi("Hoc ki", 29);
+	gotoXY(toadoX + 81, toadoY + 1);
+	cout << CanDeuChuoi("Nhom", 4);
+	gotoXY(toadoX + 86, toadoY + 1);
+	cout << CanDeuChuoi("SV MAX", 14);
+	gotoXY(toadoX + 101, toadoY + 1);
+	cout << CanDeuChuoi("SV MIN", 14);
+}
+void themLopTC(DSLopTC& t, DSMonHoc dsMH , int a[] , int &soLuong)
+{
+	string maMH;
+	string nienKhoa;
+
+	int toadoY = toadoYMain;
+	LopTC x;
+	gotoXY(toadoXBox, toadoY);
+	cout << "Ma lop TC : ";
+	gotoXY(toadoXBox + 13, toadoY++);
+	
+	x.malopTc = a[soLuong-1];
+	soLuong--;
+	gotoXY(toadoXBox+3, toadoY+2);
+	cout << x.malopTc;
+	ShowCur(1);
+	int i;
+	GiaoDienNHAPLTC(toadoXBox, toadoYBox, 1);
+		do {
+			i = 0;
+			maMH = "";
+			gotoXY(toadoXBox, toadoY);
+			//cout << "Nhap Ma Mon Hoc(0:De Thoat):";
+			//gotoXY(toadoXBox + 30, toadoY++);
+			gotoXY(toadoXBox + 15, toadoY + 2);
+			cout << "          ";
+			gotoXY(toadoXBox + 15, toadoY + 2);
+			//XuLyNhapMa(maMH);
+			XuLyNhapMaMon(maMH, 10);
+			if (maMH == "0")
+			{
+				ShowCur(0);
+				return;
+			}
+
+			i = SearchMH(dsMH, maMH);
+			if (i == -1)
+			{
+				GiaoDienThongBao("Ma Mon Hoc khong ton tai! Nhap lai!");
+			}
+		} while (i == -1);
+
+		x.mmh = maMH;
+		do
+		{
+			nienKhoa = "";
+			//gotoXY(toadoXBox, toadoY);
+			//cout << "Nhap Nien Khoa : ";
+			
+			//gotoXY(toadoXBox + 17, toadoY++);
+			gotoXY(toadoXBox + 34, toadoY + 2);
+			cout << "          ";
+			gotoXY(toadoXBox + 34, toadoY + 2);
+			XuLyNhapNienKhoa(nienKhoa);
+			if (nienKhoa == "0")
+			{
+				ShowCur(0);
+				return;
+			}
+			if (!XetNienKhoa(nienKhoa))
+			{
+				//gotoXY(toadoXBox, toadoY);
+				GiaoDienThongBao("Khong duoc mo lop o nien khoa truoc!");
+			}
+
+		} while (XetNienKhoa(nienKhoa) == false);
+		x.nienkhoa = nienKhoa;
+
+
+
+		gotoXY(toadoXBox + 60, toadoY + 2);
+		XuLyNhapSoHK(x.hocki, toadoXBox + 17);
+
+		//gotoXY(toadoXBox, toadoY);
+		//cout << "Nhap Nhom      : ";
+		//gotoXY(toadoXBox + 17, toadoY++);
+		gotoXY(toadoXBox + 82, toadoY + 2);
+		XuLyNhapSo(x.nhom, toadoXBox + 17);
+		
+		if (CheckTrungLopTinChi(t.root, x.nienkhoa, x.hocki, x.nhom, x.mmh))
+		{
+			return;
+		}
+		int max;
+		do {
+			gotoXY(toadoXBox + 92, toadoY + 2);
+			cout << "    ";
+			gotoXY(toadoXBox + 92, toadoY + 2);
+
+			XuLyNhapSo(max, toadoXBox + 17);
+			if (max < 50) {
+				GiaoDienThongBao("Khong the mo lop duoi 50 sinh vien!");
+			}
+		}while(max < 50);
+		x.so_svmax = max;
+		int min;
+		do {
+			gotoXY(toadoXBox + 105, toadoY + 2);
+			cout << "    ";
+			gotoXY(toadoXBox + 105, toadoY + 2);
+			XuLyNhapSo(min, toadoXBox + 17);
+			if (min > x.so_svmax) {
+				GiaoDienThongBao("So sinh vien min khong lon hon So Sinh Vien Max!");
+			}
+		} while (min > x.so_svmax);
+		//gotoXY(toadoXBox + 105, toadoY + 2);
+
+		//XuLyNhapSo(x.so_sv_min, toadoXBox + 17);
+		/*while(x.so_svmax < x.so_sv_min)
+		{
+			gotoXY(toadoXBox, toadoY++);
+			cout << "Nhap lai so sinh vien min max";
+			gotoXY(toadoXBox, toadoY);
+			cout << "Nhap So SV Max : ";
+			gotoXY(toadoXBox + 17, toadoY++);
+			XuLyNhapSo(x.so_svmax, toadoXBox + 17);
+
+			gotoXY(toadoXBox, toadoY);
+			cout << "Nhap So SV Min : ";
+			gotoXY(toadoXBox + 17, toadoY++);
+			XuLyNhapSo(x.so_sv_min, toadoXBox + 17);
+		};*/
+		
+	
+	x.dssvdk.pHead = NULL;
+
+	ThemNodeVaoCay(t.root, x);
+	t.soLuong++;
+	ShowCur(0);
+	GiaoDienThongBao("Them Thanh Cong");
+
+
+}
+
+
+void XoaLopTC(DSLopTC& t)
+{
+	/*int x;
+	gotoXY(50, 8);
+	cout << "Nhap gia tri can xoa: ";
+	cin >> x;
+	XoaNode(t.root, x);
+	t.soLuong--;*/
+
+	ShowCur(1);
+	int malop = 0;
+	GiaoDienXOAMonHoc(toadoXBox + 35, toadoYBox, 1);
+	gotoXY(toadoXBox + 44, toadoYBox + 1);
+	cout << CanDeuChuoi("NHAP MA LOP TIN CHI CAN XOA", 10);
+	//gotoXY(toadoXBox, toadoYMain);
+	//cout << "Nhap Ma Lop(0:De Thoat): ";
+	//gotoXY(toadoXBox + 25, toadoYMain);
+	gotoXY(toadoXBox + 50, toadoYBox + 4);
+
+	XuLyNhapSo(malop, toadoXBox + 25);
+	ShowCur(0);
+	if (malop == 0)
+	{
+		return;
+	}
+
+
+
+	NodeLopTC* p = NULL;
+	p = getLopTC(t.root, malop);
+	if (p == NULL)
+	{
+		GiaoDienThongBao("Lop tin chi khong ton tai");
+	}
+	else
+	{
+		GiaoDienThongBao("          Xoa thanh cong lop " + malop);
+		XoaNode(t.root, malop);
+		t.soLuong--;
+		return;
+
+	}
+}
+
+
+
+void SuaLopTC(DSLopTC& t, DSMonHoc dsMH)
+{
+	/*gotoXY(50, 8);
+	cout << "Ban muon xem thong tin lop tin chi nao : ";
+	int x;
+	cin >> x;
+	TimKiem(t.root, x);*/
+
+	ShowCur(1);
+	int malop = 0;
+	//gotoXY(toadoXBox, toadoYMain);
+	//cout << "Nhap Ma Lop(0:De Thoat): ";
+	//gotoXY(toadoXBox + 25, toadoYMain);
+	GiaoDienXOAMonHoc(toadoXBox + 35, toadoYBox, 1);
+	gotoXY(toadoXBox + 41, toadoYBox + 1);
+	cout << CanDeuChuoi("NHAP MA LOP TIN CHI CAN CHINH", 10);
+
+	gotoXY(toadoXBox + 50, toadoYBox + 4);
+	XuLyNhapSo(malop, toadoXBox + 25);
+
+	if (malop == 0)
+	{
+		ShowCur(0);
+		return;
+	}
+
+
+	NodeLopTC* p = NULL;
+	p = getLopTC(t.root, malop);
+	if (p == NULL)
+	{
+		GiaoDienThongBao("Lop tin chi khong ton tai");
+	}
+	else
+	{
+		hieuChinhTC(t.root, dsMH, malop);
+
+	}
+}
+
+
+// cau b 
+
+NodeSV* getSV(DSSV t, string maSV)
+{
+	for (NodeSV* k = t.pHead; k != NULL; k = k->pNext)
+	{
+		if (k->data.mssv == maSV)
+		{
+			return k;
+		}
+	}
+
+	return NULL;
+}
+
 
 
 // xuat dssv da dk lop TC 
@@ -1299,6 +1479,7 @@ int XuatDSLTCDK(LopTC a[], DSMonHoc dsMH, int n, int toadoX, int toadoY, LopTC b
 					kiemTraThem = false;
 					goto VongLap;
 				}
+				// Bam thoat
 
 				//system("cls");
 
@@ -1485,7 +1666,7 @@ void DangKiLopTC(DSSV dsSV, DSLopTC& dsLTC, DSMonHoc dsMH, int toadoX, int toado
 		gotoXY(toadoXBox, toadoYTemp);
 		cout << "Nhap Vao Ma SV (0: De Thoat):";
 		gotoXY(toadoXBox + 30, toadoYTemp++);
-		XuLyNhapMa(maSV);
+		XuLyNhapMaMon(maSV, 10);
 		if (maSV == "0")
 		{
 			return;
@@ -1527,6 +1708,7 @@ void DangKiLopTC(DSSV dsSV, DSLopTC& dsLTC, DSMonHoc dsMH, int toadoX, int toado
 		cout << "Nhap Nien Khoa : ";
 		gotoXY(toadoXBox + 17, toadoYTemp++);
 		XuLyNhapNienKhoa(nienKhoa);
+
 		if (nienKhoa == "0")
 		{
 			ShowCur(0);
@@ -1535,7 +1717,8 @@ void DangKiLopTC(DSSV dsSV, DSLopTC& dsLTC, DSMonHoc dsMH, int toadoX, int toado
 		if (!XetNienKhoa(nienKhoa))
 		{
 			gotoXY(toadoXBox, toadoYTemp++);
-			cout << "Nhap nien khoa sai ! Nhap lai ";
+			//cout << "Nhap nien khoa sai ! Nhap lai ";
+			GiaoDienThongBao("Nhap nien khoa sai ! Nhap lai");
 		}
 
 	} while (XetNienKhoa(nienKhoa) == false);
@@ -2224,71 +2407,7 @@ void GiaoDienCHINHMonHoc(int toadoX, int toadoY, int n)
 	cout << CanDeuChuoi("STC TH", 9);
 
 }
-void GiaoDienXOAMonHoc(int toadoX, int toadoY, int n)
-{
-	int chieucao = 3 + 2 * n;
-	//int chieucao = 3 + 2 * n;
 
-	int chieudai = 40;
-
-	int toadoX1 = toadoX + 70;
-	int toadoY1 = toadoY + chieucao + 2;
-	// gach ngang tren cung
-	for (int i = toadoX; i <= chieudai + toadoX; i++)
-	{
-		gotoXY(i, toadoY);
-		if (i == toadoX)
-			cout << (char)218;
-		else if (i == chieudai + toadoX)
-			cout << (char)191;
-		else
-			cout << (char)196;
-	}
-	// gach ngang duoi cung
-	for (int i = toadoX; i <= chieudai + toadoX; i++)
-	{
-		gotoXY(i, chieucao + toadoY);
-		if (i == toadoX)
-			cout << (char)192;
-		else if (i == chieudai + toadoX)
-			cout << (char)217;
-		else
-			cout << char(196);
-	}
-	//
-	for (int i = toadoY + 1; i < chieucao + toadoY; i++)
-	{
-		gotoXY(toadoX, i);
-		cout << (char)179;
-	}
-	for (int i = toadoY + 1; i < chieucao + toadoY; i++)
-	{
-		gotoXY(chieudai + toadoX, i);
-		cout << (char)179;
-	}
-
-	// gach ngang ben trong
-	for (int j = 3; j < chieucao; j = j + 2)
-	{
-		for (int i = toadoX; i <= chieudai + toadoX; i++)
-		{
-			gotoXY(i, toadoY + j);
-			if (i == toadoX)
-				cout << (char)195;
-			else if (i == chieudai + toadoX)
-				cout << (char)180;
-			else if (i == toadoX + 40)
-				cout << (char)197;
-			else
-				cout << (char)196;
-		}
-	}
-	///  bang2
-
-
-	//gotoXY(toadoX + 4, toadoY + 1);
-	//cout << CanDeuChuoi("NHAP MA MON HOC CAN XOA", 10);
-}
 void xuatMonHoc(DSMonHoc dsMH, int toadoX, int toadoY) {
 	int dem = 0;
 	sort(dsMH);

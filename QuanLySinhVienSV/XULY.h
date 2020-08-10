@@ -785,7 +785,7 @@ bool XetNienKhoa(string NK) {
 	int so1, so2;
 	so1 = ChuyenStringSangSo(str1);
 	so2 = ChuyenStringSangSo(str2);
-	if (so2 - so1 == 1 && so1 <= 2020)
+	if (so2 - so1 == 1 && so1 >= 2020)
 	{
 		return true;
 	}
@@ -813,7 +813,7 @@ void XuLyNhapNienKhoa(string& InPut)
 
 			cout << c;
 
-			if (InPut.length() == 4)
+			if (InPut.length() == 4 )
 			{
 				nam1 = ChuyenStringSangSo(InPut);
 				nam2 = nam1 + 1;
