@@ -1,6 +1,67 @@
-﻿#include "doHoa.h" 
+﻿#include "doHoa.h"
+
+int ChuyenStringSangSo(string x) {
+	int a = 0;
+	for (int i = 0; i < x.length(); i++) {
+		a = a + (int)(x[i] - '0') * pow(10, x.length() - i - 1);
+	}
+	return a;
+}
+void XuLyNhapNienKhoa(string& InPut)
+{
+	int lengthMax = 9;
+
+	ShowCur(1);
+	int nam1;
+	int nam2;
+	string stringNam2 = "";
+	while (true)
+	{
+		char c = getch();
+
+		if (c >= 48 && c <= 57 && InPut.length() < lengthMax)
+		{
 
 
+			InPut.insert(InPut.begin() + InPut.length(), c);
+
+			cout << c;
+
+			if (InPut.length() == 4)
+			{
+				nam1 = ChuyenStringSangSo(InPut);
+				nam2 = nam1 + 1;
+				stringNam2 = ChuyenSoSangString(nam2);
+				InPut.push_back('-');
+
+
+				InPut = InPut + stringNam2;
+
+				//cout << InPut;
+				cout << "-" << stringNam2;
+			}
+
+		}
+		else if (c == 8 && InPut.length() > 0) //beckspace
+		{
+			InPut.erase(InPut.begin() + InPut.length() - 1);
+			cout << "\b";
+			cout << " ";
+			cout << "\b";
+		}
+		else if (c == 27) // esc
+		{
+			InPut.clear();
+			return;
+		}
+		else if (c == 13 && InPut.length() > 0 && InPut.length() == 9)//enter
+		{
+			break;
+		}
+	}
+
+
+}
 
 NodeSVDK* KhoiTaoNodeSVDK(SinhVienDK x)
 {
@@ -473,29 +534,32 @@ void KhoiTaoCay(DSLopTC& t)
 
 void MenuSuaLopTC(NodeLopTC* l)
 {
-	int toadoY = toadoYMain;
-	gotoXY(toadoXBox, toadoY++);
+	HCNText(toadoXBox + 27, toadoYBox, 55, 25);
+
+	int toadoY = toadoYMain+5;
+	gotoXY(toadoXBox + 42, toadoY++);
 	cout << "Chon Thuoc Tinh Can Sua" << endl;
-	gotoXY(toadoXBox, toadoY++);
+	gotoXY(toadoXBox + 42, toadoY++);
 	cout << "1.Ma Mon Hoc: " << l->data.mmh << endl;
-	gotoXY(toadoXBox, toadoY++);
+	gotoXY(toadoXBox + 42, toadoY++);
 	cout << "2.Niem Khoa: " << l->data.nienkhoa << endl;
-	gotoXY(toadoXBox, toadoY++);
+	gotoXY(toadoXBox + 42, toadoY++);
 	cout << "3.Hoc Ki: " << l->data.hocki << endl;
-	gotoXY(toadoXBox, toadoY++);
+	gotoXY(toadoXBox + 42, toadoY++);
 	cout << "4.Nhom: " << l->data.nhom << endl;
-	gotoXY(toadoXBox, toadoY++);
+	gotoXY(toadoXBox + 42, toadoY++);
 	cout << "5.So Sinh Vien Max: " << l->data.so_svmax << endl;
-	gotoXY(toadoXBox, toadoY++);
+	gotoXY(toadoXBox + 42, toadoY++);
 	cout << "6.So Sinh Vien Min: " << l->data.so_sv_min << endl;
-	gotoXY(toadoXBox, toadoY++);
+	gotoXY(toadoXBox + 42, toadoY++);
 	cout << "7.Luu Va Thoat" << endl;
-	gotoXY(toadoXBox, toadoY++);
+	gotoXY(toadoXBox + 42, toadoY++);
 	cout << "8.Thoat" << endl;
-	gotoXY(toadoXBox, toadoY);
+	gotoXY(toadoXBox + 42, toadoY);
 	cout << "Chon: " << endl;
-	gotoXY(toadoXBox + 5, toadoY);
+	gotoXY(toadoXBox + 47, toadoY);
 }
+
 void hieuChinhTC(NodeLopTC* t, DSMonHoc dsMH, int malop)
 {
 	if (t != NULL)
@@ -519,38 +583,61 @@ void hieuChinhTC(NodeLopTC* t, DSMonHoc dsMH, int malop)
 				XuLyNhapSo(chon, toadoXBox + 5);
 				XoaManHinhChinh();
 
-
+				string nk;
+				int hk;
 				switch (chon)
 				{
 
 				case 1:
 				{
 					int i;
-					cin.ignore();
-					gotoXY(toadoXBox, toadoYMain);
-					cout << "Nhap Ma Mon Hoc Moi:";
-					getline(cin, x.mmh);
-					i = SearchMH(dsMH, t->data.mmh);
-					if (i == -1)
-					{
-						gotoXY(toadoXBox, toadoYMain);
-						cout << "Ma Mon Hoc Chua Ton Tai. Nhap Lai";
-						getch();
-						return;
-					}
+					string mmh;
+					//cin.ignore();
+					do {
+						i = 0;
+						mmh = "";
+						HCNText(toadoXBox + 27, toadoYBox, 50, 5);
+						gotoXY(toadoXBox + 30, toadoYMain);
+						cout << "Nhap Ma Mon Hoc Moi:";
+						//getline(cin, x.mmh);
+						gotoXY(toadoXBox + 52, toadoYMain); 
+						cout << "              ";
+						gotoXY(toadoXBox + 52, toadoYMain);
 
+						XuLyNhapMaMon(mmh, 10);
+					//	i = SearchMH(dsMH, t->data.mmh);
+						i = SearchMH(dsMH, mmh);
+						if (i == -1)
+						{
+							gotoXY(toadoXBox, toadoYMain);
+							//cout << "Ma Mon Hoc Chua Ton Tai. Nhap Lai";
+							GiaoDienThongBao("Ma Mon Hoc Chua Ton Tai. Nhap Lai");
+							//getch();
+							//return;
+						}
+					} while (i == -1);
+					x.mmh = mmh;
 					break;
 				}
 
 				case 2:
-					gotoXY(toadoXBox, toadoYMain);
+					//gotoXY(toadoXBox, toadoYMain);
+					
+					HCNText(toadoXBox + 27, toadoYBox, 50, 5);
+					gotoXY(toadoXBox + 30, toadoYMain);
 					cout << "Nhap Nien Khoa Moi:";
-					getline(cin, x.nienkhoa);
+					//getline(cin, x.nienkhoa);
+					XuLyNhapNienKhoa(nk);
+					x.nienkhoa = nk;
 					break;
 				case 3:
-					gotoXY(toadoXBox, toadoYMain);
+					//gotoXY(toadoXBox, toadoYMain);
+					HCNText(toadoXBox + 27, toadoYBox, 50, 5);
+					gotoXY(toadoXBox + 30, toadoYMain);
 					cout << "Nhap Hoc Ki Moi:";
-					cin >> x.hocki;
+					//cin >> x.hocki; 
+					XuLyNhapSoHK(hk, toadoXBox);
+					x.hocki = hk;
 					break;
 				case 4:
 					gotoXY(toadoXBox, toadoYMain);
@@ -558,14 +645,55 @@ void hieuChinhTC(NodeLopTC* t, DSMonHoc dsMH, int malop)
 					cin >> x.nhom;
 					break;
 				case 5:
-					gotoXY(toadoXBox, toadoYMain);
-					cout << "Nhap So Sinh Vien Max Moi:";
-					cin >> x.so_svmax;
+					//gotoXY(toadoXBox, toadoYMain);
+					//cout << "Nhap So Sinh Vien Max Moi:";
+					//cin >> x.so_svmax;
+					
+					//cin.ignore();
+					do {
+
+						HCNText(toadoXBox + 27, toadoYBox, 50, 5);
+						gotoXY(toadoXBox + 30, toadoYMain);
+						cout << "Nhap so sinh vien max Moi:";
+						//getline(cin, x.mmh);
+						gotoXY(toadoXBox + 57, toadoYMain);
+						cout << "              ";
+						gotoXY(toadoXBox + 57, toadoYMain);
+						cin >> x.so_svmax;
+						//	i = SearchMH(dsMH, t->data.mmh);
+						if (x.so_svmax < 50)
+						{
+							gotoXY(toadoXBox, toadoYMain);
+							//cout << "Ma Mon Hoc Chua Ton Tai. Nhap Lai";
+							GiaoDienThongBao("So sinh vien cua lop khong duoc be hon 50");
+							//getch();
+							//return;
+						}
+					} while (x.so_svmax <50);
+
 					break;
 				case 6:
-					gotoXY(toadoXBox, toadoYMain);
-					cout << "Nhap So Sinh Vien Min Moi:";
-					cin >> x.so_sv_min;
+					do {
+
+						HCNText(toadoXBox + 27, toadoYBox, 50, 5);
+						gotoXY(toadoXBox + 30, toadoYMain);
+						cout << "Nhap so sinh vien min Moi:";
+						//getline(cin, x.mmh);
+						gotoXY(toadoXBox + 58, toadoYMain);
+						cout << "              ";
+						gotoXY(toadoXBox + 58, toadoYMain);
+						cin >> x.so_sv_min;
+						//	i = SearchMH(dsMH, t->data.mmh);
+						if (x.so_sv_min > x.so_svmax)
+						{
+							gotoXY(toadoXBox, toadoYMain);
+							//cout << "Ma Mon Hoc Chua Ton Tai. Nhap Lai";
+							GiaoDienThongBao("So SV min khong lon hon So SV max");
+							//getch();
+							//return;
+						}
+					} while (x.so_sv_min > x.so_svmax);
+
 					break;
 				case 7:
 					t->data = x;
@@ -768,13 +896,7 @@ void XuLyNhapSo(int& n)
 	}
 }
 
-int ChuyenStringSangSo(string x) {
-	int a = 0;
-	for (int i = 0; i < x.length(); i++) {
-		a = a + (int)(x[i] - '0') * pow(10, x.length() - i - 1);
-	}
-	return a;
-}
+
 
 
 
@@ -793,61 +915,6 @@ bool XetNienKhoa(string NK) {
 }
 
 
-void XuLyNhapNienKhoa(string& InPut)
-{
-	int lengthMax = 9;
-
-	ShowCur(1);
-	int nam1;
-	int nam2;
-	string stringNam2 = "";
-	while (true)
-	{
-		char c = getch();
-
-		if (c >= 48 && c <= 57 && InPut.length() < lengthMax)
-		{
-
-
-			InPut.insert(InPut.begin() + InPut.length(), c);
-
-			cout << c;
-
-			if (InPut.length() == 4 )
-			{
-				nam1 = ChuyenStringSangSo(InPut);
-				nam2 = nam1 + 1;
-				stringNam2 = ChuyenSoSangString(nam2);
-				InPut.push_back('-');
-
-
-				InPut = InPut + stringNam2;
-
-				//cout << InPut;
-				cout << "-" << stringNam2;
-			}
-
-		}
-		else if (c == 8 && InPut.length() > 0) //beckspace
-		{
-			InPut.erase(InPut.begin() + InPut.length() - 1);
-			cout << "\b";
-			cout << " ";
-			cout << "\b";
-		}
-		else if (c == 27) // esc
-		{
-			InPut.clear();
-			return;
-		}
-		else if (c == 13 && InPut.length() > 0 && InPut.length() ==9)//enter
-		{
-			break;
-		}
-	}
-
-
-}
 
 ///MON HOC
 

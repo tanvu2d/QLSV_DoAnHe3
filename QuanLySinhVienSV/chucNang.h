@@ -411,7 +411,7 @@ void XoaLopTC(DSLopTC& t)
 	}
 	else
 	{
-		GiaoDienThongBao("          Xoa thanh cong lop " + malop);
+		GiaoDienThongBao("Xoa thanh cong lop ");
 		XoaNode(t.root, malop);
 		t.soLuong--;
 		return;
@@ -431,6 +431,7 @@ void SuaLopTC(DSLopTC& t, DSMonHoc dsMH)
 
 	ShowCur(1);
 	int malop = 0;
+	
 	//gotoXY(toadoXBox, toadoYMain);
 	//cout << "Nhap Ma Lop(0:De Thoat): ";
 	//gotoXY(toadoXBox + 25, toadoYMain);
@@ -456,8 +457,8 @@ void SuaLopTC(DSLopTC& t, DSMonHoc dsMH)
 	}
 	else
 	{
+		//HCNText(toadoXBox+40, toadoYBox, 55, 25);
 		hieuChinhTC(t.root, dsMH, malop);
-
 	}
 }
 
@@ -2535,7 +2536,7 @@ void xoaMonHoc(DSMonHoc& dsMH)
 		dsMH.n--;
 		gotoXY(toadoXBox, toadoYBox + 1);
 		GiaoDienThongBao("Da xoa thanh cong!");
-		system("pause");
+		system("pause"); 
 	}
 }
 
@@ -2548,34 +2549,38 @@ void chinhsuaMH(DSMonHoc& dsMH) {
 	cout << CanDeuChuoi("NHAP MA MON HOC CAN HIEU CHINH", 10);
 	gotoXY(toadoXBox + 50, toadoYBox + 4);
 	ShowCur(1);
-	XuLyNhapMa(a);
-	int mh = ktMonHoc(a, dsMH);
-	if (mh < 0)
-	{
-		gotoXY(toadoXBox, toadoYBox + 1);
-		GiaoDienThongBao("Ma Mon hoc KHONG ton tai! Nhap Lai!");
-		//goto vonglap;
-		
-	}
-	else {
-		GiaoDienCHINHMonHoc(toadoXBox + 5, toadoYBox + 10, 1);
-		gotoXY(toadoXBox + 15, toadoYBox + 14);
-		cout << CanDeuChuoi(a, 10);
-		//cout << "Nhap ten mon hoc hieu chinh: ";
-		gotoXY(toadoXBox + 45, toadoYBox + 14);
-		ShowCur(1);
-		getline(cin, dsMH.ds[mh]->TenMH);
-		//DinhDangChuoi(dsMH.ds[mh]->TenMH);
-		//cout << "Nhap so tin chi ly thuyet hieu chinh: ";
-		gotoXY(toadoXBox + 80, toadoYBox + 14);
-		cin >> dsMH.ds[mh]->sotclt;
-		//cout << "Nhap so tin chi thuc hanh hieu chinh: ";
-		gotoXY(toadoXBox + 90, toadoYBox + 14);
-		cin >> dsMH.ds[mh]->sotcth;
-		//cout << "===================" << endl;
-		gotoXY(toadoXBox, toadoYBox + 1);
-		GiaoDienThongBao("Hieu Chinh Thanh Cong");
-		///system("pause");
-	}
+	//XuLyNhapMa(a);
+	int i;
+	//cin.ignore();
+	do {
+		i = 0;
+		a = "";
+		gotoXY(toadoXBox + 50, toadoYBox + 4);
+		cout << "              ";
+		gotoXY(toadoXBox + 50, toadoYBox + 4);
+		XuLyNhapMaMon(a, 10);
+		i = SearchMH(dsMH,a);
+		if (i == -1)
+		{
+			gotoXY(toadoXBox, toadoYMain);
+			GiaoDienThongBao("Ma Mon Hoc Chua Ton Tai. Nhap Lai");
+		}
+	} while (i == -1);
 
+	string ten;
+	int mh = ktMonHoc(a, dsMH);
+	XoaManHinhChinh();
+	GiaoDienCHINHMonHoc(toadoXBox + 5, toadoYBox + 10, 1);
+	gotoXY(toadoXBox + 15, toadoYBox + 14);
+	cout << CanDeuChuoi(a, 10);
+	gotoXY(toadoXBox + 45, toadoYBox + 14);
+	ShowCur(1);		
+	XuLyNhapten(ten);
+	dsMH.ds[mh]->TenMH = ten;
+	gotoXY(toadoXBox + 80, toadoYBox + 14);
+	cin >> dsMH.ds[mh]->sotclt;
+	gotoXY(toadoXBox + 90, toadoYBox + 14);
+	cin >> dsMH.ds[mh]->sotcth;
+	gotoXY(toadoXBox, toadoYBox + 1);
+	GiaoDienThongBao("Hieu Chinh Thanh Cong");
 }

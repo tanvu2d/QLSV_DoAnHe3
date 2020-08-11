@@ -23,7 +23,7 @@ string menuConLopTC[] = {
 	"Them Lop tin chi        ",
 	"Xoa lop tin chi         ",
 	"Hieu chinh lop tin chi  ",
-	"Thoat toi menu chinh    "
+	"LUU va THOAT             "
 };
 
 
@@ -31,7 +31,7 @@ string stringNhapSV[] = {
 	"Them sinh vien             " ,
 	"Xoa sinh vien              ",
 	"Sua thong tin sinh vien    ",
-	"Thoat toi menu chinh       "
+	"LUU va THOAT               "
 };
 
 string menuMH[] = {
@@ -39,7 +39,7 @@ string menuMH[] = {
 	"Them mon hoc               ",
 	"Xoa mon hoc                ",
 	"Hieu chinh mon hoc         ",
-	"Thoat toi menu chinh       "
+	"LUU va THOAT               "
 };
 
 // Chay vong lap bang chon
@@ -184,12 +184,14 @@ void RunMenu(DSLopTC& dsLopTC, DSMonHoc& dsMonHoc, DSSV& dsSV , int a[] , int so
 							case 7:
 								themLopTC(dsLopTC, dsMonHoc,a,soLuong);
 								break;
-
+								//DONE
 							case 8:
 								XoaLopTC(dsLopTC);
+								//DONE
 								break;
 							case 9:
 								SuaLopTC(dsLopTC, dsMonHoc);
+								//DONE
 								break;
 							case 10:
 								//Save(dsSV, dsMH, dsLopTC);
@@ -197,6 +199,7 @@ void RunMenu(DSLopTC& dsLopTC, DSMonHoc& dsMonHoc, DSSV& dsSV , int a[] , int so
 								SaveLopTC(dsLopTC);
 								pointer = 7;
 								goto VONGLAP;
+								//DONE
 							}
 
 							system("cls");
@@ -273,8 +276,6 @@ void RunMenu(DSLopTC& dsLopTC, DSMonHoc& dsMonHoc, DSSV& dsSV , int a[] , int so
 							case 9:
 								SuaSVLop(dsSV);
 								break;
-
-
 							case 10:
 								pointer = 7;
 								SaveSV(dsSV);
@@ -356,15 +357,15 @@ void RunMenu(DSLopTC& dsLopTC, DSMonHoc& dsMonHoc, DSSV& dsSV , int a[] , int so
 							case 7:
 								themMonHoc(dsMonHoc, toadoXBox + 8, toadoYBox);
 								break;
-
+								//DONE
 							case 8:
 								xoaMonHoc(dsMonHoc);
 								break;
-							
+								//DONE
 							case 9:
 								chinhsuaMH(dsMonHoc);
 								break;
-
+								//DONE
 							case 10:
 								pointer = 7;
 								GhiFileMonHoc(dsMonHoc);
