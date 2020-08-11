@@ -537,6 +537,7 @@ void MenuSuaLopTC(NodeLopTC* l)
 	HCNText(toadoXBox + 27, toadoYBox, 55, 25);
 
 	int toadoY = toadoYMain+5;
+	textcolor(11);
 	gotoXY(toadoXBox + 42, toadoY++);
 	cout << "Chon Thuoc Tinh Can Sua" << endl;
 	gotoXY(toadoXBox + 42, toadoY++);
@@ -556,8 +557,10 @@ void MenuSuaLopTC(NodeLopTC* l)
 	gotoXY(toadoXBox + 42, toadoY++);
 	cout << "8.Thoat" << endl;
 	gotoXY(toadoXBox + 42, toadoY);
-	cout << "Chon: " << endl;
-	gotoXY(toadoXBox + 47, toadoY);
+	textcolor(224);
+	cout << "Chon:" << endl;
+	textcolor(12);
+	gotoXY(toadoXBox + 48, toadoY);
 }
 
 void hieuChinhTC(NodeLopTC* t, DSMonHoc dsMH, int malop)
@@ -598,6 +601,7 @@ void hieuChinhTC(NodeLopTC* t, DSMonHoc dsMH, int malop)
 						mmh = "";
 						HCNText(toadoXBox + 27, toadoYBox, 50, 5);
 						gotoXY(toadoXBox + 30, toadoYMain);
+						textcolor(11);
 						cout << "Nhap Ma Mon Hoc Moi:";
 						//getline(cin, x.mmh);
 						gotoXY(toadoXBox + 52, toadoYMain); 
@@ -625,8 +629,11 @@ void hieuChinhTC(NodeLopTC* t, DSMonHoc dsMH, int malop)
 					
 					HCNText(toadoXBox + 27, toadoYBox, 50, 5);
 					gotoXY(toadoXBox + 30, toadoYMain);
+					textcolor(11);
+
 					cout << "Nhap Nien Khoa Moi:";
 					//getline(cin, x.nienkhoa);
+					textcolor(12);
 					XuLyNhapNienKhoa(nk);
 					x.nienkhoa = nk;
 					break;
@@ -634,13 +641,19 @@ void hieuChinhTC(NodeLopTC* t, DSMonHoc dsMH, int malop)
 					//gotoXY(toadoXBox, toadoYMain);
 					HCNText(toadoXBox + 27, toadoYBox, 50, 5);
 					gotoXY(toadoXBox + 30, toadoYMain);
+					textcolor(11);
+
 					cout << "Nhap Hoc Ki Moi:";
 					//cin >> x.hocki; 
+					textcolor(12);
+
 					XuLyNhapSoHK(hk, toadoXBox);
 					x.hocki = hk;
 					break;
 				case 4:
 					gotoXY(toadoXBox, toadoYMain);
+					textcolor(11);
+
 					cout << "Nhap Nhom Moi:";
 					cin >> x.nhom;
 					break;
@@ -654,11 +667,14 @@ void hieuChinhTC(NodeLopTC* t, DSMonHoc dsMH, int malop)
 
 						HCNText(toadoXBox + 27, toadoYBox, 50, 5);
 						gotoXY(toadoXBox + 30, toadoYMain);
+						textcolor(11);
+
 						cout << "Nhap so sinh vien max Moi:";
 						//getline(cin, x.mmh);
 						gotoXY(toadoXBox + 57, toadoYMain);
 						cout << "              ";
 						gotoXY(toadoXBox + 57, toadoYMain);
+						textcolor(12);
 						cin >> x.so_svmax;
 						//	i = SearchMH(dsMH, t->data.mmh);
 						if (x.so_svmax < 50)
@@ -677,11 +693,15 @@ void hieuChinhTC(NodeLopTC* t, DSMonHoc dsMH, int malop)
 
 						HCNText(toadoXBox + 27, toadoYBox, 50, 5);
 						gotoXY(toadoXBox + 30, toadoYMain);
+						textcolor(11);
+
 						cout << "Nhap so sinh vien min Moi:";
 						//getline(cin, x.mmh);
 						gotoXY(toadoXBox + 58, toadoYMain);
 						cout << "              ";
 						gotoXY(toadoXBox + 58, toadoYMain);
+						textcolor(12);
+
 						cin >> x.so_sv_min;
 						//	i = SearchMH(dsMH, t->data.mmh);
 						if (x.so_sv_min > x.so_svmax)
@@ -796,7 +816,8 @@ void LoadSV(DSSV& dsSV)
 	ifstream fileIn1("inputSV1.txt", ios::in);
 	string tenLot;
 
-	for (int i = 0; i < 30; i++)
+	for (int i = 0; i < 50; i++)
+	//while (fileIn1.good())
 	{
 		SinhVien x;
 		getline(fileIn1, x.malop, ',');
@@ -813,7 +834,6 @@ void LoadSV(DSSV& dsSV)
 
 	fileIn1.close();
 }
-
 
 
 void DocFileMonHoc(DSMonHoc& dsMH)

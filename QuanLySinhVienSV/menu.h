@@ -269,7 +269,7 @@ void RunMenu(DSLopTC& dsLopTC, DSMonHoc& dsMonHoc, DSSV& dsSV , int a[] , int so
 							case 7:
 								NhapSVLop(dsSV);
 								break;
-
+								//Nhap chua them vao ds
 							case 8:
 								XoaSVLop(dsSV);
 								break;
@@ -304,6 +304,8 @@ void RunMenu(DSLopTC& dsLopTC, DSMonHoc& dsMonHoc, DSSV& dsSV , int a[] , int so
 				break;
 			case 10:
 				XuatDSSV1Lop(dsSV, 0, 5);
+				//LOAD và SAVE bị lỗi
+				//do hoa DONE
 				break;
 
 			case 11:  // mon hoc
@@ -394,20 +396,25 @@ void RunMenu(DSLopTC& dsLopTC, DSMonHoc& dsMonHoc, DSSV& dsSV , int a[] , int so
 			case 12:
 				xuatMonHoc(dsMonHoc, toadoXBox + 5, toadoYBox);
 				getch();
+				//DONE
 				break;
 			case 13:
 				DangKiLopTC(dsSV, dsLopTC, dsMonHoc, toadoXBox, 7);
+				//DONE
 				SaveLopTC(dsLopTC);
 				break;
 			case 14:
 				NhapDiem(dsSV, dsLopTC, dsMonHoc, toadoXBox, 7);
+				//DONE
 				SaveLopTC(dsLopTC);
 				break;
 			case 15 :
 				InBangDiemCuaLopTC(dsSV, dsLopTC, dsMonHoc, toadoXBox, 7);
+				//DONE
 				break;
 			case 16 : 
 				InDiemTBCuaLopTheoTC(dsSV, dsLopTC, dsMonHoc, toadoXBox, 7);
+				//DONE
 				break;
 			case 17:
 				
