@@ -217,7 +217,7 @@ void ThemCuoi(NodeSV*& pHead, NodeSV* p)
 				break;
 			}
 		}
-	}
+	}  
 }
 
 int SearchMH(DSMonHoc dsMH, string x) {
@@ -537,25 +537,48 @@ void MenuSuaLopTC(NodeLopTC* l)
 	HCNText(toadoXBox + 27, toadoYBox, 55, 25);
 
 	int toadoY = toadoYMain+5;
+	textcolor(0xE);
+	gotoXY(toadoXBox + 42, toadoYMain + 3);
+	cout << "CHON THUOC TINH CAN CHIN SUA" << endl;
+	gotoXY(toadoXBox + 42, toadoY++); 	textcolor(11);
+	cout << "1.Ma Mon Hoc: "; textcolor(12); cout << l->data.mmh << endl;
+	gotoXY(toadoXBox + 42, toadoY++); 	textcolor(11);
+	cout << "2.Niem Khoa: "; textcolor(12); cout << l->data.nienkhoa << endl;
+	gotoXY(toadoXBox + 42, toadoY++); 	textcolor(11);
+	cout << "3.Hoc Ki: "; textcolor(12); cout << l->data.hocki << endl;
+	gotoXY(toadoXBox + 42, toadoY++);	textcolor(11);
+	cout << "4.Nhom: "; textcolor(12); cout << l->data.nhom << endl;
+	gotoXY(toadoXBox + 42, toadoY++);	textcolor(11);
+	cout << "5.So Sinh Vien Max: "; textcolor(12); cout << l->data.so_svmax << endl;
+	gotoXY(toadoXBox + 42, toadoY++);	textcolor(11);
+	cout << "6.So Sinh Vien Min: "; textcolor(12); cout << l->data.so_sv_min << endl;
+	gotoXY(toadoXBox + 42, toadoY++); textcolor(11);
+	cout << "7.Luu Va Thoat" << endl;
+	gotoXY(toadoXBox + 42, toadoY++);
+	cout << "8.Thoat" << endl;
+	gotoXY(toadoXBox + 42, toadoY);
+	textcolor(224);
+	cout << "Chon:" << endl;
+	textcolor(12);
+	gotoXY(toadoXBox + 48, toadoY);
+}
+
+void MenuSuaMonHoc(monHoc mh)
+{
+	HCNText(toadoXBox + 27, toadoYBox, 55, 25);
+
+	int toadoY = toadoYMain + 5;
 	textcolor(11);
 	gotoXY(toadoXBox + 42, toadoY++);
 	cout << "Chon Thuoc Tinh Can Sua" << endl;
 	gotoXY(toadoXBox + 42, toadoY++);
-	cout << "1.Ma Mon Hoc: " << l->data.mmh << endl;
+	cout << "1.Ten Mon Hoc " << mh.TenMH << endl;
 	gotoXY(toadoXBox + 42, toadoY++);
-	cout << "2.Niem Khoa: " << l->data.nienkhoa << endl;
+	cout << "2.So Tin Chi Ly Thuyet " <<mh.sotclt<< endl;
 	gotoXY(toadoXBox + 42, toadoY++);
-	cout << "3.Hoc Ki: " << l->data.hocki << endl;
+	cout << "3.So Tin Chi ThuC Hanh " << mh.sotcth << endl;
 	gotoXY(toadoXBox + 42, toadoY++);
-	cout << "4.Nhom: " << l->data.nhom << endl;
-	gotoXY(toadoXBox + 42, toadoY++);
-	cout << "5.So Sinh Vien Max: " << l->data.so_svmax << endl;
-	gotoXY(toadoXBox + 42, toadoY++);
-	cout << "6.So Sinh Vien Min: " << l->data.so_sv_min << endl;
-	gotoXY(toadoXBox + 42, toadoY++);
-	cout << "7.Luu Va Thoat" << endl;
-	gotoXY(toadoXBox + 42, toadoY++);
-	cout << "8.Thoat" << endl;
+	cout << "4.Luu va Thoat" << mh.sotcth << endl;
 	gotoXY(toadoXBox + 42, toadoY);
 	textcolor(224);
 	cout << "Chon:" << endl;

@@ -726,16 +726,23 @@ void GiaoDienMain()
 		cout << (char)205;
 	}
 	textcolor(7);
-
-	gotoXY(60, 2);
+	textcolor(0xE);
+	HCNText(toadoXBox + 27, 1 , 65, 5);
+	gotoXY(64, 3);
+	textcolor(12);
+	//ToMauHCN(toadoXBox + 27, 1, 65, 5,0xE);
 	cout << "QUAN Li SINH VIEN";
+	HCNText(toadoXBox + 27, 6, 65, 20);
+
 	textcolor(7);
+
 }
 void GiaoDienThongBao(string x)
 {
-	ToMauHCN(50, 17, 50, 10, 95);
+	//ToMauHCN(50, 17, 50, 10, 95);
+	ToMauHCN(50, 20, 50, 10, 95);
 	textcolor(95);
-	gotoXY(51, 20);
+	gotoXY(51, 23);
 	cout << CanDeuChuoi(x, 49);
 	getch();
 	textcolor(7);

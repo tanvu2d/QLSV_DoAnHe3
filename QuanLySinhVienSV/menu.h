@@ -6,7 +6,7 @@ string strMNMain[] = {
 	"2.Xuat danh sach sinh vien theo nien khoa,HK,ma MH,nhom ",
 	"3.Nhap sinh vien                                        ",
 	"4.In danh sach sinh vien cua 1 lop (dua vao ma lop)     ",
-	"5.Nhap mon hoc                                          " ,
+	"5.Them mon hoc                                          " ,
 	"6.In danh sach mon hoc tang dan theo ten mon hoc        " ,
 	"7.Dang ky lop tin chi                                   ",
 	"8.Nhap diem                                             ",
@@ -20,10 +20,10 @@ string strMNMain[] = {
 
 string menuConLopTC[] = {
 
-	"Them Lop tin chi        ",
-	"Xoa lop tin chi         ",
-	"Hieu chinh lop tin chi  ",
-	"LUU va THOAT             "
+	"Them Lop tin chi           ",
+	"Xoa lop tin chi            ",
+	"Hieu chinh lop tin chi     ",
+	"LUU va THOAT               "
 };
 
 
@@ -46,10 +46,13 @@ string menuMH[] = {
 void Menu()
 {
 	//textcolor(240);
+	//HCNText(toadoXBox + 27, toadoYBox, 60, 25);
+
 	int j = 7;
 	for (int i = 0; i < sizeof(strMNMain) / sizeof(*strMNMain); i++)
 	{
-		gotoXY(50, j++);
+
+		gotoXY(48, j++);
 		cout << strMNMain[i];
 	}
 }
@@ -58,7 +61,7 @@ void menuNhapSV()
 	int j = 7;
 	for (int i = 0; i < sizeof(stringNhapSV) / sizeof(*stringNhapSV); i++)
 	{
-		gotoXY(50, j++);
+		gotoXY(60, j++);
 		cout << stringNhapSV[i];
 	}
 }
@@ -68,7 +71,7 @@ void menuMoLopTC()
 	int j = 7;
 	for (int i = 0; i < sizeof(menuConLopTC) / sizeof(*menuConLopTC); i++)
 	{
-		gotoXY(50, j++);
+		gotoXY(60, j++);
 		cout << menuConLopTC[i];
 	}
 }
@@ -77,7 +80,7 @@ void menuMonHoc()
 	int j = 7;
 	for (int i = 0; i < sizeof(menuMH) / sizeof(*menuMH); i++)
 	{
-		gotoXY(50, j++);
+		gotoXY(60, j++);
 		cout << menuMH[i];
 	}
 }
@@ -127,13 +130,15 @@ void RunMenu(DSLopTC& dsLopTC, DSMonHoc& dsMonHoc, DSSV& dsSV , int a[] , int so
 		else if (c == 13) // Bam enter
 		{
 			XoaManHinhChinh();
+			HCNText(toadoXBox + 27, 5, 65, 15);
 			switch (pointer)
 			{
 			case 7:
 				//textcolor(180);
-				gotoXY(50, pointer);
+				gotoXY(60, pointer);
 				menuMoLopTC();
-				gotoXY(50, pointer - 1);
+				gotoXY(52, pointer - 1);
+				textcolor(0xE);
 				cout << "Vua chon chuc nang QUAN LI LOP TIN CHI ";
 
 				//       Sleep (1000);
@@ -209,18 +214,20 @@ void RunMenu(DSLopTC& dsLopTC, DSMonHoc& dsMonHoc, DSSV& dsSV , int a[] , int so
 					}
 					ShowCur(0);
 					textcolor(180);
-					gotoXY(50, pointer);
+					gotoXY(60, pointer);
 					cout << menuConLopTC[pointer - 7];
 					textcolor(7);
 				}
 			case 8:
+				XoaManHinhChinh();
 				InDSSV(dsSV, dsLopTC, dsMonHoc, 0, 5);
 				break;
 			case 9:
 				pointer = 7;
-				gotoXY(50, pointer);
+				gotoXY(60, pointer);
 				menuNhapSV();
-				gotoXY(50, pointer - 1);
+				gotoXY(55, pointer - 1);
+				textcolor(0xE);
 				cout << "Vua chon chuc nang nhap sinh vien ";
 				//       Sleep (1000); 
 
@@ -295,7 +302,7 @@ void RunMenu(DSLopTC& dsLopTC, DSMonHoc& dsMonHoc, DSSV& dsSV , int a[] , int so
 					ShowCur(0);
 					// to mau 
 					textcolor(180);
-					gotoXY(50, pointer);
+					gotoXY(60, pointer);
 					cout << stringNhapSV[pointer - 7];
 					textcolor(7);
 
@@ -303,6 +310,8 @@ void RunMenu(DSLopTC& dsLopTC, DSMonHoc& dsMonHoc, DSSV& dsSV , int a[] , int so
 
 				break;
 			case 10:
+				XoaManHinhChinh();
+
 				XuatDSSV1Lop(dsSV, 0, 5);
 				//LOAD và SAVE bị lỗi
 				//do hoa DONE
@@ -310,9 +319,10 @@ void RunMenu(DSLopTC& dsLopTC, DSMonHoc& dsMonHoc, DSSV& dsSV , int a[] , int so
 
 			case 11:  // mon hoc
 				pointer = 7;
-				gotoXY(50, pointer);
+				gotoXY(60, pointer);
 				menuMonHoc();
-				gotoXY(50, pointer - 1);
+				gotoXY(55, pointer - 1);
+				textcolor(0xE);
 				cout << "Vua chon chuc nang QUAN LI MON HOC "; //
 				//       Sleep (1000);
 				while (true)
@@ -386,7 +396,7 @@ void RunMenu(DSLopTC& dsLopTC, DSMonHoc& dsMonHoc, DSSV& dsSV , int a[] , int so
 					ShowCur(0);
 					// to mau 
 					textcolor(180);
-					gotoXY(50, pointer);
+					gotoXY(60, pointer);
 					cout << menuMH[pointer - 7];
 					textcolor(7);
 
@@ -394,21 +404,26 @@ void RunMenu(DSLopTC& dsLopTC, DSMonHoc& dsMonHoc, DSSV& dsSV , int a[] , int so
 				break;
 		
 			case 12:
+				XoaManHinhChinh();
+
 				xuatMonHoc(dsMonHoc, toadoXBox + 5, toadoYBox);
 				getch();
 				//DONE
 				break;
 			case 13:
+				XoaManHinhChinh();
 				DangKiLopTC(dsSV, dsLopTC, dsMonHoc, toadoXBox, 7);
 				//DONE
 				SaveLopTC(dsLopTC);
 				break;
 			case 14:
+				XoaManHinhChinh();
 				NhapDiem(dsSV, dsLopTC, dsMonHoc, toadoXBox, 7);
 				//DONE
 				SaveLopTC(dsLopTC);
 				break;
 			case 15 :
+				XoaManHinhChinh();
 				InBangDiemCuaLopTC(dsSV, dsLopTC, dsMonHoc, toadoXBox, 7);
 				//DONE
 				break;
@@ -432,7 +447,7 @@ void RunMenu(DSLopTC& dsLopTC, DSMonHoc& dsMonHoc, DSSV& dsSV , int a[] , int so
 	ShowCur(0);
 	// to mau 
 	textcolor(180);
-	gotoXY(50, pointer);
+	gotoXY(48, pointer);
 	cout << strMNMain[pointer - 7];
 	textcolor(7);
 }
