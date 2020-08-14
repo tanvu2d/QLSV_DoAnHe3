@@ -354,7 +354,7 @@ void themLopTC(DSLopTC& t, DSMonHoc dsMH , int a[] , int &soLuong)
 			gotoXY(toadoXBox + 17, toadoY++);
 			XuLyNhapSo(x.so_sv_min, toadoXBox + 17);
 		};*/
-		
+		//
 	
 	x.dssvdk.pHead = NULL;
 
