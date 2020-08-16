@@ -1220,23 +1220,23 @@ int ktMonHoc(string a, DSMonHoc dsMH)
 }
 */
 
-bool CheckTrungLopTinChi(NodeLopTC* t, string nienKhoa, int hocKi, int nhom, string maMH )
+void CheckTrungLopTinChi(NodeLopTC* t, string nienKhoa, int hocKi, int nhom, string maMH  , bool &check)
 {
 	if (t == NULL)
 	{
-
-		return false;
+		
+		return;
 	}
 	else
 	{
 		if (t->data.mmh == maMH && t->data.hocki == hocKi && t->data.nhom == nhom && t->data.nienkhoa == nienKhoa)
 		{
 			GiaoDienThongBao("Du Lieu Lop Da Ton Tai");
-			
-			return true ;
+			check = true;
+			return;
 		}
-		return  CheckTrungLopTinChi(t->pLeft, nienKhoa, hocKi, nhom, maMH);
-		return  CheckTrungLopTinChi(t->pRight, nienKhoa, hocKi, nhom, maMH);
+		  CheckTrungLopTinChi(t->pLeft, nienKhoa, hocKi, nhom, maMH,check);
+		  CheckTrungLopTinChi(t->pRight, nienKhoa, hocKi, nhom, maMH,check);
 	}
 }
 

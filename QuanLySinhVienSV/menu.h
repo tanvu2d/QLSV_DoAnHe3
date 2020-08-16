@@ -188,6 +188,7 @@ void RunMenu(DSLopTC& dsLopTC, DSMonHoc& dsMonHoc, DSSV& dsSV , int a[] , int so
 							{
 							case 7:
 								themLopTC(dsLopTC, dsMonHoc,a,soLuong);
+								
 								break;
 								//DONE
 							case 8:

@@ -267,12 +267,9 @@ void themLopTC(DSLopTC& t, DSMonHoc dsMH , int a[] , int &soLuong)
 			i = 0;
 			maMH = "";
 			gotoXY(toadoXBox, toadoY);
-			//cout << "Nhap Ma Mon Hoc(0:De Thoat):";
-			//gotoXY(toadoXBox + 30, toadoY++);
 			gotoXY(toadoXBox + 15, toadoY + 2);
 			cout << "          ";
 			gotoXY(toadoXBox + 15, toadoY + 2);
-			//XuLyNhapMa(maMH);
 			XuLyNhapMaMon(maMH, 10);
 			if (maMH == "0")
 			{
@@ -311,8 +308,11 @@ void themLopTC(DSLopTC& t, DSMonHoc dsMH , int a[] , int &soLuong)
 		XuLyNhapSoHK(x.hocki, toadoXBox + 17);
 		gotoXY(toadoXBox + 82, toadoY + 2);
 		XuLyNhapSo(x.nhom, toadoXBox + 17);
-		if (CheckTrungLopTinChi(t.root, x.nienkhoa, x.hocki, x.nhom, x.mmh))
+		bool check = false;
+		CheckTrungLopTinChi(t.root, nienKhoa, x.hocki, x.nhom, maMH, check);
+		if (check == true)
 		{
+			
 			return;
 		}
 		int max;
@@ -337,24 +337,7 @@ void themLopTC(DSLopTC& t, DSMonHoc dsMH , int a[] , int &soLuong)
 				GiaoDienThongBao("So sinh vien min khong lon hon So Sinh Vien Max!");
 			}
 		} while (min > x.so_svmax);
-		//gotoXY(toadoXBox + 105, toadoY + 2);
-
-		//XuLyNhapSo(x.so_sv_min, toadoXBox + 17);
-		/*while(x.so_svmax < x.so_sv_min)
-		{
-			gotoXY(toadoXBox, toadoY++);
-			cout << "Nhap lai so sinh vien min max";
-			gotoXY(toadoXBox, toadoY);
-			cout << "Nhap So SV Max : ";
-			gotoXY(toadoXBox + 17, toadoY++);
-			XuLyNhapSo(x.so_svmax, toadoXBox + 17);
-
-			gotoXY(toadoXBox, toadoY);
-			cout << "Nhap So SV Min : ";
-			gotoXY(toadoXBox + 17, toadoY++);
-			XuLyNhapSo(x.so_sv_min, toadoXBox + 17);
-		};*/
-		//
+		x.so_sv_min = min;
 	
 	x.dssvdk.pHead = NULL;
 
@@ -366,7 +349,142 @@ void themLopTC(DSLopTC& t, DSMonHoc dsMH , int a[] , int &soLuong)
 
 }
 
-
+//void themLopTCa(DSLopTC& t, DSMonHoc dsMH, int a[], int& soLuong) {
+//	ShowCur(1);
+//	int toadoY = toadoYMain;
+//	string nk;
+//	int hk;
+//	int i;
+//	HCNText(toadoXBox + 27, toadoYBox, 55, 7);
+//
+//
+//	gotoXY(toadoXBox + 40, toadoYBox + 2);
+//	textcolor(11);
+//	cout << "Nhap Nien Khoa: ";
+//	//gotoXY(toadoXBox + 55, toadoYBox + 2);
+//	textcolor(15);
+//	XuLyNhapNienKhoa(nk);
+//	gotoXY(toadoXBox + 40, toadoYBox + 3);
+//	cout << "Nhap hoc ki: ";
+//
+//	XuLyNhapSoHK(hk, toadoXBox);
+//	if (nk == "0") {
+//		return;
+//	}
+//	do {
+//		LopTC x;
+//		string maMH;
+//		x.nienkhoa = nk;
+//		x.hocki = hk;
+//		//gotoXY(toadoXBox, toadoY);
+//		textcolor(12);
+//		//cout << "Ma lop TC : ";
+//		//gotoXY(toadoXBox + 13, toadoY++);
+//		x.malopTc = a[soLuong - 1];
+//		soLuong--;
+//
+//		XoaManHinhChinh();
+//		HCNText(toadoXBox, toadoYBox, 25, 7);
+//		gotoXY(toadoXBox + 3, toadoY);
+//		cout << "Nien khoa: "; textcolor(12); cout << nk;
+//		gotoXY(toadoXBox + 3, toadoY + 1);
+//		textcolor(0xE);
+//		cout << "Hoc ki: "; textcolor(12); cout << hk;
+//		gotoXY(toadoXBox + 3, toadoY + 2);  textcolor(0xE);
+//		cout << "Ma lop: "; textcolor(12); cout << x.malopTc;
+//
+//		HCNText(toadoXBox + 27, toadoYBox, 55, 12);
+//		gotoXY(toadoXBox + 42, toadoYBox + 2);
+//		textcolor(12);
+//		cout << "NHAP THONG TIN LOP TIN CHI";
+//		gotoXY(toadoXBox + 35, toadoYBox + 4);
+//		textcolor(11);
+//		cout << "Ma mon hoc:";
+//		gotoXY(toadoXBox + 35, toadoYBox + 5);
+//		cout << "Nhom: ";
+//		gotoXY(toadoXBox + 35, toadoYBox + 6);
+//		cout << "So Sinh Vien Toi Da:";
+//		gotoXY(toadoXBox + 35, toadoYBox + 7);
+//		cout << "So Sinh Vien Toi Thieu:";
+//
+//		ShowCur(1);
+//		textcolor(0xE);
+//		do {
+//			i = 0;
+//			maMH = "";
+//			gotoXY(toadoXBox, toadoY);
+//			//cout << "Nhap Ma Mon Hoc(0:De Thoat):";
+//			//gotoXY(toadoXBox + 30, toadoY++);
+//			gotoXY(toadoXBox + 48, toadoYBox + 4);
+//			cout << "          ";
+//			gotoXY(toadoXBox + 48, toadoYBox + 4);
+//			XuLyNhapMaMon(maMH, 10);
+//			if (maMH == "0")
+//			{
+//				ShowCur(0);
+//				return;
+//			}
+//
+//			i = SearchMH(dsMH, maMH);
+//			if (i == -1)
+//			{
+//				GiaoDienThongBao("Ma Mon Hoc khong ton tai! Nhap lai!");
+//			}
+//		} while (i == -1);
+//		int j;
+//		x.mmh = maMH;
+//		int nhom;
+//	VongLap:
+//		j = 0;
+//		nhom = 0;
+//		gotoXY(toadoXBox + 40, toadoYBox + 5);
+//		cout << "      ";
+//		gotoXY(toadoXBox + 40, toadoYBox + 5);
+//		XuLyNhapSo(nhom, toadoXBox + 17);
+//		bool check = false;
+//		CheckTrungLopTinChi(t.root, nk, x.hocki, x.nhom, maMH, check);
+//				if (check == true)
+//				{
+//					
+//					return;
+//				}
+//		x.nhom = nhom;
+//		int max;
+//		do {
+//			gotoXY(toadoXBox + 58, toadoYBox + 6);
+//			cout << "    ";
+//			gotoXY(toadoXBox + 58, toadoYBox + 6);
+//
+//			XuLyNhapSo(max, toadoXBox + 17);
+//			if (max < 50) {
+//				GiaoDienThongBao("Khong the mo lop duoi 50 sinh vien!");
+//			}
+//		} while (max < 50);
+//		x.so_svmax = max;
+//		int min;
+//		do {
+//			gotoXY(toadoXBox + 58, toadoYBox + 7);
+//			cout << "    ";
+//			gotoXY(toadoXBox + 58, toadoYBox + 7);
+//			XuLyNhapSo(min, toadoXBox + 17);
+//			if (min > x.so_svmax) {
+//				GiaoDienThongBao("So sinh vien min khong lon hon So Sinh Vien Max!");
+//			}
+//		} while (min > x.so_svmax);
+//		x.so_sv_min = min;
+//		x.dssvdk.pHead = NULL;
+//
+//		ThemNodeVaoCay(t.root, x);
+//		t.soLuong++;
+//		
+//
+//		ShowCur(0);
+//		GiaoDienThongBao("Them Thanh Cong");
+//
+//
+//	} while (true);
+//	ShowCur(0);
+//}
 void XoaLopTC(DSLopTC& t)
 {
 	/*int x;
@@ -749,11 +867,6 @@ void NhapSVLop(DSSV& dsSV)
 	ShowCur(1);
 	int toadoY = toadoYMain;
 	string maLop;
-
-	/*gotoXY(toadoXBox, toadoY);
-	cout << "Nhap Vao Ma Lop(0:De Thoat):";
-	gotoXY(toadoXBox + 30, toadoY);
-	//XuLyNhapMa(maLop);*/
 	HCNText(toadoXBox + 27, toadoYBox, 55, 5);
 
 
@@ -1540,7 +1653,7 @@ string getTeMonHoc(DSMonHoc dsMH, string maMH)
 }
 
 
-int XuatDSLTCDK(LopTC a[], DSMonHoc dsMH, int n, int toadoX, int toadoY, LopTC b[], int soLuongLopTCdaDK, bool& kiemTraThem)
+int XuatDSLTCDK(LopTC a[], DSMonHoc dsMH, int n, int toadoX, int toadoY, LopTC b[], int soLuongLopTCdaDK, bool& kiemTraThem, bool& thoat)
 {
 	XoaManHinhChinh();
 	int dem = 0;
@@ -1622,21 +1735,7 @@ int XuatDSLTCDK(LopTC a[], DSMonHoc dsMH, int n, int toadoX, int toadoY, LopTC b
 			}
 			else if (c == 13)
 			{
-				//XoaManHinhChinh();
-				/*switch (pointer1)
-				{
-				case 1:
-					cout << "cccccccccccccccccccccccc";
-					break;
-				case 2:
-
-					break;
-
-				case 25:
-
-					exit(0);
-
-				}*/
+			
 
 				if (pointer1 == dongLenh)
 				{
@@ -1648,9 +1747,12 @@ int XuatDSLTCDK(LopTC a[], DSMonHoc dsMH, int n, int toadoX, int toadoY, LopTC b
 					kiemTraThem = false;
 					goto VongLap;
 				}
-				// Bam thoat
-
-				//system("cls");
+				else if (pointer1 == dongLenh + 2)
+				{
+					thoat = true;
+					goto VongLap1;
+				}
+				
 
 				MenuLuaChon(toadoXBox, dongLenh);
 			}
@@ -1708,21 +1810,11 @@ VongLap:
 		}
 		return b[chose - 1].malopTc;
 	}
-	/*gotoXY(toadoXBox, toadoY + 4 + (dem * 2));
-	ShowCur(1);
-	cout << "Chon Lop Bang STT(0:De Thoat):";
-	cin >> chose;
-	ShowCur(0);
-
-	if (chose == 0)
+VongLap1 : 
+	if (thoat == true)
 	{
 		return 0;
 	}
-	else if (chose > n)
-	{
-		return -1;
-	}
-	return a[chose - 1].malopTc;*/
 }
 
 void DSlopTCTrong(NodeLopTC* t, DSLopTC dsLopTC, LopTC  a[], string nienKhoa, int hocKy, string maSV, int& soLuong)
@@ -1745,7 +1837,7 @@ void DSlopTCTrong(NodeLopTC* t, DSLopTC dsLopTC, LopTC  a[], string nienKhoa, in
 	}
 }
 
-void SinhVienDKLopTC(NodeLopTC* t, DSLopTC dsLTC, int maLopTC, string maSV, string nienKhoa, int hocki)
+void SinhVienDKLopTC(NodeLopTC* t, DSLopTC dsLTC, int maLopTC, string maSV, string nienKhoa, int hocki )
 
 {
 	if (t == NULL)
@@ -1932,7 +2024,7 @@ void DangKiLopTC(DSSV dsSV, DSLopTC& dsLTC, DSMonHoc dsMH, int toadoX, int toado
 		LopTC a[100];
 		int n = 0;
 		bool kiemtraThem = true;
-
+		bool thoat = false;
 		DSlopTCTrong(dsLTC.root, dsLTC, a, nienKhoa, hocki, maSV, n);
 
 		if (n == 0 && soLuongLopTCDK == 0)
@@ -1941,10 +2033,10 @@ void DangKiLopTC(DSSV dsSV, DSLopTC& dsLTC, DSMonHoc dsMH, int toadoX, int toado
 			return;
 		}
 
-		int maLTC = XuatDSLTCDK(a, dsMH, n, toadoX, toadoY, lopTCsvDaDK, soLuongLopTCDK, kiemtraThem);
+		int maLTC = XuatDSLTCDK(a, dsMH, n, toadoX, toadoY, lopTCsvDaDK, soLuongLopTCDK, kiemtraThem, thoat);
 
 
-		if (kiemtraThem == true)
+		if (kiemtraThem == true && thoat == false )
 		{
 			if (maLTC == 0)
 			{
@@ -1961,7 +2053,7 @@ void DangKiLopTC(DSSV dsSV, DSLopTC& dsLTC, DSMonHoc dsMH, int toadoX, int toado
 			SinhVienDKLopTC(dsLTC.root, dsLTC, maLTC, maSV, nienKhoa, hocki);
 			GiaoDienThongBao("Dang Ki Thanh Cong");
 		}
-		else if (kiemtraThem == false)
+		else if (kiemtraThem == false && thoat == false)
 		{
 			if (maLTC == 0)
 			{
@@ -1982,6 +2074,10 @@ void DangKiLopTC(DSSV dsSV, DSLopTC& dsLTC, DSMonHoc dsMH, int toadoX, int toado
 			int vt = TimViTriLopCanXoa(lopTCsvDaDK, soLuongLopTCDK, maLTC);
 			XoaLopTCDaDK(lopTCsvDaDK, soLuongLopTCDK, vt);
 
+		}
+		else if (thoat == true)
+		{
+			return;
 		}
 
 	}

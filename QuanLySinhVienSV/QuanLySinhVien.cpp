@@ -21,7 +21,7 @@ int main()
 	}
 	DocFileMonHoc(dsMH);
 	Menu();
-	resizeConsole(1000, 600);
+	resizeConsole(1200, 600);
 	GiaoDienMain();
 	while (true)
 	{
