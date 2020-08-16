@@ -891,7 +891,7 @@ void LoadSV(DSSV& dsSV)
 		getline(fileIn1, x.sdt);
 		NodeSV* p = KhoiTaoNode(x);
 		ThemSinhVienTheoThuTu(dsSV, p);
-		fileIn1.ignore();
+		
 	}
 
 	fileIn1.close();

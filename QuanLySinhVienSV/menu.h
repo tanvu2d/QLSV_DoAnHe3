@@ -433,7 +433,7 @@ void RunMenu(DSLopTC& dsLopTC, DSMonHoc& dsMonHoc, DSSV& dsSV , int a[] , int so
 				//DONE
 				break;
 			case 17:
-				
+				SaveSV(dsSV);
 				exit(0);
 
 			}
