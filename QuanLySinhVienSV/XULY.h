@@ -1260,3 +1260,63 @@ void loadIdLopTC(int a[], int& n)
 	}
 	fileIn.close();
 }
+void XuLyNhapMaSV(string& InPut, int maximum = 256)
+{
+	while (true)
+	{
+		char c = _getch();
+
+		if ((c >= 48 && c <= 57) || c == '_' || c == 32 || (c >= 65 && c <= 90)) // hoa
+		{
+			if (InPut.length() < maximum) {
+				InPut.insert(InPut.begin() + InPut.length(), c);
+				cout << c;
+			}
+		}
+		else if (c >= 97 && c <= 122) // thuong
+		{
+			if (InPut.length() < maximum) {
+				c = c - 32;
+				InPut.insert(InPut.begin() + InPut.length(), c);
+				cout << c;
+			}
+		}
+		else if (c == 8 && InPut.length() > 0) //beckspace
+		{
+			InPut.erase(InPut.begin() + InPut.length() - 1);
+			cout << "\b";
+			cout << " ";
+			cout << "\b";
+		}
+		else if (c == 27) // esc
+		{
+			InPut.clear();
+			return;
+		}
+		else if (c == 13 && InPut.length() > 0)//enter
+		{
+			break;
+		}
+	}
+}
+bool checkMaSVNhapVao(string a)
+{
+	int dem = 0;
+	for (int i = 0; i < a.length(); i++)
+	{
+		if (a[i] == 32)
+		{
+			dem++;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	if (dem == a.length())
+	{
+		return true;
+	}
+
+	return false;
+}

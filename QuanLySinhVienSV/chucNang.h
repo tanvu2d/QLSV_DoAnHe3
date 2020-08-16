@@ -364,8 +364,9 @@ void themLopTCa(DSLopTC& t, DSMonHoc dsMH, int a[], int& soLuong) {
 	//gotoXY(toadoXBox + 55, toadoYBox + 2);
 	textcolor(15);
 	XuLyNhapNienKhoa(nk);
+	textcolor(11);
 	gotoXY(toadoXBox + 40, toadoYBox + 3);
-	cout << "Nhap hoc ki: ";
+	cout << "Nhap hoc ki: "; textcolor(15);
 
 	XuLyNhapSoHK(hk, toadoXBox);
 	if (nk == "0") {
@@ -835,7 +836,27 @@ int checkMaSVa(DSSV dsSV, string maSV)
 {
 	for (NodeSV* k = dsSV.pHead; k != NULL; k = k->pNext)
 	{
+		if (maSV < k->data.mssv)
+		{
+			return -1;
+		}
 		if (k->data.mssv == maSV)
+		{
+			return 1;
+		}
+	}
+
+	return -1;
+}
+int checkMaLop(DSSV dsSV, string maLop)
+{
+	for (NodeSV* k = dsSV.pHead; k != NULL; k = k->pNext)
+	{
+		if (maLop < k->data.malop)
+		{
+			return -1;
+		}
+		if (k->data.malop == maLop)
 		{
 			return 1;
 		}
@@ -867,22 +888,33 @@ void NhapSVLop(DSSV& dsSV)
 	ShowCur(1);
 	int toadoY = toadoYMain;
 	string maLop;
+	string ml;
+	int k;
 	HCNText(toadoXBox + 27, toadoYBox, 55, 5);
+	do {
+		k = 0;
+		ml = "";
+		textcolor(11);
+		gotoXY(toadoXBox + 40, toadoYBox + 2);
+		cout << "Nhap Ma Lop: ";
+		gotoXY(toadoXBox + 55, toadoYBox + 2);
+		cout << "             ";
+		gotoXY(toadoXBox + 55, toadoYBox + 2);
 
+		textcolor(15);
+		XuLyNhapMaMon(ml , 9);
 
-	gotoXY(toadoXBox + 40, toadoYBox + 2);
-	textcolor(11);
-	cout << "Nhap Ma Lop: ";
-	gotoXY(toadoXBox + 55, toadoYBox + 2);
-	textcolor(15);
-	XuLyNhapMaMon(maLop, 9);
-
-	if (maLop == "0")
-	{
-		return;
-	}
-
-	int i = 1;
+		if (ml == "0")
+		{
+			return;
+		}
+		k = checkMaLop(dsSV, ml);
+		if (k == -1) {
+			GiaoDienThongBao("Ma lop khong ton tai!");
+		}
+	} while (k == -1);
+	maLop = ml;
+	int i=0;
 	while (true)
 	{
 		SinhVien sv;
@@ -932,9 +964,10 @@ void NhapSVLop(DSSV& dsSV)
 			gotoXY(toadoXBox + 50, toadoYBox + 4);
 			cout << "               ";
 			gotoXY(toadoXBox + 50, toadoYBox + 4);
-
-			XuLyNhapMaMon(msv, 10);
-			if (msv == "0")
+			bool check = true;
+			//XuLyNhapMaMon(msv, 10);
+			XuLyNhapMaSV(msv, 12);
+			if (checkMaSVNhapVao(msv)==true)
 			{
 				return;
 			}
