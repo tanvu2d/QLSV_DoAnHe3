@@ -187,7 +187,7 @@ void RunMenu(DSLopTC& dsLopTC, DSMonHoc& dsMonHoc, DSSV& dsSV , int a[] , int so
 							switch (pointer)
 							{
 							case 7:
-								themLopTC(dsLopTC, dsMonHoc,a,soLuong);
+								themLopTCa(dsLopTC, dsMonHoc,a,soLuong);
 								
 								break;
 								//DONE
