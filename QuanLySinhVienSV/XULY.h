@@ -833,14 +833,52 @@ void LoadTC(DSLopTC& dsTC)
 }
 
 // load danh sach sinh vien 
+void ThemSinhVienTheoThuTu(DSSV& t, NodeSV* p)
+{
+	/*string a = p->data.malop + p->data.mssv;
+	for (NodeSV* k = dsSV.pHead; k != NULL; k = k->pNext)
+	{
+		string k1 = k->data.malop + k->data.mssv;
+		if (a > k1)
+		{
+			NodeSV* g = KhoiTaoNode(p->data);
+			g->pNext = k->pNext;
+			k->pNext = g;
+			break;
+		}
+	}*/
+
+	string a = p->data.malop + p->data.mssv;
+
+	if (t.pHead == NULL)
+	{
+		t.pHead = p;
+		return;
+	}
+
+	NodeSV* q = t.pHead;
+
+	for (NodeSV* k = t.pHead->pNext; k != NULL; k = k->pNext)
+	{
+		if (a < k->data.malop + k->data.mssv)
+		{
+			q->pNext = p;
+			p->pNext = k;
+			return;
+		}
+		q = k;
+	}
+	q->pNext = p;
+}
 
 void LoadSV(DSSV& dsSV)
 {
 	ifstream fileIn1("inputSV1.txt", ios::in);
 	string tenLot;
-
-	for (int i = 0; i < 50; i++)
-	//while (fileIn1.good())
+	fileIn1 >> dsSV.solg;
+	fileIn1.ignore();
+	for (int i = 0; i < dsSV.solg; i++)
+		//while (fileIn1.good())
 	{
 		SinhVien x;
 		getline(fileIn1, x.malop, ',');
@@ -852,11 +890,13 @@ void LoadSV(DSSV& dsSV)
 		getline(fileIn1, x.phai, ',');
 		getline(fileIn1, x.sdt);
 		NodeSV* p = KhoiTaoNode(x);
-		ThemCuoi(dsSV.pHead, p);
+		ThemSinhVienTheoThuTu(dsSV, p);
+		fileIn1.ignore();
 	}
 
 	fileIn1.close();
 }
+
 
 
 void DocFileMonHoc(DSMonHoc& dsMH)

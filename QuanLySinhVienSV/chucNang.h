@@ -866,21 +866,6 @@ int checkMaLop(DSSV dsSV, string maLop)
 }
 
 
-void ThemSinhVienTheoThuTu(DSSV& dsSV, NodeSV* p)
-{
-	string a = p->data.malop + p->data.mssv;
-	for (NodeSV* k = dsSV.pHead; k != NULL; k = k->pNext)
-	{
-		string k1 = k->data.malop + k->data.mssv;
-		if (a > k1)
-		{
-			NodeSV* g = KhoiTaoNode(p->data);
-			g->pNext = k->pNext;
-			k->pNext = g;
-			break;
-		}
-	}
-}
 
 
 void NhapSVLop(DSSV& dsSV)

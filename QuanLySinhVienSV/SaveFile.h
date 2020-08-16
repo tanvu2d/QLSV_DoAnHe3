@@ -3,20 +3,18 @@
 void SaveSV(DSSV dsSV)
 {
 	ofstream fileOut("inputSV1.txt", ios::out);
-
+	fileOut << dsSV.solg << endl;
 
 	for (NodeSV* k = dsSV.pHead; k != NULL; k = k->pNext)
 	{
-		fileOut << k->data.malop << "," << k->data.mssv << "," << k->data.ho + " " + k->data.ten << "," << k->data.phai << "," << k->data.sdt << endl;
+		fileOut << k->data.malop << "," << k->data.namnhaphoc << "," << k->data.mssv << "," << k->data.ho << "," << k->data.ten << "," << k->data.phai << "," << k->data.sdt << endl;
 	}
-
-
 	fileOut.close();
 }
 
-void DuyetSave(NodeLopTC *t, ofstream& fileOut)
+void DuyetSave(NodeLopTC* t, ofstream& fileOut)
 {
-	if ( t == NULL)
+	if (t == NULL)
 	{
 		return;
 	}
