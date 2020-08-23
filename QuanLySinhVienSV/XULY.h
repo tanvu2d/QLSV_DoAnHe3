@@ -177,7 +177,7 @@ NodeSV* KhoiTaoNode(SinhVien x)
 	NodeSV* p = new NodeSV;
 	if (p == NULL)
 	{
-		cout << "\nCap phat khong thanh cong";
+		GiaoDienThongBao( "\nCap phat khong thanh cong");
 		return NULL;
 	}
 	p->data = x;
@@ -455,9 +455,9 @@ void DiTimNodeTheMang(NodeLopTC*& X, NodeLopTC*& Y)
 	}
 	else
 	{
-		X->data = Y->data;
-		X = Y;
-		Y = Y->pRight;
+		X->data = Y->data; // den day Y là nut cuc trai của cay con ben phai
+		X = Y; // gan Y cho X để xóa X
+		Y = Y->pRight; // tao lien ket xuông nhanh ben phai (móc vòng)
 	}
 
 }
@@ -844,7 +844,7 @@ void ThemSinhVienTheoThuTu(DSSV& t, NodeSV* p)
 			NodeSV* g = KhoiTaoNode(p->data);
 			g->pNext = k->pNext;
 			k->pNext = g;
-			break;
+			break; 
 		}
 	}*/
 

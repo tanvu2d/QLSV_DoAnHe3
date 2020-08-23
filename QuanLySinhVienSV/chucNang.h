@@ -357,16 +357,32 @@ void themLopTCa(DSLopTC& t, DSMonHoc dsMH, int a[], int& soLuong) {
 	int i;
 	HCNText(toadoXBox + 27, toadoYBox, 55, 7);
 
+	do
+	{
+		nk = "";
+		gotoXY(toadoXBox + 38, toadoYBox + 2);
+		textcolor(11);
+		cout << "Nhap Nien Khoa: ";
+		gotoXY(toadoXBox + 55, toadoYBox + 2);
+		cout << "                ";
+		gotoXY(toadoXBox + 55, toadoYBox + 2);
+		textcolor(12);
+		XuLyNhapNienKhoa(nk);
+		if (nk == "0")
+		{
+			ShowCur(0);
+			return;
+		}
+		if (!XetNienKhoa(nk))
+		{
+			
+			GiaoDienThongBao( "Nien khoa be hon nam hien tai ! Nhap lai ");
+		}
 
-	gotoXY(toadoXBox + 40, toadoYBox + 2);
+	} while (XetNienKhoa(nk) == false);
 	textcolor(11);
-	cout << "Nhap Nien Khoa: ";
-	//gotoXY(toadoXBox + 55, toadoYBox + 2);
-	textcolor(15);
-	XuLyNhapNienKhoa(nk);
-	textcolor(11);
-	gotoXY(toadoXBox + 40, toadoYBox + 3);
-	cout << "Nhap hoc ki: "; textcolor(15);
+	gotoXY(toadoXBox + 38, toadoYBox + 3);
+	cout << "Nhap hoc ki: "; textcolor(12);
 
 	XuLyNhapSoHK(hk, toadoXBox);
 	if (nk == "0") {
@@ -513,7 +529,7 @@ void XoaLopTC(DSLopTC& t)
 	}
 
 	NodeLopTC* p = NULL;
-	p = getLopTC(t.root, malop);
+	p = getLopTC(t.root, malop); // tra ve Null hoặc con trỏ p
 	if (p == NULL)
 	{
 		GiaoDienThongBao("Lop tin chi khong ton tai");
@@ -559,6 +575,7 @@ void SuaLopTC(DSLopTC& t, DSMonHoc dsMH)
 	else
 	{
 		//HCNText(toadoXBox+40, toadoYBox, 55, 25);
+		//LRN
 		hieuChinhTC(t.root, dsMH, malop);
 	}
 }
@@ -600,7 +617,7 @@ void XuatSVDKtheoNK(DSSV dsSV, NodeLopTC* t, int toadoX, int toadoY, int hocKi, 
 				{
 					continue;
 				}
-
+			//	cout << dem; dem tăng lên thì số dòng tang len
 				gotoXY(toadoX + 1, toadoY + 4 + (dem * 2));
 				cout << CanDeuChuoi(ChuyenSoSangString(t->data.malopTc), 9);
 				gotoXY(toadoX + 11, toadoY + 4 + (dem * 2));
@@ -618,9 +635,10 @@ void XuatSVDKtheoNK(DSSV dsSV, NodeLopTC* t, int toadoX, int toadoY, int hocKi, 
 				dem++;
 				temp = NULL;
 			}
+			//cout << dem;
 		}
-		XuatSVDKtheoNK(dsSV, t->pRight, toadoX, toadoY, hocKi, nhom, nienKhoa, maMH, dem);
 		XuatSVDKtheoNK(dsSV, t->pLeft, toadoX, toadoY, hocKi, nhom, nienKhoa, maMH, dem);
+		XuatSVDKtheoNK(dsSV, t->pRight, toadoX, toadoY, hocKi, nhom, nienKhoa, maMH, dem);
 	}
 }
 void XuatDSSV(DSSV dsSV, DSLopTC& dsLopTC, int toadoX, int toadoY, int hocKi, int nhom, string nienKhoa, string maMH, int& dem)
@@ -967,49 +985,28 @@ void NhapSVLop(DSSV& dsSV)
 		int phai = 0;
 		//gotoXY(toadoXBox, toadoY++);
 		gotoXY(toadoXBox + 50, toadoYBox + 5);
-		//cout << "Nhap Vao Ho Va Ten Lot:";
-		//getline(cin, sv.ho);
 		XuLyNhapten(sv.ho, 15);
 
-		//gotoXY(toadoXBox, toadoY++);
 		gotoXY(toadoXBox + 70, toadoYBox + 5);
-		//cout << "Nhap Vao Ten:";
-	//	getline(cin, sv.ten);
 		XuLyNhapMaMon(sv.ten, 6);
 
-
-	//	gotoXY(toadoXBox, toadoY);
 		gotoXY(toadoXBox + 55, toadoYBox + 6);
-	//	cout << "Nhap Vao Phai(1:nam 2:nu):";
-		//gotoXY(toadoXBox + 27, toadoY++);
 		XuLyNhapSo(phai, toadoXBox + 27);
-
 		if (phai == 1)
 		{
 			sv.phai = "Nam";
 		}
 		sv.phai = "Nu";
+
 		gotoXY(toadoXBox + 40, toadoYBox + 7);
 		XuLyNhapSDT(sv.sdt);
-		/*do
-		{
-			gotoXY(toadoXBox, toadoY);
-			cout << "Nhap Vao SDT:";
-			gotoXY(toadoXBox + 17, toadoY++);
-			XuLyNhapSDT(sv.sdt);
-			if (sv.sdt.length() < 10)
-			{
-				gotoXY(toadoXBox, toadoY++);
-				cout << "Sai dinh dang sdt ! Nhap lai:";
-			}
-		} while (sv.sdt.length() < 10);*/
 
-		//gotoXY(toadoXBox, toadoY++);
 		gotoXY(toadoXBox + 50, toadoYBox + 8);
-		//cout << "Nhap nam nhap hoc : ";
 		XuLyNhapSo(sv.namnhaphoc);
+
+		//Phan Xu Ly
 		NodeSV* p = KhoiTaoNode(sv);
-		ThemSinhVienTheoThuTu(dsSV, p);
+	 	ThemSinhVienTheoThuTu(dsSV, p);
 		dsSV.solg++;
 	}
 
@@ -2753,7 +2750,7 @@ void GiaoDienMonHoc(int toadoX, int toadoY, int n)
 	}
 	///  bang2
 
-
+	textcolor(12);
 	gotoXY(toadoX + 1, toadoY + 1);
 	cout << CanDeuChuoi("STT", 9);
 	gotoXY(toadoX + 11, toadoY + 1);
@@ -2843,7 +2840,6 @@ void GiaoDienCHINHMonHoc(int toadoX, int toadoY, int n)
 		}
 	}
 	///  bang2
-
 	gotoXY(toadoX + 8, toadoY + 1);
 	cout << CanDeuChuoi("Ma Mon Hoc", 19);
 	gotoXY(toadoX + 31, toadoY + 1);
@@ -2859,21 +2855,21 @@ void xuatMonHoc(DSMonHoc dsMH, int toadoX, int toadoY) {
 	int dem = 0;
 	sort(dsMH);
 	XoaManHinhChinh();
-
-	GiaoDienMonHoc(toadoXBox + 4, toadoYBox, dsMH.n);
-
+	textcolor(11);
+	GiaoDienMonHoc(toadoXBox + 15, toadoYBox, dsMH.n);
+	textcolor(15);
 	for (int i = 0; i < dsMH.n; i++) {
 		
-		gotoXY(toadoX + 1, toadoY + 4 + (dem * 2));
+		gotoXY(toadoX + 6, toadoY + 4 + (dem * 2));
 		cout << CanDeuChuoi(ChuyenSoSangString(i + 1), 9);
 
-		gotoXY(toadoX + 11, toadoY + 4 + (dem * 2));
+		gotoXY(toadoX + 16, toadoY + 4 + (dem * 2));
 		cout << CanDeuChuoi(dsMH.ds[i]->maMonHoc, 19);
-		gotoXY(toadoX + 31, toadoY + 4 + (dem * 2));
+		gotoXY(toadoX + 38, toadoY + 4 + (dem * 2));
 		cout << dsMH.ds[i]->TenMH << endl;
-		gotoXY(toadoX + 71, toadoY + 4 + (dem * 2));
+		gotoXY(toadoX + 79, toadoY + 4 + (dem * 2));
 		cout << dsMH.ds[i]->sotclt;
-		gotoXY(toadoX + 81, toadoY + 4 + (dem * 2));
+		gotoXY(toadoX + 89, toadoY + 4 + (dem * 2));
 		cout << dsMH.ds[i]->sotcth;
 		dem++;
 	}
@@ -2889,17 +2885,33 @@ void themMonHoc(DSMonHoc& dsMH, int toadoX, int toadoY) {
 	int X = toadoX + 71;
 	monHoc* p = new monHoc;
 	XoaManHinhChinh();
-	GiaoDienMonHoc(toadoXBox + 4, toadoYBox, 1);
-	gotoXY(toadoX + 1, toadoY + 4);
-	cout << 1;
+	//GiaoDienMonHoc(toadoXBox + 4, toadoYBox, 1);
+	//gotoXY(toadoX + 1, toadoY + 4);
+	//cout << 1;
 	//cin.ignore();
+	HCNText(toadoXBox + 27, toadoYBox, 55, 12);
+	gotoXY(toadoXBox + 42, toadoYBox + 2);
+	textcolor(12);
+	cout << "NHAP THONG TIN MON HOC";
+	gotoXY(toadoXBox + 35, toadoYBox + 4);
+	textcolor(11);
+	cout << "Ma mon hoc:";
+	gotoXY(toadoXBox + 35, toadoYBox + 5);
+	cout << "Ten Mon Hoc: ";
+	gotoXY(toadoXBox + 35, toadoYBox + 6);
+	cout << "So tin cho ly thuyet: ";
+	gotoXY(toadoXBox + 35, toadoYBox + 7);
+	cout << "So tin chi thuc hanh: ";
+
+
 	do {
 		i = 0;
 		monHocss = "";
-		gotoXY(toadoX + 11, toadoY + 4);
-		//cout << "               |                                       |         |         |";
+		//gotoXY(toadoX + 11, toadoY + 4);	
+		gotoXY(toadoXBox + 48, toadoYBox + 4);
 		cout << "          ";
-		gotoXY(toadoX + 11, toadoY + 4);
+		//gotoXY(toadoX + 11, toadoY + 4);
+		gotoXY(toadoXBox + 48, toadoYBox + 4);
 		XuLyNhapMaMon(monHocss,10);
 		i = SearchMH(dsMH, monHocss);
 		if (monHocss == "0") {
@@ -2924,22 +2936,29 @@ void themMonHoc(DSMonHoc& dsMH, int toadoX, int toadoY) {
 
 	do {
 		tenMHss = "";
-		gotoXY(toadoX + 31, toadoY + 4);
-		XuLyNhapten(tenMHss, 35);
+		//gotoXY(toadoX + 31, toadoY + 4);
+		gotoXY(toadoXBox + 48, toadoYBox + 5);
+		XuLyNhapten(tenMHss, 30);
 		//getline(cin,tenMHss);
-		if (tenMHss.size() > 35 || tenMHss.size() <= 0 ) {
+		if (tenMHss.size() > 30 || tenMHss.size() <= 0 ) {
 			gotoXY(toadoXBox, toadoY + 1);
-			GiaoDienThongBao("Ten Mon hoc khong hop le! Nhap Lai( < 35 ki tu )");
+			GiaoDienThongBao("Ten Mon hoc khong hop le! Nhap Lai( < 30 ki tu )");
 
 		}
-	} while (tenMHss.size() > 35 || tenMHss.size() <= 0);
+	} while (tenMHss.size() > 30 || tenMHss.size() <= 0);
 
 	p->TenMH = tenMHss;
-	gotoXY(toadoX + 71, toadoY + 4);
-	XuLyNhapSoMH(p->sotclt);
-	gotoXY(toadoX + 81, toadoY + 4);
-	//cin >> p->sotcth;
-	XuLyNhapSoMH(p->sotcth);
+//	gotoXY(toadoX + 71, toadoY + 4);
+	gotoXY(toadoXBox + 58, toadoYBox + 6);
+
+	//XuLyNhapSoMH(p->sotclt);
+	cin >> p->sotclt;
+//	gotoXY(toadoX + 81, toadoY + 4);
+	gotoXY(toadoXBox + 58, toadoYBox + 7);
+
+
+	cin >> p->sotcth;
+	//XuLyNhapSoMH(p->sotcth);
 	dsMH.ds[dsMH.n] = new monHoc;
 	dsMH.ds[dsMH.n] = p;
 	dsMH.n++;
@@ -3036,7 +3055,7 @@ void chinhsuaMH(DSMonHoc& dsMH) {
 	} while (i == -1);
 
 	string ten;
-	int mh = ktMonHoc(a, dsMH);
+	int mh = ktMonHoc(a, dsMH);// tra ve vi tri cua mon hoc can chinh sua
 	monHoc mhh;
 	int chon = 0;
 	while (true) {
@@ -3088,10 +3107,9 @@ void chinhsuaMH(DSMonHoc& dsMH) {
 			textcolor(11);
 
 			cout << "So tin chi ly thuyet moi: ";
-			//getline(cin, x.nienkhoa);
 			textcolor(12);
 			ShowCur(1);
-			XuLyNhapSoMH(dsMH.ds[mh]->sotclt);
+			cin>>dsMH.ds[mh]->sotclt;
 			break;
 		case 3:
 			HCNText(toadoXBox + 27, toadoYBox, 50, 5);
@@ -3099,12 +3117,12 @@ void chinhsuaMH(DSMonHoc& dsMH) {
 			textcolor(11);
 
 			cout << "So tin chi thuc hanh moi: ";
-			//getline(cin, x.nienkhoa);
 			textcolor(12);
 			ShowCur(1);
-			XuLyNhapSoMH(dsMH.ds[mh]->sotcth);
+			cin >> dsMH.ds[mh]->sotcth;
 			break;
 		case 4:
+			//save
 			return;
 		}
 	}

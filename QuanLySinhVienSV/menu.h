@@ -2,17 +2,17 @@
 #include "SaveFile.h"
 //int pointer = 7;
 string strMNMain[] = {
-	"1.Mo lop tin chi                                        ",
-	"2.Xuat danh sach sinh vien theo nien khoa,HK,ma MH,nhom ",
-	"3.Nhap sinh vien                                        ",
-	"4.In danh sach sinh vien cua 1 lop (dua vao ma lop)     ",
-	"5.Them mon hoc                                          " ,
-	"6.In danh sach mon hoc tang dan theo ten mon hoc        " ,
-	"7.Dang ky lop tin chi                                   ",
-	"8.Nhap diem                                             ",
-	"9.In bang diem mon hoc cua 1 lop tin chi                ",
-	"10.In bang diem trung binh cua 1 lop theo so tin chi    ",
-	"11.Ket thuc chuong trinh                                "
+	"1. Mo lop tin chi                                      ",
+	"2. Xuat DSSV theo Nien Khoa, Hoc Ki, Ma Mon Hoc, Nhom  ",
+	"3. Nhap Sinh Vien                                      ",
+	"4. In DSSV cua mot lop (dua vao Ma Lop)                ",
+	"5. Them Mon Hoc                                        " ,
+	"6. In danh sach mon hoc tang dan theo ten mon hoc      " ,
+	"7. Dang ky Lop Tin Chi                                 ",
+	"8. Nhap Diem                                           ",
+	"9. In bang diem mon hoc cua mot Lop Tin Chi            ",
+	"10.In bang diem trung binh cua mot lop theo so tin chi ",
+	"11.Ket thuc chuong trinh                               "
 };
 
 
@@ -47,18 +47,16 @@ void Menu()
 {
 	//textcolor(240);
 	//HCNText(toadoXBox + 27, toadoYBox, 60, 25);
-
-	int j = 7;
+	int j = 9;
 	for (int i = 0; i < sizeof(strMNMain) / sizeof(*strMNMain); i++)
 	{
-
 		gotoXY(48, j++);
 		cout << strMNMain[i];
 	}
 }
 void menuNhapSV()
 {
-	int j = 7;
+	int j = 9;
 	for (int i = 0; i < sizeof(stringNhapSV) / sizeof(*stringNhapSV); i++)
 	{
 		gotoXY(60, j++);
@@ -68,7 +66,7 @@ void menuNhapSV()
 
 void menuMoLopTC()
 {
-	int j = 7;
+	int j = 9;
 	for (int i = 0; i < sizeof(menuConLopTC) / sizeof(*menuConLopTC); i++)
 	{
 		gotoXY(60, j++);
@@ -77,7 +75,7 @@ void menuMoLopTC()
 }
 void menuMonHoc()
 {
-	int j = 7;
+	int j = 9;
 	for (int i = 0; i < sizeof(menuMH) / sizeof(*menuMH); i++)
 	{
 		gotoXY(60, j++);
@@ -89,20 +87,19 @@ void menuMonHoc()
 
 void RunMenu(DSLopTC& dsLopTC, DSMonHoc& dsMonHoc, DSSV& dsSV , int a[] , int soLuong) 		// DSLTC& dsLopTC, DSSV &dsSV,DSMH& dsMH
 {
-
 	if (kbhit())
 	{
-
 		char c = getch(); // lay phim tu ban phim
+	
 		if (c == -32)
 		{
 			c = getch();
 			if (c == 72)//len
 			{
-				if (pointer == 7)
+				if (pointer == 9)
 				{
 					Menu();
-					pointer = 7 - 1 + sizeof(strMNMain) / sizeof(*strMNMain);
+					pointer = 9 - 1 + sizeof(strMNMain) / sizeof(*strMNMain);
 				}
 				else
 				{
@@ -112,10 +109,10 @@ void RunMenu(DSLopTC& dsLopTC, DSMonHoc& dsMonHoc, DSSV& dsSV , int a[] , int so
 			}
 			else if (c == 80) //ma ascii mui ten xuong
 			{
-				if (pointer == 7 - 1 + sizeof(strMNMain) / sizeof(*strMNMain))
+				if (pointer == 9 - 1 + sizeof(strMNMain) / sizeof(*strMNMain))
 				{
 					Menu();
-					pointer = 7;
+					pointer = 9;
 				}
 				else
 				{
@@ -126,14 +123,13 @@ void RunMenu(DSLopTC& dsLopTC, DSMonHoc& dsMonHoc, DSSV& dsSV , int a[] , int so
 		}
 
 
-
 		else if (c == 13) // Bam enter
 		{
 			XoaManHinhChinh();
 			HCNText(toadoXBox + 27, 5, 65, 15);
 			switch (pointer)
 			{
-			case 7:
+			case 9:
 				//textcolor(180);
 				gotoXY(60, pointer);
 				menuMoLopTC();
@@ -154,10 +150,10 @@ void RunMenu(DSLopTC& dsLopTC, DSMonHoc& dsMonHoc, DSSV& dsSV , int a[] , int so
 							c = getch();
 							if (c == 72)//len
 							{
-								if (pointer == 7)
+								if (pointer == 9)
 								{
 									menuMoLopTC();
-									pointer = 7 - 1 + sizeof(menuConLopTC) / sizeof(*menuConLopTC);
+									pointer = 9 - 1 + sizeof(menuConLopTC) / sizeof(*menuConLopTC);
 								}
 								else
 								{
@@ -167,10 +163,10 @@ void RunMenu(DSLopTC& dsLopTC, DSMonHoc& dsMonHoc, DSSV& dsSV , int a[] , int so
 							}
 							else if (c == 80) // mã ascii mui tên xu?ng
 							{
-								if (pointer == 7 - 1 + sizeof(menuConLopTC) / sizeof(*menuConLopTC))
+								if (pointer == 9 - 1 + sizeof(menuConLopTC) / sizeof(*menuConLopTC))
 								{
 									menuMoLopTC();
-									pointer = 7;
+									pointer = 9;
 								}
 								else
 								{
@@ -186,24 +182,24 @@ void RunMenu(DSLopTC& dsLopTC, DSMonHoc& dsMonHoc, DSSV& dsSV , int a[] , int so
 							XoaManHinhChinh();
 							switch (pointer)
 							{
-							case 7:
+							case 9:
 								themLopTCa(dsLopTC, dsMonHoc,a,soLuong);
 								
 								break;
 								//DONE
-							case 8:
+							case 10:
 								XoaLopTC(dsLopTC);
 								//DONE
 								break;
-							case 9:
+							case 11:
 								SuaLopTC(dsLopTC, dsMonHoc);
 								//DONE
 								break;
-							case 10:
+							case 12:
 								//Save(dsSV, dsMH, dsLopTC);
 								//DeleteMemory(dsSV, dsMH, dsLopTC);
 								SaveLopTC(dsLopTC);
-								pointer = 7;
+								pointer = 9;
 								goto VONGLAP;
 								//DONE
 							}
@@ -216,15 +212,15 @@ void RunMenu(DSLopTC& dsLopTC, DSMonHoc& dsMonHoc, DSSV& dsSV , int a[] , int so
 					ShowCur(0);
 					textcolor(180);
 					gotoXY(60, pointer);
-					cout << menuConLopTC[pointer - 7];
+					cout << menuConLopTC[pointer - 9];
 					textcolor(7);
 				}
-			case 8:
+			case 10:
 				XoaManHinhChinh();
-				InDSSV(dsSV, dsLopTC, dsMonHoc, 0, 5);
+				InDSSV(dsSV, dsLopTC, dsMonHoc, 12, 8);
 				break;
-			case 9:
-				pointer = 7;
+			case 11:
+				pointer = 9;
 				gotoXY(60, pointer);
 				menuNhapSV();
 				gotoXY(55, pointer - 1);
@@ -243,10 +239,10 @@ void RunMenu(DSLopTC& dsLopTC, DSMonHoc& dsMonHoc, DSSV& dsSV , int a[] , int so
 							c = getch();
 							if (c == 72)//len
 							{
-								if (pointer == 7)
+								if (pointer == 9)
 								{
 									menuNhapSV();
-									pointer = 7 - 1 + sizeof(stringNhapSV) / sizeof(*stringNhapSV);
+									pointer = 9 - 1 + sizeof(stringNhapSV) / sizeof(*stringNhapSV);
 								}
 								else
 								{
@@ -256,10 +252,10 @@ void RunMenu(DSLopTC& dsLopTC, DSMonHoc& dsMonHoc, DSSV& dsSV , int a[] , int so
 							}
 							else if (c == 80) // mã ascii mui tên xu?ng
 							{
-								if (pointer == 7 - 1 + sizeof(stringNhapSV) / sizeof(*stringNhapSV))
+								if (pointer == 9 - 1 + sizeof(stringNhapSV) / sizeof(*stringNhapSV))
 								{
 									menuNhapSV();
-									pointer = 7;
+									pointer = 9;
 								}
 								else
 								{
@@ -274,18 +270,18 @@ void RunMenu(DSLopTC& dsLopTC, DSMonHoc& dsMonHoc, DSSV& dsSV , int a[] , int so
 							XoaManHinhChinh();
 							switch (pointer)
 							{
-							case 7:
+							case 9:
 								NhapSVLop(dsSV);
 								break;
 								//Nhap chua them vao ds
-							case 8:
+							case 10:
 								XoaSVLop(dsSV);
 								break;
-							case 9:
+							case 11:
 								SuaSVLop(dsSV);
 								break;
-							case 10:
-								pointer = 7;
+							case 12:
+								pointer = 9;
 								SaveSV(dsSV);
 								goto VONGLAP;
 
@@ -304,13 +300,13 @@ void RunMenu(DSLopTC& dsLopTC, DSMonHoc& dsMonHoc, DSSV& dsSV , int a[] , int so
 					// to mau 
 					textcolor(180);
 					gotoXY(60, pointer);
-					cout << stringNhapSV[pointer - 7];
+					cout << stringNhapSV[pointer - 9];
 					textcolor(7);
 
 				}
 
 				break;
-			case 10:
+			case 12:
 				XoaManHinhChinh();
 
 				XuatDSSV1Lop(dsSV, 0, 5);
@@ -318,8 +314,8 @@ void RunMenu(DSLopTC& dsLopTC, DSMonHoc& dsMonHoc, DSSV& dsSV , int a[] , int so
 				//do hoa DONE
 				break;
 
-			case 11:  // mon hoc
-				pointer = 7;
+			case 13:  // mon hoc
+				pointer = 9;
 				gotoXY(60, pointer);
 				menuMonHoc();
 				gotoXY(55, pointer - 1);
@@ -336,10 +332,10 @@ void RunMenu(DSLopTC& dsLopTC, DSMonHoc& dsMonHoc, DSSV& dsSV , int a[] , int so
 							c = getch();
 							if (c == 72)//len
 							{
-								if (pointer == 7)
+								if (pointer == 9)
 								{
 									menuMonHoc();
-									pointer = 7 - 1 + sizeof(menuMH) / sizeof(*menuMH);
+									pointer = 9 - 1 + sizeof(menuMH) / sizeof(*menuMH);
 								}
 								else
 								{
@@ -349,10 +345,10 @@ void RunMenu(DSLopTC& dsLopTC, DSMonHoc& dsMonHoc, DSSV& dsSV , int a[] , int so
 							}
 							else if (c == 80) // mã ascii mui tên xu?ng
 							{
-								if (pointer == 7 - 1 + sizeof(menuMH) / sizeof(*menuMH))
+								if (pointer == 9 - 1 + sizeof(menuMH) / sizeof(*menuMH))
 								{
 									menuMonHoc();
-									pointer = 7;
+									pointer = 9;
 								}
 								else
 								{
@@ -367,20 +363,20 @@ void RunMenu(DSLopTC& dsLopTC, DSMonHoc& dsMonHoc, DSSV& dsSV , int a[] , int so
 							XoaManHinhChinh();
 							switch (pointer)
 							{
-							case 7:
+							case 9:
 								themMonHoc(dsMonHoc, toadoXBox + 8, toadoYBox);
 								break;
 								//DONE
-							case 8:
+							case 10 :
 								xoaMonHoc(dsMonHoc);
 								break;
 								//DONE
-							case 9:
+							case 11:
 								chinhsuaMH(dsMonHoc);
 								break;
 								//DONE
-							case 10:
-								pointer = 7;
+							case 12:
+								pointer = 9;
 								GhiFileMonHoc(dsMonHoc);
 								goto VONGLAP;
 							}
@@ -398,41 +394,42 @@ void RunMenu(DSLopTC& dsLopTC, DSMonHoc& dsMonHoc, DSSV& dsSV , int a[] , int so
 					// to mau 
 					textcolor(180);
 					gotoXY(60, pointer);
-					cout << menuMH[pointer - 7];
+					cout << menuMH[pointer - 9];
 					textcolor(7);
 
 				}
 				break;
 		
-			case 12:
+			case 14:
 				XoaManHinhChinh();
 
-				xuatMonHoc(dsMonHoc, toadoXBox + 5, toadoYBox);
+				xuatMonHoc(dsMonHoc, toadoXBox + 10, toadoYBox);
 				getch();
 				//DONE
 				break;
-			case 13:
+			case 15:
 				XoaManHinhChinh();
 				DangKiLopTC(dsSV, dsLopTC, dsMonHoc, toadoXBox, 7);
 				//DONE
 				SaveLopTC(dsLopTC);
 				break;
-			case 14:
+			case 16:
 				XoaManHinhChinh();
 				NhapDiem(dsSV, dsLopTC, dsMonHoc, toadoXBox, 7);
 				//DONE
 				SaveLopTC(dsLopTC);
 				break;
-			case 15 :
+			case 17 :
 				XoaManHinhChinh();
 				InBangDiemCuaLopTC(dsSV, dsLopTC, dsMonHoc, toadoXBox, 7);
 				//DONE
 				break;
-			case 16 : 
+			case 18 : 
+				XoaManHinhChinh();
 				InDiemTBCuaLopTheoTC(dsSV, dsLopTC, dsMonHoc, toadoXBox, 7);
 				//DONE
 				break;
-			case 17:
+			case 19:
 				SaveSV(dsSV);
 				exit(0);
 
@@ -449,7 +446,7 @@ void RunMenu(DSLopTC& dsLopTC, DSMonHoc& dsMonHoc, DSSV& dsSV , int a[] , int so
 	// to mau 
 	textcolor(180);
 	gotoXY(48, pointer);
-	cout << strMNMain[pointer - 7];
+	cout << strMNMain[pointer - 9];
 	textcolor(7);
 }
 
