@@ -2949,14 +2949,30 @@ void themMonHoc(DSMonHoc& dsMH, int toadoX, int toadoY) {
 
 	p->TenMH = tenMHss;
 //	gotoXY(toadoX + 71, toadoY + 4);
-	gotoXY(toadoXBox + 58, toadoYBox + 6);
+	
 
 	//XuLyNhapSoMH(p->sotclt);
-	cin >> p->sotclt;
+	/*cin >> p->sotclt;*/
+	float soTclt;
+	do {
+		gotoXY(toadoXBox + 58, toadoYBox + 6);
+		cout << "            ";
+		gotoXY(toadoXBox + 58, toadoYBox + 6);
+		
+		XuLyNhapSoTC(soTclt, toadoXBox + 58);
+		
+		if (xetSoTC(soTclt) == false)
+		{
+			GiaoDienThongBaoMh("Nhap lai so tin chi");
+		}
+			
+		
+	} while (xetSoTC(soTclt) == false);
+	p->sotclt = soTclt;
 //	gotoXY(toadoX + 81, toadoY + 4);
 	gotoXY(toadoXBox + 58, toadoYBox + 7);
 
-
+	
 	cin >> p->sotcth;
 	//XuLyNhapSoMH(p->sotcth);
 	dsMH.ds[dsMH.n] = new monHoc;

@@ -13,7 +13,7 @@ using namespace std;
 #define MAXMH 300
 #define SoLuongID 9000
 
-int pointer = 7; // con tro dieu khien menu main
+int pointer = 9; // con tro dieu khien menu main
 int toadoXBox = 15;
 int toadoYBox = 9;
 int toadoYMain = 10;

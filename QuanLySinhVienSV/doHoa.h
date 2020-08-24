@@ -321,31 +321,12 @@ bool XuLyNhapDiem(float& n, int toadoX, int& toadoY)
 				if ((x == "1" && c == 48) || c == 46)
 				{
 					x.insert(x.begin() + (whereX() - toadoX), c);
-					if ((whereX() - toadoX) < x.length() - 1)
-					{
-						toadoXtam = whereX() + 1;
-						gotoXY(toadoX, whereY());
-						cout << "  ";
-						gotoXY(toadoX, whereY());
-						cout << x;
-						gotoXY(toadoXtam, whereY());
-					}
-					else
 						cout << c; 
 				}
 			}
 			else {
 				x.insert(x.begin() + (whereX() - toadoX), c);
-				if ((whereX() - toadoX) < x.length() - 1)
-				{
-					toadoXtam = whereX() + 1;
-					gotoXY(toadoX, whereY());
-					cout << "     ";
-					gotoXY(toadoX, whereY());
-					cout << x;
-					gotoXY(toadoXtam, whereY());
-				}
-				else
+
 					cout << c;
 			}
 
@@ -358,7 +339,7 @@ bool XuLyNhapDiem(float& n, int toadoX, int& toadoY)
 			cout << "\b";
 
 		}
-		else if (c == 13 && x.length() > 0)// n?u là phím enter
+		else if (c == 13 && x.length() > 0)
 		{
 			toadoY = toadoY + 2;
 			n = atof(x.c_str());
@@ -745,6 +726,18 @@ void GiaoDienThongBao(string x)
 	gotoXY(51, 23);
 	cout << CanDeuChuoi(x, 49);
 	getch();
+	textcolor(7);
+
+}
+void GiaoDienThongBaoMh(string x)
+{
+	//ToMauHCN(50, 17, 50, 10, 95);
+	ToMauHCN(50, 20, 50, 10, 95);
+	textcolor(95);
+	gotoXY(51, 23);
+	cout << CanDeuChuoi(x, 49);
+	getch();
+	ToMauHCN(50, 20, 50, 10, 7);
 	textcolor(7);
 
 }

@@ -1360,3 +1360,52 @@ bool checkMaSVNhapVao(string a)
 
 	return false;
 }
+
+void XuLyNhapSoTC(float &n , int toadoX)
+{
+	char c;
+	string x = "";
+	while (true)
+	{
+		c = getch();
+		if ((c >= 48 && c <= 57)  && x.length() < 5)
+		{					
+				x.insert(x.begin() + (whereX() - toadoX), c);
+				cout << c;
+			
+
+		}
+		else if (c == 46 && x.length () < 4)
+		{
+			x.insert(x.begin() + (whereX() - toadoX), c);
+			x.insert(x.begin() + (whereX() + 1 - toadoX), '5' );
+			cout << c << "5";
+		}
+		else if (c == 8 && whereX() > toadoX)
+		{
+			x.erase(x.begin() + x.length() - 1);
+			cout << "\b";
+			cout << " ";
+			cout << "\b";
+
+		}
+		else if (c == 13 && x.length() > 0)
+		{
+			
+			n = atof(x.c_str());
+			return ;
+		}
+		
+		
+	}
+}
+
+bool xetSoTC (float soTc)
+{
+	float phanDu = soTc - (int)soTc;
+	if (phanDu == 0 || phanDu == 0.5)
+	{
+		return true;
+	}
+	return false;
+}
