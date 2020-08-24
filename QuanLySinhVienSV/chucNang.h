@@ -802,7 +802,9 @@ void InDSSV(DSSV dsSV, DSLopTC& dslop, DSMonHoc dsMH, int toadoX, int toadoY)
 	ShowCur(0);
 
 	int n = 0;
-	XuatDSSV(dsSV, dslop, toadoX, toadoY, HK, nhom, nienKhoa, maMH, n);
+	//XuatDSSV(dsSV, dslop, toadoX, toadoY, HK, nhom, nienKhoa, maMH, n);
+	XoaManHinhChinh();
+	XuatSVDKtheoNK(dsSV, dslop.root , toadoX, toadoY, HK, nhom, nienKhoa, maMH, n);
 	GiaoDienInDSLop(toadoX, toadoY, n);
 	getch();
 }
@@ -905,7 +907,7 @@ void NhapSVLop(DSSV& dsSV)
 		gotoXY(toadoXBox + 55, toadoYBox + 2);
 
 		textcolor(15);
-		XuLyNhapMaMon(ml , 9);
+		XuLyNhapMaMon(ml , 15);
 
 		if (ml == "0")
 		{
@@ -1049,7 +1051,7 @@ void XoaSVLop(DSSV& dsSV)
 		cout << "             ";
 		gotoXY(toadoXBox + 58, toadoYBox + 2);
 		textcolor(15);
-		XuLyNhapMaMon(maSV, 10);
+		XuLyNhapMaMon(maSV, 12);
 		if (checkMaSV(dsSV, maSV))
 		{
 			GiaoDienThongBao("Ma Sinh Vien Khong Ton Tai");
@@ -2624,7 +2626,7 @@ void InDiemTBCuaLopTheoTC(DSSV dsSV, DSLopTC& dsLopTC, DSMonHoc dsMH, int toadoX
 	cout << "Nhap Ma Lop: ";
 	gotoXY(toadoXBox + 55, toadoYBox + 2);
 	textcolor(15);
-	XuLyNhapMaMon(maLop,9);
+	XuLyNhapMaMon(maLop,15);
 	if (maLop == "0")
 	{
 		ShowCur(0);

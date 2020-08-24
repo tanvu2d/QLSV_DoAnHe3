@@ -713,7 +713,7 @@ void GiaoDienMain()
 	textcolor(12);
 	//ToMauHCN(toadoXBox + 27, 1, 65, 5,0xE);
 	cout << "QUAN Li SINH VIEN";
-	HCNText(toadoXBox + 27, 6, 65, 20);
+	HCNText(toadoXBox + 27, 5, 65, 20);
 
 	textcolor(7);
 
