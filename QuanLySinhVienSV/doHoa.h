@@ -79,7 +79,7 @@ char Chuyen1SoSangKiTu(int n)
 		return '0';
 	}
 }
-
+//
 string chuyenSoThuc(float  n)
 {
 	string str;
