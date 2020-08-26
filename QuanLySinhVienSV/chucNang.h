@@ -2572,9 +2572,55 @@ int getSoTCMH(DSMonHoc dsMH, string maMH)
 	return 0;
 }
 
-  void diemTBCua1SVLTC(NodeLopTC* t, DSMonHoc dsMH, string maSV, int& soLuongTC, float& diem)
+bool checkMaxMonTrung (string  a[], int n, string maMH)
 {
-	  int soLgTemp = 0;
+	for (int i = 0; i < n; i++)
+	{
+		if (a[i] == maMH)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+void checkMaxDiem(NodeLopTC* t, string maMH, string maSV, float diem, bool& max, int dem)
+{
+	if (t == NULL)
+	{
+		return;
+	}
+	else
+	{
+
+		if (t->data.mmh == maMH)
+		{
+			for (NodeSVDK* k = t->data.dssvdk.pHead; k != NULL; k = k->pNext)
+			{
+				if (k->data.masv == maSV && k->data.diem > diem)
+				{
+					max = false;
+				}
+			}
+		}
+		checkMaxDiem(t->pLeft, maMH, maSV, diem, max, dem);
+		checkMaxDiem(t->pRight, maMH, maSV, diem, max, dem);
+	}
+}
+int GetMaxTCLop(DSMonHoc dsMH, string a[], int n)
+{
+	int temp = 0;
+	int SL = 0;
+	for (int i = 0; i < n; i++)
+	{
+		temp = getSoTCMH(dsMH, a[i]);
+		SL += temp;
+	}
+	return SL;
+}
+
+void diemTBCua1SVLTC(NodeLopTC* t, DSMonHoc dsMH, string maSV, float &diem , string a[] , int& SLMang )
+{
+	int soLgTemp = 0;
 	if (t == NULL)
 	{
 		return;
@@ -2585,37 +2631,114 @@ int getSoTCMH(DSMonHoc dsMH, string maMH)
 		{
 			if (k->data.masv == maSV)
 			{
-				soLgTemp = getSoTCMH(dsMH , t->data.mmh);
-				if (k->data.diem != -1)
+
+				bool max = true;
+				int dem = 0;
+				bool checkMang = checkMaxMonTrung(a, SLMang, t->data.mmh);
+				if (checkMang == false)
 				{
-					diem += k->data.diem * soLgTemp;
-					soLuongTC += soLgTemp;
+					checkMaxDiem(t, t->data.mmh, maSV, k->data.diem, max, dem);
+
+					if (max == true)
+					{
+						soLgTemp = getSoTCMH(dsMH, t->data.mmh);
+						float diemTam = k->data.diem;
+
+						if (diemTam == -1)
+						{
+							diemTam = 0;
+						}
+						diem += diemTam * soLgTemp;
+						a[SLMang++] = t->data.mmh;
+					}
+					break;
 				}
-				else if (k->data.diem == -1)
-				{
-					soLuongTC += soLgTemp; 
-				}
-				break;
 			}
 		}
 
-		diemTBCua1SVLTC(t->pLeft, dsMH, maSV, soLuongTC, diem);
-		diemTBCua1SVLTC(t->pRight, dsMH, maSV, soLuongTC, diem);
+		diemTBCua1SVLTC(t->pLeft, dsMH, maSV, diem,a,SLMang);
+		diemTBCua1SVLTC(t->pRight, dsMH, maSV, diem , a , SLMang);
 	}
 }
 
-float DiemTBCua1SV(DSLopTC & dsLopTC, DSMonHoc dsMH, string maSV )
+float DiemTBCua1SV(DSLopTC& dsLopTC, DSMonHoc dsMH, string maSV)
 {
-	int soLgTC = 0;
+
 	float diem = 0;
+	int SLMaxTC = 0;
+	string a[500];
+	int SLMang = 0;
+	diemTBCua1SVLTC(dsLopTC.root, dsMH, maSV, diem, a, SLMang);
+	return diem ;
+}
+
+
+
+void soTC1SV(NodeLopTC* t, DSMonHoc dsMH, string maSV, int& soTC, string a[], int& SLMang )
+{
 	int soLgTemp = 0;
-	diemTBCua1SVLTC(dsLopTC.root, dsMH,maSV , soLgTC, diem);
-	
-	if (soLgTC == 0)
+	if (t == NULL)
 	{
-		return -1;
+		return;
 	}
-	return diem / soLgTC;
+	else
+	{
+		for (NodeSVDK* k = t->data.dssvdk.pHead; k != NULL; k = k->pNext)
+		{
+			if (k->data.masv == maSV)
+			{
+
+				bool max = true;
+				int dem = 0;
+				bool checkMang = checkMaxMonTrung(a, SLMang, t->data.mmh);
+				if (checkMang == false)
+				{
+					checkMaxDiem(t, t->data.mmh, maSV, k->data.diem, max, dem);
+
+					if (max == true)
+					{
+						soLgTemp = getSoTCMH(dsMH, t->data.mmh);
+						
+						soTC +=  soLgTemp;
+						a[SLMang++] = t->data.mmh;
+					}
+					break;
+				}
+			}
+		}
+
+		soTC1SV(t->pLeft, dsMH, maSV, soTC, a, SLMang);
+		soTC1SV(t->pRight, dsMH, maSV, soTC, a, SLMang);
+	}
+}
+
+float soTcCua1SV (DSLopTC dsLoptc, DSMonHoc dsMH, string maSV)
+{
+	int soTC = 0;
+	string a[500];
+	int SL = 0;
+	soTC1SV(dsLoptc.root ,dsMH ,maSV,soTC ,a,SL);
+	return soTC;
+}
+int GetMaxTcLop(DSSV t ,DSLopTC dsLopTC , DSMonHoc dsMH, string maLop )
+{
+	int max = 0;
+	int temp = 0;
+	for (NodeSV* k = t.pHead; k != NULL; k = k->pNext)
+	{
+		if (k->data.malop > maLop)
+		{
+			return max;
+			break; 
+		}
+		temp = soTcCua1SV(dsLopTC, dsMH, k->data.mssv);
+		if (temp > max)
+		{
+			max = temp;
+		}
+	}
+
+	return max;
 }
 void InDiemTBCuaLopTheoTC(DSSV dsSV, DSLopTC& dsLopTC, DSMonHoc dsMH, int toadoX, int toadoY)
 {
@@ -2647,7 +2770,7 @@ void InDiemTBCuaLopTheoTC(DSSV dsSV, DSLopTC& dsLopTC, DSMonHoc dsMH, int toadoX
 	cout << "Lop :" << maLop;
 
 	toadoY += 3;
-
+	int maxTC = GetMaxTcLop(dsSV, dsLopTC, dsMH, maLop);
 	for (NodeSV* k = dsSV.pHead; k != NULL; k = k->pNext)
 	{
 		if (k->data.malop == maLop)
@@ -2662,12 +2785,7 @@ void InDiemTBCuaLopTheoTC(DSSV dsSV, DSLopTC& dsLopTC, DSMonHoc dsMH, int toadoX
 			cout << CanDeuChuoi(k->data.ten, 19);
 			gotoXY(toadoX + 91, toadoY + 4 + (dem * 2));
 			float tempTB = DiemTBCua1SV(dsLopTC, dsMH, k->data.mssv);
-			if (tempTB != -1)
-			{
-				cout << tempTB;
-			}
-			else
-				cout << "Chua Co";
+			cout << tempTB/ maxTC;
 
 			dem++;
 		}
