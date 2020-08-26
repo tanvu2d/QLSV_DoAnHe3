@@ -364,7 +364,13 @@ void RunMenu(DSLopTC& dsLopTC, DSMonHoc& dsMonHoc, DSSV& dsSV , int a[] , int so
 							switch (pointer)
 							{
 							case 9:
-								themMonHoc(dsMonHoc, toadoXBox + 8, toadoYBox);
+								if (dsMonHoc.n == 300) {
+									GiaoDienThongBao("Dieu lieu da day!");
+									system("pause");
+								}
+								else {
+									themMonHoc(dsMonHoc, toadoXBox + 8, toadoYBox);
+								}
 								break;
 								//DONE
 							case 10 :
@@ -396,7 +402,6 @@ void RunMenu(DSLopTC& dsLopTC, DSMonHoc& dsMonHoc, DSSV& dsSV , int a[] , int so
 					gotoXY(60, pointer);
 					cout << menuMH[pointer - 9];
 					textcolor(7);
-
 				}
 				break;
 		

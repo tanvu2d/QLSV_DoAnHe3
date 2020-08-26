@@ -802,7 +802,9 @@ void InDSSV(DSSV dsSV, DSLopTC& dslop, DSMonHoc dsMH, int toadoX, int toadoY)
 	ShowCur(0);
 
 	int n = 0;
-	XuatDSSV(dsSV, dslop, toadoX, toadoY, HK, nhom, nienKhoa, maMH, n);
+	//XuatDSSV(dsSV, dslop, toadoX, toadoY, HK, nhom, nienKhoa, maMH, n);
+	XoaManHinhChinh();
+	XuatSVDKtheoNK(dsSV, dslop.root , toadoX, toadoY, HK, nhom, nienKhoa, maMH, n);
 	GiaoDienInDSLop(toadoX, toadoY, n);
 	getch();
 }
@@ -905,7 +907,7 @@ void NhapSVLop(DSSV& dsSV)
 		gotoXY(toadoXBox + 55, toadoYBox + 2);
 
 		textcolor(15);
-		XuLyNhapMaMon(ml , 9);
+		XuLyNhapMaMon(ml , 15);
 
 		if (ml == "0")
 		{
@@ -1049,7 +1051,7 @@ void XoaSVLop(DSSV& dsSV)
 		cout << "             ";
 		gotoXY(toadoXBox + 58, toadoYBox + 2);
 		textcolor(15);
-		XuLyNhapMaMon(maSV, 10);
+		XuLyNhapMaMon(maSV, 12);
 		if (checkMaSV(dsSV, maSV))
 		{
 			GiaoDienThongBao("Ma Sinh Vien Khong Ton Tai");
@@ -2628,7 +2630,7 @@ void InDiemTBCuaLopTheoTC(DSSV dsSV, DSLopTC& dsLopTC, DSMonHoc dsMH, int toadoX
 	cout << "Nhap Ma Lop: ";
 	gotoXY(toadoXBox + 55, toadoYBox + 2);
 	textcolor(15);
-	XuLyNhapMaMon(maLop,9);
+	XuLyNhapMaMon(maLop,15);
 	if (maLop == "0")
 	{
 		ShowCur(0);
@@ -2916,6 +2918,7 @@ void themMonHoc(DSMonHoc& dsMH, int toadoX, int toadoY) {
 		cout << "          ";
 		//gotoXY(toadoX + 11, toadoY + 4);
 		gotoXY(toadoXBox + 48, toadoYBox + 4);
+		textcolor(12);
 		XuLyNhapMaMon(monHocss,10);
 		i = SearchMH(dsMH, monHocss);
 		if (monHocss == "0") {
@@ -2942,6 +2945,7 @@ void themMonHoc(DSMonHoc& dsMH, int toadoX, int toadoY) {
 		tenMHss = "";
 		//gotoXY(toadoX + 31, toadoY + 4);
 		gotoXY(toadoXBox + 48, toadoYBox + 5);
+		textcolor(12);
 		XuLyNhapten(tenMHss, 30);
 		//getline(cin,tenMHss);
 		if (tenMHss.size() > 30 || tenMHss.size() <= 0 ) {
@@ -2962,7 +2966,7 @@ void themMonHoc(DSMonHoc& dsMH, int toadoX, int toadoY) {
 		gotoXY(toadoXBox + 58, toadoYBox + 6);
 		cout << "            ";
 		gotoXY(toadoXBox + 58, toadoYBox + 6);
-		
+		textcolor(12);
 		XuLyNhapSoTC(soTclt, toadoXBox + 58);
 		
 		if (xetSoTC(soTclt) == false)
@@ -2975,9 +2979,23 @@ void themMonHoc(DSMonHoc& dsMH, int toadoX, int toadoY) {
 	p->sotclt = soTclt;
 //	gotoXY(toadoX + 81, toadoY + 4);
 	gotoXY(toadoXBox + 58, toadoYBox + 7);
+	float sTcth;
+	do {
+		gotoXY(toadoXBox + 58, toadoYBox + 7);
+		cout << "            ";
+		gotoXY(toadoXBox + 58, toadoYBox + 7);
+		textcolor(12);
+		XuLyNhapSoTC(sTcth, toadoXBox + 58);
 
-	
-	cin >> p->sotcth;
+		if (xetSoTC(sTcth) == false)
+		{
+			GiaoDienThongBaoMh("Nhap lai so tin chi");
+		}
+
+
+	} while (xetSoTC(sTcth) == false);
+	p->sotcth = sTcth;
+
 	//XuLyNhapSoMH(p->sotcth);
 	dsMH.ds[dsMH.n] = new monHoc;
 	dsMH.ds[dsMH.n] = p;
