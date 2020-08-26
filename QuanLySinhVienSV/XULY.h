@@ -1391,11 +1391,11 @@ void XuLyNhapSoTC(float &n , int toadoX)
 		}
 		else if (c == 13 && x.length() > 0)
 		{
-			
 			n = atof(x.c_str());
 			return ;
 		}
-		
+					
+
 		
 	}
 }

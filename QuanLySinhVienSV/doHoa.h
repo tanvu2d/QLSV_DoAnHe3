@@ -53,22 +53,6 @@ void ShowCur(bool CursorVisibility)
 //		return csbi.dwCursorPosition.Y;
 //	return -1;
 //}
-
-float roundF(float var, int num)
-{
-	float value = (int)(var * num + 0.5);
-	return (float)value / num;
-}
-int DemChuSo(int n)
-{
-	int dem = 0;
-	while (n > 0)
-	{
-		n = n / 10;
-		dem++;
-	}
-	return dem;
-}
 char Chuyen1SoSangKiTu(int n)
 {
 	switch (n)
@@ -95,6 +79,55 @@ char Chuyen1SoSangKiTu(int n)
 		return '0';
 	}
 }
+
+string chuyenSoThuc(float  n)
+{
+	string str;
+	int a;
+	int m = int(n);
+	float du = n - m;
+	int phanDu = du * 100;
+
+	while (phanDu > 0)
+	{
+		a = phanDu % 10;
+
+		str.insert(str.begin() + 0, Chuyen1SoSangKiTu(a));
+		phanDu = phanDu / 10;
+	}
+	str.insert(str.begin() + 0, '.');
+	if (m == 0)
+	{
+		str.insert(str.begin() + 0, '0');
+	}
+	while (m > 0)
+	{
+		a = m % 10;
+		Chuyen1SoSangKiTu(a);
+		str.insert(str.begin() + 0, Chuyen1SoSangKiTu(a));
+		m = m / 10;
+	}
+	return str;
+
+}
+
+
+float roundF(float var, int num)
+{
+	float value = (int)(var * num + 0.5);
+	return (float)value / num;
+}
+int DemChuSo(int n)
+{
+	int dem = 0;
+	while (n > 0)
+	{
+		n = n / 10;
+		dem++;
+	}
+	return dem;
+}
+
 void DinhDangChuoi(string& str)
 {
 	//Xoa khoang trong

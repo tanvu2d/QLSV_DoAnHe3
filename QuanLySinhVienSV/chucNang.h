@@ -2589,6 +2589,10 @@ int getSoTCMH(DSMonHoc dsMH, string maMH)
 					diem += k->data.diem * soLgTemp;
 					soLuongTC += soLgTemp;
 				}
+				else if (k->data.diem == -1)
+				{
+					soLuongTC += soLgTemp; 
+				}
 				break;
 			}
 		}
