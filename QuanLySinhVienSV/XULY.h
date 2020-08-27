@@ -318,6 +318,23 @@ void Xuat(NodeSV* pHead)
 	getch();
 }
 
+void xoaSVBatKy(DSSV& dsSV, string maSV)
+{
+	NodeSV* g = new NodeSV;
+	for (NodeSV* k = dsSV.pHead; k != NULL; k = k->pNext)
+	{
+		if (k->data.mssv == maSV)
+		{
+			g->pNext = k->pNext;
+			delete k;
+			dsSV.solg--;
+			return;
+
+
+		}
+		g = k;
+	}
+}
 
 void GiaiPhong(NodeSV*& pHead)
 {

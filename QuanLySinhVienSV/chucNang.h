@@ -1019,68 +1019,77 @@ void NhapSVLop(DSSV& dsSV)
 void XoaSVLop(DSSV& dsSV)
 {
 	ShowCur(1);
-	string maSV;
-	//gotoXY(toadoXBox, toadoYMain);
-	//cout << "Nhap Vao Ma SV(0:Thoat):";
-	//gotoXY(toadoXBox + 30, toadoYMain);
-	//XuLyNhapMa(maSV);
+	int toadoY = toadoYMain;
+	string maLop;
+	string ml;
+	int k;
 	HCNText(toadoXBox + 27, toadoYBox, 55, 5);
-
-
-	gotoXY(toadoXBox + 38, toadoYBox + 2);
-	textcolor(11);
-	cout << "Nhap Ma Sinh Vien: ";
-	gotoXY(toadoXBox + 58, toadoYBox + 2);
-	textcolor(15);
-	XuLyNhapMaMon(maSV, 10);
-	ShowCur(0);
-
-	if (maSV == "0")
-	{
-		return;
-	}
-	/*else if (checkMaSV(dsSV, maSV))
-	{
-		GiaoDienThongBao("Ma Sinh Vien Khong Ton Tai");
-	}*/
-	ShowCur(1);
 	do {
-		maSV = "";
-		int i = 0;
-		gotoXY(toadoXBox + 58, toadoYBox + 2);
+		k = 0;
+		ml = "";
+		textcolor(11);
+		gotoXY(toadoXBox + 40, toadoYBox + 2);
+		cout << "Nhap Ma Lop: ";
+		gotoXY(toadoXBox + 55, toadoYBox + 2);
 		cout << "             ";
-		gotoXY(toadoXBox + 58, toadoYBox + 2);
+		gotoXY(toadoXBox + 55, toadoYBox + 2);
+
 		textcolor(15);
-		XuLyNhapMaMon(maSV, 12);
-		if (checkMaSV(dsSV, maSV))
-		{
-			GiaoDienThongBao("Ma Sinh Vien Khong Ton Tai");
-		}
-	} while (checkMaSV(dsSV, maSV));
+		XuLyNhapMaMon(ml, 15);
 
-	if (dsSV.pHead->data.mssv == maSV)
-	{
-		NodeSV* temp = dsSV.pHead;
-		dsSV.pHead = dsSV.pHead->pNext;
-		delete temp;
-		//GiaoDienThongBao("Xoa Thanh Cong sinh vien");
-		//Sleep(3000);
-		return;
-	}
-
-	NodeSV* temp = dsSV.pHead;
-	for (NodeSV* k = dsSV.pHead->pNext; k != NULL; k = k->pNext)
-	{
-		if (k->data.mssv == maSV)
+		if (ml == "0")
 		{
-			temp->pNext = k->pNext;
-			delete k;
-			dsSV.solg--;
 			return;
 		}
-		temp = k;
-	}
+		k = checkMaLop(dsSV, ml);
+		if (k == -1) {
+			GiaoDienThongBao("Ma lop khong ton tai!");
+		}
+	} while (k == -1);
+	maLop = ml;
 
+	
+	int  toadoSV = toadoYBox + 3;
+
+	string maSV;
+	ShowCur(1);
+	int i;
+	while (true )
+	{
+		string msv;
+		do {
+			GiaoDienCheThongBao();
+			msv = "";
+			i = 0;
+			textcolor(0xE);
+			gotoXY(toadoXBox + 25, toadoSV + 2);
+			cout << "                                 " ;
+			gotoXY(toadoXBox + 25, toadoSV +2);
+			cout << "Ma sinh vien ";
+
+			gotoXY(toadoXBox + 40, toadoSV + 2);
+			bool check = true;
+			//XuLyNhapMaMon(msv, 10);
+			XuLyNhapMaSV(msv, 12);
+			if (checkMaSVNhapVao(msv) == true)
+			{
+				return;
+			}
+			//else if (!checkMaSV(dsSV, sv.mssv))
+			i = checkMaSVa(dsSV, msv);
+			if (i == 1)
+			{
+				
+				GiaoDienThongBao("Xoa Thanh Cong");
+				
+				xoaSVBatKy(dsSV, msv );
+			}
+		} while (i == 1);
+
+
+		
+
+	} 
 
 
 }
@@ -1893,11 +1902,11 @@ void HuySVDKLopTC(NodeLopTC* t, int maLTC, string maSV)
 	}
 	else
 	{
-		if (t->data.malopTc)
+		if (t->data.malopTc == maLTC)
 		{
 
-			NodeSVDK* temp = t->data.dssvdk.pHead;
-			for (NodeSVDK* k = t->data.dssvdk.pHead->pNext; k != NULL; k = k->pNext)
+			NodeSVDK* temp = new NodeSVDK;
+			for (NodeSVDK* k = t->data.dssvdk.pHead; k != NULL; k = k->pNext)
 			{
 				if (k->data.masv == maSV)
 				{
@@ -1908,6 +1917,14 @@ void HuySVDKLopTC(NodeLopTC* t, int maLTC, string maSV)
 				}
 				temp = k;
 			}
+		}
+		if (maLTC > t->data.malopTc)
+		{
+			HuySVDKLopTC(t->pRight, maLTC, maSV);
+		}
+		if (maLTC < t->data.malopTc)
+		{
+			HuySVDKLopTC(t->pLeft, maLTC, maSV);
 		}
 	}
 }
@@ -1951,7 +1968,7 @@ void DangKiLopTC(DSSV dsSV, DSLopTC& dsLTC, DSMonHoc dsMH, int toadoX, int toado
 		cout << CanDeuChuoi("NHAP MA SINH VIEN (0 = THOAT)", 10);
 		gotoXY(toadoXBox + 50, toadoYBox + 4);
 		ShowCur(1);
-		XuLyNhapMaMon(maSV, 10);
+		XuLyNhapMaMon(maSV, 12);
 		if (maSV == "0")
 		{
 			return;
@@ -2195,7 +2212,7 @@ void XuatDSDiem(DSSV dsSV, NodeSVDK* a[], int n, int toadoX, int toadoY, int kt 
 		NodeSV* temp = getSV(dsSV, a[i]->data.masv);
 		gotoXY(toadoX + 1, toadoY + 4 + (dem * 2));
 		cout << CanDeuChuoi(ChuyenSoSangString(i + 1), 9);
-		gotoXY(toadoX + 11, toadoY + 4 + (dem * 2));
+		gotoXY(toadoX + 11, toadoY + 4 + (dem * 2)); 
 		cout << CanDeuChuoi(a[i]->data.masv, 29);
 		gotoXY(toadoX + 41, toadoY + 4 + (dem * 2));
 		cout << CanDeuChuoi(temp->data.ho, 29);

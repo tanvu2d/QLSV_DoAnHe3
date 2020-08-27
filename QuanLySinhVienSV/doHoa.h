@@ -769,8 +769,15 @@ void GiaoDienThongBaoMh(string x)
 	textcolor(95);
 	gotoXY(51, 23);
 	cout << CanDeuChuoi(x, 49);
-	getch();
+	
 	ToMauHCN(50, 20, 50, 10, 7);
 	textcolor(7);
 
+
+}
+
+void GiaoDienCheThongBao()
+{
+	ToMauHCN(50, 20, 50, 10, 7);
+	textcolor(7);
 }
