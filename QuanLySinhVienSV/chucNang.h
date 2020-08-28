@@ -1132,9 +1132,41 @@ void MenuSua(SinhVien sv)
 
 void SuaSVLop(DSSV& dsSV)
 {
+
+	ShowCur(1);
+	int toadoY = toadoYMain;
+	string maLop;
+	string ml;
+	int k;
+	HCNText(toadoXBox + 27, toadoYBox, 55, 5);
+	do {
+		k = 0;
+		ml = "";
+		textcolor(11);
+		gotoXY(toadoXBox + 40, toadoYBox + 2);
+		cout << "Nhap Ma Lop: ";
+		gotoXY(toadoXBox + 55, toadoYBox + 2);
+		cout << "             ";
+		gotoXY(toadoXBox + 55, toadoYBox + 2);
+
+		textcolor(15);
+		XuLyNhapMaMon(ml, 15);
+
+		if (ml == "0")
+		{
+			return;
+		}
+		k = checkMaLop(dsSV, ml);
+		if (k == -1) {
+			GiaoDienThongBao("Ma lop khong ton tai!");
+		}
+	} while (k == -1);
+	maLop = ml;
+	XoaManHinhChinh();
 	string maSV;
 vonglap:
 	maSV = "";
+	int i = 0;
 	XoaManHinhChinh();
 
 	ShowCur(1);
@@ -1145,11 +1177,18 @@ vonglap:
 	textcolor(11);
 	cout << "Nhap Ma Sinh Vien Can Chinh: ";
 	textcolor(15);
-	XuLyNhapMaMon(maSV,10);
-	if (maSV == "0")
+	XuLyNhapMaSV(maSV, 12);
+	if (checkMaSVNhapVao(maSV) == true)
 	{
-		ShowCur(0);
 		return;
+	}
+	//else if (!checkMaSV(dsSV, sv.mssv))
+	i = checkMaSVa(dsSV, maSV, maLop);
+	if (i == -1)
+	{
+		GiaoDienThongBao("Khong ton tai sv trong lop");
+		goto vonglap;
+
 	}
 
 	bool kt = false;
@@ -1158,19 +1197,15 @@ vonglap:
 
 	for (NodeSV* k = dsSV.pHead; k != NULL; k = k->pNext)
 	{
+		if (k->data.malop > maLop)
+		{
+			break;
+		}
 		if (k->data.mssv == maSV)
 		{
 			temp = k;
 			break;
 		}
-	}
-
-
-	if (temp == NULL)
-	{
-		GiaoDienThongBao("MA SINH VIEN KHONG TON TAI");
-		//return;
-		goto vonglap;
 	}
 
 	int chon = 0;
