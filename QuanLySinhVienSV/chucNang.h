@@ -852,11 +852,11 @@ bool checkMaSV(DSSV dsSV, string maSV)
 
 	return true;
 }
-int checkMaSVa(DSSV dsSV, string maSV)
+int checkMaSVa(DSSV dsSV, string maSV , string maLop)
 {
 	for (NodeSV* k = dsSV.pHead; k != NULL; k = k->pNext)
 	{
-		if (maSV < k->data.mssv)
+		if (maLop < k->data.malop)
 		{
 			return -1;
 		}
@@ -977,7 +977,7 @@ void NhapSVLop(DSSV& dsSV)
 				return;
 			}
 			//else if (!checkMaSV(dsSV, sv.mssv))
-			i = checkMaSVa(dsSV, msv);
+			i = checkMaSVa(dsSV, msv , maLop);
 			if (i == 1)
 			{
 				GiaoDienThongBao("Ma Sinh Vien trung! Nhap lai");
@@ -1076,15 +1076,20 @@ void XoaSVLop(DSSV& dsSV)
 				return;
 			}
 			//else if (!checkMaSV(dsSV, sv.mssv))
-			i = checkMaSVa(dsSV, msv);
-			if (i == 1)
+			i = checkMaSVa(dsSV, msv , maLop);
+			if (i = -1)
+			{
+				GiaoDienThongBao("Khong ton tai sv trong lop");
+				
+			}
+			else if (i == 1)
 			{
 				
 				GiaoDienThongBao("Xoa Thanh Cong");
 				
 				xoaSVBatKy(dsSV, msv );
 			}
-		} while (i == 1);
+		} while (i == 1 || i== -1);
 
 
 		
@@ -1375,7 +1380,7 @@ void XuatDSSV1Lop(DSSV dsSV, int toadoX, int toadoY)
 	cout << CanDeuChuoi("NHAP MA LOP", 10);
 	gotoXY(toadoXBox + 50, toadoYBox + 4);
 	ShowCur(1);
-	XuLyNhapMaMon(maLop,9);
+	XuLyNhapMaMon(maLop,15);
 	ShowCur(0);
 	if (maLop == "0")
 	{
@@ -2203,7 +2208,7 @@ void GiaoDienNhapDiem(int toadoX, int toadoY, int n)
 	cout << CanDeuChuoi("Diem", 9);
 }
 
-void XuatDSDiem(DSSV dsSV, NodeSVDK* a[], int n, int toadoX, int toadoY, int kt = 1)
+void XuatDSDiem(DSSV dsSV, NodeSVDK* a[], int n, int toadoX, int toadoY)
 {
 
 	int dem = 0;
@@ -2219,19 +2224,15 @@ void XuatDSDiem(DSSV dsSV, NodeSVDK* a[], int n, int toadoX, int toadoY, int kt 
 		gotoXY(toadoX + 71, toadoY + 4 + (dem * 2));
 		cout << CanDeuChuoi(temp->data.ten, 19);
 		gotoXY(toadoX + 91, toadoY + 4 + (dem * 2));
-		if (kt == 1)
-		{
-			if (a[i]->data.diem != -1)
-				cout << showpoint << setprecision(3) << a[i]->data.diem;
-		}
-		else {
+	
+		
 			if (a[i]->data.diem == -1)
 			{
-				cout << CanDeuChuoi("Chua Co", 9); 
+				cout << CanDeuChuoi("Chua co ", 9); 
 			}
 			else
 				cout << showpoint << setprecision(3) << a[i]->data.diem;;
-		}
+		
 		dem++;
 	}
 	GiaoDienNhapDiem(toadoX, toadoY, n);
@@ -2248,6 +2249,8 @@ void RunNhapDiem(NodeSVDK* a[], int n, int toadoX, int toadoY)
 	{
 		if (a[(pointer1 - toadoY) / 2]->data.diem == -1)
 		{
+			gotoXY(toadoX, pointer1);
+			cout << "       ";
 			gotoXY(toadoX, pointer1);
 		}
 		else
@@ -2497,7 +2500,7 @@ void InBangDiemCuaLopTC(DSSV dsSV, DSLopTC& dsLopTC, DSMonHoc dsMH, int toadoX, 
 	cout << "BANG DIEM MON HOC " << getTeMonHoc(dsMH, maMH);
 	gotoXY(toadoX + 40, toadoY + 1);
 	cout << "Nien Khoa :" << nienKhoa << " Hoc Ki :" << HK << " Nhom :" << nhom;
-	XuatDSDiem(dsSV, a, n, toadoX, toadoY + 3, 0);
+	XuatDSDiem(dsSV, a, n, toadoX, toadoY + 3);
 	getch();
 }
 // cau cuoi 
